@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ItemController : MonoBehaviour
 {
-    private GameObject key;
+    private GameObject inKey;
     private GameObject listKey;
     private GameObject doorAnchor;
     private GameObject nob;
@@ -13,10 +13,13 @@ public class ItemController : MonoBehaviour
     private GameObject hammer;
     private GameObject listHammer;
     private GameObject[] zoomList;
+    private GameObject[] itemList;
     private GameObject zoomCamera;
     private GameObject closeButton;
     private int clickCount;
-    private DoorController script;   
+    private DoorController script;
+    public Image image;
+    private Sprite sprite;
     private bool chooseKey = false;
     private bool chooseNob = false;
     private bool chooseHammer = false;
@@ -25,7 +28,7 @@ public class ItemController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.key = GameObject.Find("Key");
+        this.inKey = GameObject.Find("InKey");
         this.listKey = GameObject.Find("ItemListKey");
         this.doorAnchor = GameObject.Find("DoorAnchor");
         this.script = doorAnchor.GetComponent<DoorController>();
@@ -39,21 +42,37 @@ public class ItemController : MonoBehaviour
         this.zoomList = GameObject.FindGameObjectsWithTag("ZoomList");
         this.zoomCamera = GameObject.Find("ZoomCamera");
         this.closeButton = GameObject.Find("CloseButton");
+        this.itemList = GameObject.FindGameObjectsWithTag("ItemList");
         this.zoomList[0].SetActive(false);
         this.zoomList[1].SetActive(false);
         this.zoomList[2].SetActive(false);
+        this.zoomList[3].SetActive(false);
         this.zoomCamera.SetActive(false);
-        
+        this.sprite = Resources.Load<Sprite>("枠線1");
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+       if(this.chooseHammer)
+        {
+            this.GetComponent<Image>();
+            image.sprite = this.sprite;
+        }
+        if (this.chooseKey)
+        {
+            this.GetComponent<Image>();
+            image.sprite = this.sprite;
+        }
+        if (this.chooseNob)
+        {
+            this.GetComponent<Image>();
+            image.sprite = this.sprite;
+        }
     }
     public void GetKey()
     {
-         Destroy(this.key);
+        this.zoomList[3].SetActive(false);
          this.listKey.SetActive(true);
     }
     public void UseKey()
@@ -72,6 +91,7 @@ public class ItemController : MonoBehaviour
             this.zoomList[0].SetActive(false);
             this.zoomList[1].SetActive(false);
             this.zoomList[2].SetActive(true);
+            this.zoomList[3].SetActive(false);
             this.chooseNob = false;
             this.chooseKey = false;
             this.chooseHammer = false;
@@ -113,6 +133,7 @@ public class ItemController : MonoBehaviour
             this.zoomList[0].SetActive(false);
             this.zoomList[1].SetActive(true);
             this.zoomList[2].SetActive(false);
+            this.zoomList[3].SetActive(false);
             this.chooseNob = false;
             this.chooseKey = false;
             this.chooseHammer = false;
@@ -123,7 +144,10 @@ public class ItemController : MonoBehaviour
         if (this.chooseHammer)
         {
             this.listNob.SetActive(false);
+            this.zoomList[1].SetActive(false);
+            this.zoomList[3].SetActive(true);
             this.chooseHammer = false;
+            this.listHammer.SetActive(false);           
         }
     }
     public void GetHammer()
@@ -148,6 +172,7 @@ public class ItemController : MonoBehaviour
             this.zoomList[0].SetActive(true);
             this.zoomList[1].SetActive(false);
             this.zoomList[2].SetActive(false);
+            this.zoomList[3].SetActive(false);
             this.chooseNob = false;
             this.chooseKey = false;
             this.chooseHammer = false;
@@ -159,8 +184,13 @@ public class ItemController : MonoBehaviour
         this.zoomList[0].SetActive(false);
         this.zoomList[1].SetActive(false);
         this.zoomList[2].SetActive(false);
+        this.zoomList[3].SetActive(false);
         this.chooseNob = false;
         this.chooseKey = false;
         this.chooseHammer = false;
+    }
+    public void button color()
+    {
+        
     }
 }
