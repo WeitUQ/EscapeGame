@@ -36,7 +36,6 @@ public class ItemController : MonoBehaviour
         this.hammer = GameObject.Find("Hammer");
         this.listHammer = GameObject.Find("ItemListHammer");
         this.listHammer.SetActive(false);
-        this.zoomList = GameObject.FindGameObjectsWithTag("ZoomList");
         this.zoomCamera = GameObject.Find("ZoomCamera");
         this.closeButton = GameObject.Find("CloseButton");
         this.zoomList[0].SetActive(false);
@@ -154,8 +153,8 @@ public class ItemController : MonoBehaviour
             this.zoomList[0].SetActive(false);
             this.zoomList[1].SetActive(false);
             this.zoomList[2].SetActive(false);
-            this.zoomList[3].SetActive(false);
-            this.zoomList[4].SetActive(true);
+            this.zoomList[3].SetActive(true);
+            this.zoomList[4].SetActive(false);
             this.zoomList[5].SetActive(false);
             this.zoomList[6].SetActive(false);
         }
