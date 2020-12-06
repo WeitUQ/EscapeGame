@@ -12,17 +12,14 @@ public class ItemController : MonoBehaviour
     private GameObject listNob;
     private GameObject hammer;
     private GameObject listHammer;
-    private GameObject[] zoomList;
-    private GameObject[] itemList;
+    public GameObject[] zoomList;
     private GameObject zoomCamera;
     private GameObject closeButton;
     private int clickCount;
     private DoorController script;
-    public Image image;
-    private Sprite sprite;
-    private bool chooseKey = false;
-    private bool chooseNob = false;
-    private bool chooseHammer = false;
+    public bool chooseKey = false;
+    public bool chooseNob = false;
+    public bool chooseHammer = false;
     
    
     // Start is called before the first frame update
@@ -42,37 +39,25 @@ public class ItemController : MonoBehaviour
         this.zoomList = GameObject.FindGameObjectsWithTag("ZoomList");
         this.zoomCamera = GameObject.Find("ZoomCamera");
         this.closeButton = GameObject.Find("CloseButton");
-        this.itemList = GameObject.FindGameObjectsWithTag("ItemList");
         this.zoomList[0].SetActive(false);
         this.zoomList[1].SetActive(false);
         this.zoomList[2].SetActive(false);
         this.zoomList[3].SetActive(false);
+        this.zoomList[4].SetActive(false);
+        this.zoomList[5].SetActive(false);
+        this.zoomList[6].SetActive(false);
         this.zoomCamera.SetActive(false);
-        this.sprite = Resources.Load<Sprite>("枠線1");
     }
 
     // Update is called once per frame
     void Update()
     {
-       if(this.chooseHammer)
-        {
-            this.GetComponent<Image>();
-            image.sprite = this.sprite;
-        }
-        if (this.chooseKey)
-        {
-            this.GetComponent<Image>();
-            image.sprite = this.sprite;
-        }
-        if (this.chooseNob)
-        {
-            this.GetComponent<Image>();
-            image.sprite = this.sprite;
-        }
+      
     }
     public void GetKey()
     {
-        this.zoomList[3].SetActive(false);
+        this.zoomList[6].SetActive(false);
+        this.zoomList[5].SetActive(true);
          this.listKey.SetActive(true);
     }
     public void UseKey()
@@ -85,21 +70,20 @@ public class ItemController : MonoBehaviour
     }
     public void zoomKey()
     {
-       if (this.chooseKey)
+       if (this.chooseKey & this.listKey.activeSelf)
        {
             this.zoomCamera.SetActive(true);
             this.zoomList[0].SetActive(false);
             this.zoomList[1].SetActive(false);
-            this.zoomList[2].SetActive(true);
+            this.zoomList[2].SetActive(false);
             this.zoomList[3].SetActive(false);
-            this.chooseNob = false;
-            this.chooseKey = false;
-            this.chooseHammer = false;
+            this.zoomList[4].SetActive(false);
+            this.zoomList[5].SetActive(true);
+            this.zoomList[6].SetActive(false);
         }
     }
     public void ChooseKey()
     {        
-        if (this.listKey.activeSelf)
         {
             this.chooseNob = false;
             this.chooseKey = true;
@@ -118,7 +102,6 @@ public class ItemController : MonoBehaviour
     }
     public void ChooseNob()
     {
-        if (this.listNob.activeSelf)
         {
             this.chooseNob = true;
             this.chooseKey = false;
@@ -127,25 +110,25 @@ public class ItemController : MonoBehaviour
     }
     public void zoomNob()
     {
-        if(this.chooseNob)
+        if(this.chooseNob & this.listNob.activeSelf)
         {
             this.zoomCamera.SetActive(true);
             this.zoomList[0].SetActive(false);
-            this.zoomList[1].SetActive(true);
+            this.zoomList[1].SetActive(false);
             this.zoomList[2].SetActive(false);
             this.zoomList[3].SetActive(false);
-            this.chooseNob = false;
-            this.chooseKey = false;
-            this.chooseHammer = false;
+            this.zoomList[4].SetActive(true);
+            this.zoomList[5].SetActive(false);
+            this.zoomList[6].SetActive(false);
         }
     }
     public void CrushNob()
     {
-        if (this.chooseHammer)
+        if (this.chooseHammer & this.listHammer.activeSelf)
         {
             this.listNob.SetActive(false);
-            this.zoomList[1].SetActive(false);
-            this.zoomList[3].SetActive(true);
+            this.zoomList[4].SetActive(false);
+            this.zoomList[6].SetActive(true);
             this.chooseHammer = false;
             this.listHammer.SetActive(false);           
         }
@@ -157,7 +140,6 @@ public class ItemController : MonoBehaviour
     }
     public void ChooseHammer()
     {
-        if (this.listHammer.activeSelf)
         {
             this.chooseNob = false;
             this.chooseKey = false;
@@ -166,16 +148,16 @@ public class ItemController : MonoBehaviour
     }
     public void zoomHammer()
     {
-        if (this.chooseHammer)
+        if (this.chooseHammer & this.listHammer.activeSelf)
         {
             this.zoomCamera.SetActive(true);
-            this.zoomList[0].SetActive(true);
+            this.zoomList[0].SetActive(false);
             this.zoomList[1].SetActive(false);
             this.zoomList[2].SetActive(false);
             this.zoomList[3].SetActive(false);
-            this.chooseNob = false;
-            this.chooseKey = false;
-            this.chooseHammer = false;
+            this.zoomList[4].SetActive(true);
+            this.zoomList[5].SetActive(false);
+            this.zoomList[6].SetActive(false);
         }
     }
     public void OnCloseButtun()
@@ -185,12 +167,8 @@ public class ItemController : MonoBehaviour
         this.zoomList[1].SetActive(false);
         this.zoomList[2].SetActive(false);
         this.zoomList[3].SetActive(false);
-        this.chooseNob = false;
-        this.chooseKey = false;
-        this.chooseHammer = false;
-    }
-    public void button color()
-    {
-        
+        this.zoomList[4].SetActive(false);
+        this.zoomList[5].SetActive(false);
+        this.zoomList[6].SetActive(false);
     }
 }

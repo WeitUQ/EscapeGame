@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    //doorに鍵が刺さっているか、ドアノブがついているかで分岐
     private GameObject door;
     //doorを開けるアニメーション
     private Animator doorOpen;
