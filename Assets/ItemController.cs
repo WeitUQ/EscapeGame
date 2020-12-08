@@ -15,8 +15,10 @@ public class ItemController : MonoBehaviour
     public GameObject[] zoomList;
     private GameObject zoomCamera;
     private GameObject closeButton;
+    private GameObject mCamera;
+    private CameraController cameraScript;
     private int clickCount;
-    private DoorController script;
+    private DoorController doorScript;
     public bool chooseKey = false;
     public bool chooseNob = false;
     public bool chooseHammer = false;
@@ -28,7 +30,7 @@ public class ItemController : MonoBehaviour
         this.inKey = GameObject.Find("InKey");
         this.listKey = GameObject.Find("ItemListKey");
         this.doorAnchor = GameObject.Find("DoorAnchor");
-        this.script = doorAnchor.GetComponent<DoorController>();
+        this.doorScript = doorAnchor.GetComponent<DoorController>();
         this.listKey.SetActive(false);
         this.nob = GameObject.Find("DoorNob");        
         this.listNob = GameObject.Find("ItemListDoorNob");       
@@ -38,6 +40,8 @@ public class ItemController : MonoBehaviour
         this.listHammer.SetActive(false);
         this.zoomCamera = GameObject.Find("ZoomCamera");
         this.closeButton = GameObject.Find("CloseButton");
+        this.mCamera = GameObject.Find("Main Camera");
+        this.cameraScript = mCamera.GetComponent<CameraController>();
         this.zoomList[0].SetActive(false);
         this.zoomList[1].SetActive(false);
         this.zoomList[2].SetActive(false);
@@ -53,21 +57,25 @@ public class ItemController : MonoBehaviour
     {
       
     }
+
     public void GetKey()
     {
         this.zoomList[6].SetActive(false);
         this.zoomList[5].SetActive(true);
-         this.listKey.SetActive(true);
+        this.closeButton.SetActive(true);
+        this.listKey.SetActive(true);
     }
+    
     public void UseKey()
     {
-        if (this.chooseKey)
+        if (this.cameraScript.zoomState[0] & this.chooseKey)
         {           
             Destroy(this.listKey);
-            this.script.lockState = true;
+            this.doorScript.lockState = true;
         }
     }
-    public void zoomKey()
+    
+    public void ZoomKey()
     {
        if (this.chooseKey & this.listKey.activeSelf)
        {
@@ -81,6 +89,7 @@ public class ItemController : MonoBehaviour
             this.zoomList[6].SetActive(false);
         }
     }
+    
     public void ChooseKey()
     {        
         {
@@ -92,13 +101,17 @@ public class ItemController : MonoBehaviour
    
     public void GetNob()
     {
-        this.clickCount += 1;
-        if (this.clickCount == 3)
+        if (this.cameraScript.zoomState[0])
         {
-            Destroy(this.nob);
-            this.listNob.SetActive(true);
+            this.clickCount += 1;
+            if (this.clickCount == 3)
+            {
+                Destroy(this.nob);
+                this.listNob.SetActive(true);
+            }
         }
     }
+    
     public void ChooseNob()
     {
         {
@@ -107,7 +120,8 @@ public class ItemController : MonoBehaviour
             this.chooseHammer = false;
         }    
     }
-    public void zoomNob()
+    
+    public void ZoomNob()
     {
         if(this.chooseNob & this.listNob.activeSelf)
         {
@@ -121,22 +135,26 @@ public class ItemController : MonoBehaviour
             this.zoomList[6].SetActive(false);
         }
     }
+    
     public void CrushNob()
     {
         if (this.chooseHammer & this.listHammer.activeSelf)
         {
-            this.listNob.SetActive(false);
             this.zoomList[4].SetActive(false);
             this.zoomList[6].SetActive(true);
+            this.closeButton.SetActive(false);
             this.chooseHammer = false;
-            this.listHammer.SetActive(false);           
+            Destroy(this.listNob);
+            Destroy(this.listHammer);   
         }
     }
+    
     public void GetHammer()
     {
         Destroy(this.hammer);
         this.listHammer.SetActive(true);
     }
+    
     public void ChooseHammer()
     {
         {
@@ -145,7 +163,8 @@ public class ItemController : MonoBehaviour
             this.chooseHammer = true;
         }
     }
-    public void zoomHammer()
+    
+    public void ZoomHammer()
     {
         if (this.chooseHammer & this.listHammer.activeSelf)
         {
@@ -159,6 +178,7 @@ public class ItemController : MonoBehaviour
             this.zoomList[6].SetActive(false);
         }
     }
+    
     public void OnCloseButtun()
     {
         this.zoomCamera.SetActive(false);
