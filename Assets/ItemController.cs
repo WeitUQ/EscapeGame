@@ -151,8 +151,11 @@ public class ItemController : MonoBehaviour
     
     public void GetHammer()
     {
-        Destroy(this.hammer);
-        this.listHammer.SetActive(true);
+        if (this.cameraScript.zoomState[2])
+        {
+            Destroy(this.hammer);
+            this.listHammer.SetActive(true);
+        }
     }
     
     public void ChooseHammer()
