@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour
     }
     public void DeskZoomCamera()
     {
-        if (this.zoomState[1] == false)
+        if (this.zoomState[1] == false & this.zoomState[2] == false)
         {
             this.zoomState[1] = true;
             this.MCamera.transform.Rotate(20, -45, 0);
@@ -78,6 +78,7 @@ public class CameraController : MonoBehaviour
     {
         if (this.zoomState[1])
         {
+            this.zoomState[1] = false;
             this.zoomState[2] = true;
             this.MCamera.transform.Rotate(10, 0, 0);
             this.MCamera.transform.position = new Vector3(-15, 20, this.desk.transform.position.z);
@@ -105,6 +106,7 @@ public class CameraController : MonoBehaviour
         }
         else if (this.zoomState[2])
         {
+            this.zoomState[1] = true;
             this.zoomState[2] = false;
             this.MCamera.transform.eulerAngles = this.interAng;
             this.MCamera.transform.position = this.interPos;
