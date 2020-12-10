@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class CameraController : MonoBehaviour
 {
     private GameObject desk;
+    private GameObject odCollider;
+    private Collider deskCollider;
     private GameObject door;
     private GameObject MCamera;
     private GameObject rButton;
@@ -25,7 +27,10 @@ public class CameraController : MonoBehaviour
         this.rButton = GameObject.Find("RightButton");
         this.lButton = GameObject.Find("LeftButton");
         this.bButton = GameObject.Find("BackButton");
+        this.odCollider = GameObject.Find("OverDeskCollider");
+        this.deskCollider = this.desk.GetComponent<Collider>();
         this.bButton.SetActive(false);
+        this.odCollider.SetActive(false);
         this.startPos = this.transform.position;
         this.startAng = this.transform.eulerAngles;
     }
@@ -61,8 +66,10 @@ public class CameraController : MonoBehaviour
     }
     public void DeskZoomCamera()
     {
-        if (this.zoomState[1] == false & this.zoomState[2] == false)
+        if (this.zoomState[1] == false & this.zoomState[2] == false & this.zoomState[3] == false)
         {
+            this.odCollider.SetActive(true);
+            this.deskCollider.enabled = false;
             this.zoomState[1] = true;
             this.MCamera.transform.Rotate(20, -45, 0);
             this.MCamera.transform.position = new Vector3(-5, 15, this.desk.transform.position.z);
@@ -76,12 +83,22 @@ public class CameraController : MonoBehaviour
     }
     public void OverDeskZoomCamera()
     {
-        if (this.zoomState[1])
+        if (this.zoomState[1] & this.odCollider.activeSelf)
         {
             this.zoomState[1] = false;
             this.zoomState[2] = true;
-            this.MCamera.transform.Rotate(10, 0, 0);
-            this.MCamera.transform.position = new Vector3(-15, 20, this.desk.transform.position.z);
+            this.MCamera.transform.Rotate(35, 0, 0);
+            this.MCamera.transform.position = new Vector3(-23, 25, this.desk.transform.position.z);
+        }
+    }
+    public void DrawerZoomCamera()
+    {
+        if (this.zoomState[1])
+        {
+            this.zoomState[1] = false;
+            this.zoomState[3] = true;
+            this.MCamera.transform.Rotate(33, 0, 0);
+            this.MCamera.transform.position = new Vector3(-18, 16, this.desk.transform.position.z +7);
         }
     }
     public void BackCamera()
@@ -95,14 +112,16 @@ public class CameraController : MonoBehaviour
             this.lButton.SetActive(true);
             this.bButton.SetActive(false);
         }
-        else if (this.zoomState[1] & this.zoomState[2] == false)
+        else if (this.zoomState[1])
         {
+            this.odCollider.SetActive(false);
             this.zoomState[1] = false;
             this.MCamera.transform.eulerAngles = this.startAng;
             this.MCamera.transform.position = this.startPos;
             this.rButton.SetActive(true);
             this.lButton.SetActive(true);
             this.bButton.SetActive(false);
+            this.deskCollider.enabled = true;
         }
         else if (this.zoomState[2])
         {
@@ -111,5 +130,12 @@ public class CameraController : MonoBehaviour
             this.MCamera.transform.eulerAngles = this.interAng;
             this.MCamera.transform.position = this.interPos;
         }
+        else if (this.zoomState[3])
+        {
+            this.zoomState[1] = true;
+            this.zoomState[3] = false;
+            this.MCamera.transform.eulerAngles = this.interAng;
+            this.MCamera.transform.position = this.interPos;
+        }       
     }
 }
