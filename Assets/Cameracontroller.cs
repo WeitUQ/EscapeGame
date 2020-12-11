@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CameraController : MonoBehaviour
 {
     private GameObject desk;
-    private GameObject odCollider;
+    public GameObject[] boxCollider;
     private Collider deskCollider;
     private GameObject door;
     private GameObject MCamera;
@@ -27,10 +27,8 @@ public class CameraController : MonoBehaviour
         this.rButton = GameObject.Find("RightButton");
         this.lButton = GameObject.Find("LeftButton");
         this.bButton = GameObject.Find("BackButton");
-        this.odCollider = GameObject.Find("OverDeskCollider");
         this.deskCollider = this.desk.GetComponent<Collider>();
         this.bButton.SetActive(false);
-        this.odCollider.SetActive(false);
         this.startPos = this.transform.position;
         this.startAng = this.transform.eulerAngles;
     }
@@ -68,7 +66,8 @@ public class CameraController : MonoBehaviour
     {
         if (this.zoomState[1] == false & this.zoomState[2] == false & this.zoomState[3] == false)
         {
-            this.odCollider.SetActive(true);
+            this.boxCollider[0].SetActive(true);
+            this.boxCollider[1].SetActive(true);
             this.deskCollider.enabled = false;
             this.zoomState[1] = true;
             this.MCamera.transform.Rotate(20, -45, 0);
@@ -83,7 +82,7 @@ public class CameraController : MonoBehaviour
     }
     public void OverDeskZoomCamera()
     {
-        if (this.zoomState[1] & this.odCollider.activeSelf)
+        if (this.zoomState[1])
         {
             this.zoomState[1] = false;
             this.zoomState[2] = true;
@@ -95,10 +94,46 @@ public class CameraController : MonoBehaviour
     {
         if (this.zoomState[1])
         {
+            this.boxCollider[0].SetActive(false);
             this.zoomState[1] = false;
             this.zoomState[3] = true;
             this.MCamera.transform.Rotate(33, 0, 0);
             this.MCamera.transform.position = new Vector3(-18, 16, this.desk.transform.position.z +7);
+        }
+    }
+    public void SlotMachineZoomCamera()
+    {
+        if (this.zoomState[4] == false)
+        {
+            this.boxCollider[2].SetActive(false);
+            this.zoomState[4] = true;
+            this.MCamera.transform.Rotate(20, -45, 0);
+            this.MCamera.transform.position = new Vector3(30, 20, -10);
+            this.rButton.SetActive(false);
+            this.lButton.SetActive(false);
+            this.bButton.SetActive(true);
+            this.interPos = this.transform.position;
+            this.interAng = this.transform.eulerAngles;
+        }
+    }
+    public void RedZoomCamera()
+    {
+        if (this.zoomState[4])
+        {
+            this.zoomState[4] = false;
+            this.zoomState[5] = true;
+            this.MCamera.transform.Rotate(0, 0, 0);
+            this.MCamera.transform.position = new Vector3(35, 17, 5);
+        }
+    }
+    public void BlueZoomCamera()
+    {
+        if (this.zoomState[4])
+        {
+            this.zoomState[4] = false;
+            this.zoomState[6] = true;
+            this.MCamera.transform.Rotate(0, 0, 0);
+            this.MCamera.transform.position = new Vector3(15, 17, 5);
         }
     }
     public void BackCamera()
@@ -114,7 +149,8 @@ public class CameraController : MonoBehaviour
         }
         else if (this.zoomState[1])
         {
-            this.odCollider.SetActive(false);
+            this.boxCollider[0].SetActive(false);
+            this.boxCollider[1].SetActive(false);
             this.zoomState[1] = false;
             this.MCamera.transform.eulerAngles = this.startAng;
             this.MCamera.transform.position = this.startPos;
@@ -132,10 +168,35 @@ public class CameraController : MonoBehaviour
         }
         else if (this.zoomState[3])
         {
+            this.boxCollider[0].SetActive(true);
             this.zoomState[1] = true;
             this.zoomState[3] = false;
             this.MCamera.transform.eulerAngles = this.interAng;
             this.MCamera.transform.position = this.interPos;
-        }       
+        }      
+        else if (this.zoomState[4])
+        {
+            this.zoomState[4] = false;
+            this.MCamera.transform.eulerAngles = this.startAng;
+            this.MCamera.transform.position = this.startPos;
+            this.rButton.SetActive(true);
+            this.lButton.SetActive(true);
+            this.bButton.SetActive(false);
+            this.boxCollider[2].SetActive(true);
+        }
+        else if (this.zoomState[5])
+        {
+            this.zoomState[4] = true;
+            this.zoomState[5] = false;
+            this.MCamera.transform.eulerAngles = this.interAng;
+            this.MCamera.transform.position = this.interPos;
+        }
+        else if (this.zoomState[6])
+        {
+            this.zoomState[4] = true;
+            this.zoomState[6] = false;
+            this.MCamera.transform.eulerAngles = this.interAng;
+            this.MCamera.transform.position = this.interPos;
+        }
     }
 }
