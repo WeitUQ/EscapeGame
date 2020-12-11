@@ -29,18 +29,28 @@ public class SpriteChanger : MonoBehaviour
             this.itemList[3].GetComponent<Image>().sprite = this.sprite[1];
             this.itemList[4].GetComponent<Image>().sprite = this.sprite[0];
             this.itemList[5].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[6].GetComponent<Image>().sprite = this.sprite[0];
         }
         else if (this.script.chooseNob)
         {
             this.itemList[3].GetComponent<Image>().sprite = this.sprite[0];
             this.itemList[4].GetComponent<Image>().sprite = this.sprite[1];
             this.itemList[5].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[6].GetComponent<Image>().sprite = this.sprite[0];
         }
         else if (this.script.chooseKey)
         {
             this.itemList[3].GetComponent<Image>().sprite = this.sprite[0];
             this.itemList[4].GetComponent<Image>().sprite = this.sprite[0];
             this.itemList[5].GetComponent<Image>().sprite = this.sprite[1];
+            this.itemList[6].GetComponent<Image>().sprite = this.sprite[0];
+        }
+        else if (this.script.chooseCoin)
+        {
+            this.itemList[3].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[4].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[5].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[6].GetComponent<Image>().sprite = this.sprite[1];
         }
     }
 }

@@ -12,16 +12,22 @@ public class ItemController : MonoBehaviour
     private GameObject listNob;
     private GameObject hammer;
     private GameObject listHammer;
+    public GameObject[] coins;
+    public GameObject[] listCoins;
     public GameObject[] zoomList;
     private GameObject zoomCamera;
     private GameObject closeButton;
     private GameObject mCamera;
     private CameraController cameraScript;
-    private int clickCount;
+    private int clickCount = 0;
+    private int getCoinCount = 0;
+    private int rCoinCount = 0;
+    private int bCoinCount = 0;
     private DoorController doorScript;
     public bool chooseKey = false;
     public bool chooseNob = false;
     public bool chooseHammer = false;
+    public bool chooseCoin = false;
     
    
     // Start is called before the first frame update
@@ -41,6 +47,10 @@ public class ItemController : MonoBehaviour
         this.zoomCamera = GameObject.Find("ZoomCamera");
         this.closeButton = GameObject.Find("CloseButton");
         this.mCamera = GameObject.Find("Main Camera");
+        for (int i = 0; i <= 2; i++)
+        {
+            this.listCoins[i].SetActive(false);
+        }
         this.cameraScript = mCamera.GetComponent<CameraController>();
         this.zoomList[0].SetActive(false);
         this.zoomList[1].SetActive(false);
@@ -68,7 +78,7 @@ public class ItemController : MonoBehaviour
     
     public void UseKey()
     {
-        if (this.cameraScript.zoomState[0] & this.chooseKey)
+        if (this.cameraScript.zoomState[0] & this.chooseKey & this.listKey.activeSelf)
         {           
             Destroy(this.listKey);
             this.doorScript.lockState = true;
@@ -92,18 +102,17 @@ public class ItemController : MonoBehaviour
     
     public void ChooseKey()
     {        
-        {
-            this.chooseNob = false;
-            this.chooseKey = true;
-            this.chooseHammer = false;
-        }
+        this.chooseNob = false;
+        this.chooseKey = true;
+        this.chooseHammer = false;    
+        this.chooseCoin = false;       
     }
    
     public void GetNob()
     {
         if (this.cameraScript.zoomState[0])
         {
-            this.clickCount += 1;
+            this.clickCount++;
             if (this.clickCount == 3)
             {
                 Destroy(this.nob);
@@ -114,11 +123,10 @@ public class ItemController : MonoBehaviour
     
     public void ChooseNob()
     {
-        {
-            this.chooseNob = true;
-            this.chooseKey = false;
-            this.chooseHammer = false;
-        }    
+        this.chooseNob = true;
+        this.chooseKey = false;
+        this.chooseHammer = false;
+        this.chooseCoin = false;
     }
     
     public void ZoomNob()
@@ -140,31 +148,27 @@ public class ItemController : MonoBehaviour
     {
         if (this.chooseHammer & this.listHammer.activeSelf)
         {
+            this.listHammer.SetActive(false);
+            this.listNob.SetActive(false);
             this.zoomList[4].SetActive(false);
             this.zoomList[6].SetActive(true);
             this.closeButton.SetActive(false);
             this.chooseHammer = false;
-            Destroy(this.listNob);
-            Destroy(this.listHammer);   
         }
     }
     
     public void GetHammer()
-    {
-        if (this.cameraScript.zoomState[2])
-        {
+    {       
             Destroy(this.hammer);
             this.listHammer.SetActive(true);
-        }
     }
     
     public void ChooseHammer()
     {
-        {
-            this.chooseNob = false;
-            this.chooseKey = false;
-            this.chooseHammer = true;
-        }
+        this.chooseNob = false;
+        this.chooseKey = false;
+        this.chooseHammer = true;
+        this.chooseCoin = false; 
     }
     
     public void ZoomHammer()
@@ -182,6 +186,75 @@ public class ItemController : MonoBehaviour
         }
     }
     
+    public void GetCoin()
+    {
+        this.getCoinCount++;
+        if (this.getCoinCount == 1)
+        {
+            Destroy(this.coins[0]);
+            this.listCoins[0].SetActive(true);
+        }
+        else if (this.getCoinCount == 2)
+        {
+            Destroy(this.coins[1]);
+            this.listCoins[1].SetActive(true);
+        }
+        else if (this.getCoinCount == 3)
+        {
+            Destroy(this.coins[2]);
+            this.listCoins[2].SetActive(true);
+        }
+    }
+    public void RUseCoin()
+    {
+        if (this.chooseCoin)
+        {
+            if (this.listCoins[0].activeSelf)
+            {
+                this.listCoins[0].SetActive(false);
+                this.rCoinCount++;
+            }
+            else if (this.listCoins[1].activeSelf)
+            {
+                this.listCoins[1].SetActive(false);
+                this.rCoinCount++;
+            }
+            else if (this.listCoins[2].activeSelf)
+            {
+                this.listCoins[2].SetActive(false);
+                this.rCoinCount++;
+            }
+        }
+    }
+    public void BUseCoin()
+    {
+        if (this.chooseCoin)
+        {
+            if (this.listCoins[0].activeSelf)
+            {
+                this.listCoins[0].SetActive(false);
+                this.bCoinCount++;
+            }
+            else if (this.listCoins[1].activeSelf)
+            {
+                this.listCoins[1].SetActive(false);
+                this.bCoinCount++;
+            }
+            else if (this.listCoins[2].activeSelf)
+            {
+                this.listCoins[2].SetActive(false);
+                this.bCoinCount++;
+            }
+        }
+    }
+    public void ChooseCoin()
+    {
+        this.chooseNob = false;
+        this.chooseKey = false;
+        this.chooseHammer = false;
+        this.chooseCoin = true;
+    }
+
     public void OnCloseButtun()
     {
         this.zoomCamera.SetActive(false);

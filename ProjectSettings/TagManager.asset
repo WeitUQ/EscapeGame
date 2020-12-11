@@ -6,7 +6,6 @@ TagManager:
   tags:
   - ItemList
   - ZoomList
-  - Collider
   layers:
   - Default
   - TransparentFX
