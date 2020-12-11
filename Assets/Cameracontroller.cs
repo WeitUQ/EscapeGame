@@ -9,7 +9,8 @@ public class CameraController : MonoBehaviour
     public GameObject[] boxCollider;
     private Collider deskCollider;
     private GameObject door;
-    private GameObject MCamera;
+    private GameObject MCamera;   
+    public Collider[] slotColliders;
     private GameObject rButton;
     private GameObject lButton;
     private GameObject bButton;
@@ -120,6 +121,7 @@ public class CameraController : MonoBehaviour
     {
         if (this.zoomState[4])
         {
+            this.slotColliders[0].enabled = false;
             this.zoomState[4] = false;
             this.zoomState[5] = true;
             this.MCamera.transform.Rotate(0, 0, 0);
@@ -130,6 +132,7 @@ public class CameraController : MonoBehaviour
     {
         if (this.zoomState[4])
         {
+            this.slotColliders[1].enabled = false;
             this.zoomState[4] = false;
             this.zoomState[6] = true;
             this.MCamera.transform.Rotate(0, 0, 0);
@@ -186,6 +189,7 @@ public class CameraController : MonoBehaviour
         }
         else if (this.zoomState[5])
         {
+            this.slotColliders[0].enabled = true;
             this.zoomState[4] = true;
             this.zoomState[5] = false;
             this.MCamera.transform.eulerAngles = this.interAng;
@@ -193,6 +197,7 @@ public class CameraController : MonoBehaviour
         }
         else if (this.zoomState[6])
         {
+            this.slotColliders[1].enabled = true;
             this.zoomState[4] = true;
             this.zoomState[6] = false;
             this.MCamera.transform.eulerAngles = this.interAng;

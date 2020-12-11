@@ -14,7 +14,6 @@ public class SpriteChanger : MonoBehaviour
     {
         this.iController = GameObject.Find("ItemController");
         this.script = iController.GetComponent<ItemController>();
-        this.itemList = GameObject.FindGameObjectsWithTag("ItemList");
     }
 
     // Update is called once per frame
@@ -26,6 +25,9 @@ public class SpriteChanger : MonoBehaviour
     {
         if(this.script.chooseHammer)
         {
+            this.itemList[0].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[1].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[2].GetComponent<Image>().sprite = this.sprite[0];
             this.itemList[3].GetComponent<Image>().sprite = this.sprite[1];
             this.itemList[4].GetComponent<Image>().sprite = this.sprite[0];
             this.itemList[5].GetComponent<Image>().sprite = this.sprite[0];
@@ -33,6 +35,9 @@ public class SpriteChanger : MonoBehaviour
         }
         else if (this.script.chooseNob)
         {
+            this.itemList[0].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[1].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[2].GetComponent<Image>().sprite = this.sprite[0];
             this.itemList[3].GetComponent<Image>().sprite = this.sprite[0];
             this.itemList[4].GetComponent<Image>().sprite = this.sprite[1];
             this.itemList[5].GetComponent<Image>().sprite = this.sprite[0];
@@ -40,6 +45,9 @@ public class SpriteChanger : MonoBehaviour
         }
         else if (this.script.chooseKey)
         {
+            this.itemList[0].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[1].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[2].GetComponent<Image>().sprite = this.sprite[0];
             this.itemList[3].GetComponent<Image>().sprite = this.sprite[0];
             this.itemList[4].GetComponent<Image>().sprite = this.sprite[0];
             this.itemList[5].GetComponent<Image>().sprite = this.sprite[1];
@@ -47,10 +55,13 @@ public class SpriteChanger : MonoBehaviour
         }
         else if (this.script.chooseCoin)
         {
+            this.itemList[0].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[1].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[2].GetComponent<Image>().sprite = this.sprite[1];
             this.itemList[3].GetComponent<Image>().sprite = this.sprite[0];
             this.itemList[4].GetComponent<Image>().sprite = this.sprite[0];
             this.itemList[5].GetComponent<Image>().sprite = this.sprite[0];
-            this.itemList[6].GetComponent<Image>().sprite = this.sprite[1];
+            this.itemList[6].GetComponent<Image>().sprite = this.sprite[0];
         }
     }
 }

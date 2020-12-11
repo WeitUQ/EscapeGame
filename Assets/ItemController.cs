@@ -19,9 +19,12 @@ public class ItemController : MonoBehaviour
     private GameObject closeButton;
     private GameObject mCamera;
     private CameraController cameraScript;
+    public GameObject[] drawerKeys;
+    public GameObject[] listdrawerKeys;
+    public GameObject[] zoomListCoins;
     private int clickCount = 0;
     private int getCoinCount = 0;
-    private int rCoinCount = 0;
+    public int rCoinCount = 0;
     private int bCoinCount = 0;
     private DoorController doorScript;
     public bool chooseKey = false;
@@ -50,6 +53,10 @@ public class ItemController : MonoBehaviour
         for (int i = 0; i <= 2; i++)
         {
             this.listCoins[i].SetActive(false);
+        }
+        for (int i = 0; i <= 1; i++)
+        {
+            this.listdrawerKeys[i].SetActive(false);
         }
         this.cameraScript = mCamera.GetComponent<CameraController>();
         this.zoomList[0].SetActive(false);
@@ -205,7 +212,36 @@ public class ItemController : MonoBehaviour
             this.listCoins[2].SetActive(true);
         }
     }
-    public void RUseCoin()
+    public void ZoomCoin()
+    {
+        if (this.chooseCoin & (this.listCoins[0].activeSelf || this.listCoins[1].activeSelf || this.listCoins[2].activeSelf))
+        {
+            this.zoomCamera.SetActive(true);
+            this.zoomList[0].SetActive(false);
+            this.zoomList[1].SetActive(false);
+            this.zoomList[2].SetActive(true);
+            this.zoomList[3].SetActive(false);
+            this.zoomList[4].SetActive(false);
+            this.zoomList[5].SetActive(false);
+            this.zoomList[6].SetActive(false);
+            this.zoomListCoins[0].SetActive(false);
+            this.zoomListCoins[1].SetActive(false);
+            this.zoomListCoins[2].SetActive(false);
+            if (this.listCoins[0].activeSelf)
+            {
+                this.zoomListCoins[0].SetActive(true);
+            }
+            if (this.listCoins[1].activeSelf)
+            {
+                this.zoomListCoins[1].SetActive(true);
+            }
+            if (this.listCoins[2].activeSelf)
+            {
+                this.zoomListCoins[2].SetActive(true);
+            }
+        }
+    }
+    public void RInCoin()
     {
         if (this.chooseCoin)
         {
@@ -226,7 +262,7 @@ public class ItemController : MonoBehaviour
             }
         }
     }
-    public void BUseCoin()
+    public void BInCoin()
     {
         if (this.chooseCoin)
         {
