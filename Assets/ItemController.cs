@@ -24,7 +24,6 @@ public class ItemController : MonoBehaviour
     public GameObject[] zoomDrawerKeys;
     public GameObject[] zoomListCoins;
     private int clickCount = 0;
-    private int getCoinCount = 0;
     public int rCoinCount = 0;
     public int bCoinCount = 0;
     private DoorController doorScript;
@@ -243,24 +242,20 @@ public class ItemController : MonoBehaviour
         }
     }
     
-    public void GetCoin()
-    {
-        this.getCoinCount++;
-        if (this.getCoinCount == 1)
-        {
+    public void GetCoin1()
+    {        
             Destroy(this.coins[0]);
-            this.listCoins[0].SetActive(true);
-        }
-        else if (this.getCoinCount == 2)
-        {
-            Destroy(this.coins[1]);
-            this.listCoins[1].SetActive(true);
-        }
-        else if (this.getCoinCount == 3)
-        {
-            Destroy(this.coins[2]);
-            this.listCoins[2].SetActive(true);
-        }
+            this.listCoins[0].SetActive(true);       
+    }
+    public void GetCoin2()
+    {
+        Destroy(this.coins[1]);
+        this.listCoins[1].SetActive(true);
+    }
+    public void GetCoin3()
+    {
+        Destroy(this.coins[2]);
+        this.listCoins[2].SetActive(true);
     }
     public void ZoomCoin()
     {

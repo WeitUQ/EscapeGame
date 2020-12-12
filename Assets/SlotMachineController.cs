@@ -6,6 +6,7 @@ public class SlotMachineController : MonoBehaviour
 {
     public GameObject missPaper;
     public GameObject drawerKey;
+    public GameObject[] items;
     public ItemController iScript;
     private int prob;
     // Start is called before the first frame update
@@ -13,6 +14,8 @@ public class SlotMachineController : MonoBehaviour
     {
         this.drawerKey.SetActive(false);
         this.missPaper.SetActive(false);
+        this.items[0].SetActive(false);
+        this.items[1].SetActive(false);
     }
 
     // Update is called once per frame
@@ -42,13 +45,13 @@ public class SlotMachineController : MonoBehaviour
         {
             this.iScript.bCoinCount = 0;
             this.prob = Random.Range(0, 100);
-            if (this.prob >= 0 & this.prob <= 19)
+            if (this.prob >= 0 & this.prob <= 49)
             {
-                
+                this.items[0].SetActive(true);
             }
             else
             {
-
+                this.items[1].SetActive(true);
             }
         }
     }
