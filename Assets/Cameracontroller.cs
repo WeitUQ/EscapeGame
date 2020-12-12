@@ -87,6 +87,7 @@ public class CameraController : MonoBehaviour
         {
             this.zoomState[1] = false;
             this.zoomState[2] = true;
+            this.boxCollider[1].SetActive(false);
             this.MCamera.transform.Rotate(35, 0, 0);
             this.MCamera.transform.position = new Vector3(-23, 25, this.desk.transform.position.z);
         }
@@ -164,6 +165,7 @@ public class CameraController : MonoBehaviour
         }
         else if (this.zoomState[2])
         {
+            this.boxCollider[1].SetActive(true);
             this.zoomState[1] = true;
             this.zoomState[2] = false;
             this.MCamera.transform.eulerAngles = this.interAng;

@@ -20,17 +20,19 @@ public class ItemController : MonoBehaviour
     private GameObject mCamera;
     private CameraController cameraScript;
     public GameObject[] drawerKeys;
-    public GameObject[] listdrawerKeys;
+    public GameObject[] listDrawerKeys;
+    public GameObject[] zoomDrawerKeys;
     public GameObject[] zoomListCoins;
     private int clickCount = 0;
     private int getCoinCount = 0;
     public int rCoinCount = 0;
-    private int bCoinCount = 0;
+    public int bCoinCount = 0;
     private DoorController doorScript;
     public bool chooseKey = false;
     public bool chooseNob = false;
     public bool chooseHammer = false;
     public bool chooseCoin = false;
+    public bool chooseDrawerKey = false;
     
    
     // Start is called before the first frame update
@@ -56,7 +58,7 @@ public class ItemController : MonoBehaviour
         }
         for (int i = 0; i <= 1; i++)
         {
-            this.listdrawerKeys[i].SetActive(false);
+            this.listDrawerKeys[i].SetActive(false);
         }
         this.cameraScript = mCamera.GetComponent<CameraController>();
         this.zoomList[0].SetActive(false);
@@ -75,6 +77,51 @@ public class ItemController : MonoBehaviour
       
     }
 
+    public void GetDrawerKey()
+    {
+        if (this.cameraScript.zoomState[5])
+        {
+            Destroy(this.drawerKeys[1]);
+            this.listDrawerKeys[1].SetActive(true);
+        }
+        else
+        {
+            Destroy(this.drawerKeys[0]);
+            this.listDrawerKeys[0].SetActive(true); 
+        }
+    }
+    public void ChooseDrawerKey()
+    {
+        this.chooseDrawerKey = true;
+        this.chooseNob = false;
+        this.chooseKey = false;
+        this.chooseHammer = false;
+        this.chooseCoin = false;
+    }
+    public void ZoomDrawerKey()
+    {
+        if (this.chooseDrawerKey & (this.listDrawerKeys[0].activeSelf || this.listDrawerKeys[1].activeSelf))
+        {
+            this.zoomCamera.SetActive(true);
+            this.zoomList[0].SetActive(false);
+            this.zoomList[1].SetActive(true);
+            this.zoomList[2].SetActive(false);
+            this.zoomList[3].SetActive(false);
+            this.zoomList[4].SetActive(false);
+            this.zoomList[5].SetActive(false);
+            this.zoomList[6].SetActive(false);
+            this.zoomDrawerKeys[0].SetActive(false);
+            this.zoomDrawerKeys[1].SetActive(false);
+            if (this.listDrawerKeys[0].activeSelf)
+            {
+                this.zoomDrawerKeys[0].SetActive(true);
+            }
+            if (this.listDrawerKeys[1].activeSelf)
+            {
+                this.zoomDrawerKeys[1].SetActive(true);
+            }
+        }
+    }
     public void GetKey()
     {
         this.zoomList[6].SetActive(false);
@@ -108,7 +155,8 @@ public class ItemController : MonoBehaviour
     }
     
     public void ChooseKey()
-    {        
+    {
+        this.chooseDrawerKey = false;
         this.chooseNob = false;
         this.chooseKey = true;
         this.chooseHammer = false;    
@@ -130,6 +178,7 @@ public class ItemController : MonoBehaviour
     
     public void ChooseNob()
     {
+        this.chooseDrawerKey = false;
         this.chooseNob = true;
         this.chooseKey = false;
         this.chooseHammer = false;
@@ -172,6 +221,7 @@ public class ItemController : MonoBehaviour
     
     public void ChooseHammer()
     {
+        this.chooseDrawerKey = false;
         this.chooseNob = false;
         this.chooseKey = false;
         this.chooseHammer = true;
@@ -285,6 +335,7 @@ public class ItemController : MonoBehaviour
     }
     public void ChooseCoin()
     {
+        this.chooseDrawerKey = false;
         this.chooseNob = false;
         this.chooseKey = false;
         this.chooseHammer = false;

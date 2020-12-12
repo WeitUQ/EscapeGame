@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SlotMachineController : MonoBehaviour
 {
+    public GameObject missPaper;
     public GameObject drawerKey;
     public ItemController iScript;
     private int prob;
@@ -11,6 +12,7 @@ public class SlotMachineController : MonoBehaviour
     void Start()
     {
         this.drawerKey.SetActive(false);
+        this.missPaper.SetActive(false);
     }
 
     // Update is called once per frame
@@ -30,12 +32,24 @@ public class SlotMachineController : MonoBehaviour
             }
             else
             {
-
+                this.missPaper.SetActive(true);
             }
         }
     }
     public void BlueMachineController()
     {
+        if (this.iScript.bCoinCount == 3)
+        {
+            this.iScript.bCoinCount = 0;
+            this.prob = Random.Range(0, 100);
+            if (this.prob >= 0 & this.prob <= 19)
+            {
+                
+            }
+            else
+            {
 
+            }
+        }
     }
 }
