@@ -5,69 +5,36 @@ using UnityEngine.UI;
 
 public class ItemController : MonoBehaviour
 {
-    private GameObject inKey;
-    private GameObject listKey;
-    private GameObject doorAnchor;
-    private GameObject nob;
-    private GameObject listNob;
-    private GameObject hammer;
-    private GameObject listHammer;
+    public GameObject listKey;
+    public GameObject door;
+    public GameObject nob;
+    public GameObject listNob;
+    public GameObject hammer;
+    public GameObject listHammer;
     public GameObject[] coins;
     public GameObject[] listCoins;
     public GameObject[] zoomList;
-    private GameObject zoomCamera;
-    private GameObject closeButton;
-    private GameObject mCamera;
-    private CameraController cameraScript;
+    public GameObject zoomCamera;
+    public GameObject closeButton;
+    public CameraController cameraScript;
     public GameObject[] drawerKeys;
     public GameObject[] listDrawerKeys;
     public GameObject[] zoomDrawerKeys;
-    public GameObject[] zoomListCoins;
-    private int clickCount = 0;
+    public GameObject[] zoomListCoins;   
     public int rCoinCount = 0;
     public int bCoinCount = 0;
-    private DoorController doorScript;
+    public DoorController doorScript;
     public bool chooseKey = false;
     public bool chooseNob = false;
     public bool chooseHammer = false;
     public bool chooseCoin = false;
     public bool chooseDrawerKey = false;
-    
+    private int clickCount = 0;
    
     // Start is called before the first frame update
     void Start()
-    {
-        this.inKey = GameObject.Find("InKey");
-        this.listKey = GameObject.Find("ItemListKey");
-        this.doorAnchor = GameObject.Find("DoorAnchor");
-        this.doorScript = doorAnchor.GetComponent<DoorController>();
-        this.listKey.SetActive(false);
-        this.nob = GameObject.Find("DoorNob");        
-        this.listNob = GameObject.Find("ItemListDoorNob");       
-        this.listNob.SetActive(false);
-        this.hammer = GameObject.Find("Hammer");
-        this.listHammer = GameObject.Find("ItemListHammer");
-        this.listHammer.SetActive(false);
-        this.zoomCamera = GameObject.Find("ZoomCamera");
-        this.closeButton = GameObject.Find("CloseButton");
-        this.mCamera = GameObject.Find("Main Camera");
-        for (int i = 0; i <= 2; i++)
-        {
-            this.listCoins[i].SetActive(false);
-        }
-        for (int i = 0; i <= 1; i++)
-        {
-            this.listDrawerKeys[i].SetActive(false);
-        }
-        this.cameraScript = mCamera.GetComponent<CameraController>();
-        this.zoomList[0].SetActive(false);
-        this.zoomList[1].SetActive(false);
-        this.zoomList[2].SetActive(false);
-        this.zoomList[3].SetActive(false);
-        this.zoomList[4].SetActive(false);
-        this.zoomList[5].SetActive(false);
-        this.zoomList[6].SetActive(false);
-        this.zoomCamera.SetActive(false);
+    {      
+       
     }
 
     // Update is called once per frame

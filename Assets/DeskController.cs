@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class DeskController : MonoBehaviour
 {
-    private Animator deskAnimator;
-    private GameObject mCamera;
-    private CameraController cScript;
+    public Animator deskAnimator;
+    public GameObject mCamera;
+    public CameraController cScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.deskAnimator = GetComponent<Animator>();
-        this.mCamera = GameObject.Find("Main Camera");
-        this.cScript = this.mCamera.GetComponent<CameraController>();
+        
     }
 
     // Update is called once per frame

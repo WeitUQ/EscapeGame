@@ -12,10 +12,7 @@ public class SlotMachineController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.drawerKey.SetActive(false);
-        this.missPaper.SetActive(false);
-        this.items[0].SetActive(false);
-        this.items[1].SetActive(false);
+        
     }
 
     // Update is called once per frame

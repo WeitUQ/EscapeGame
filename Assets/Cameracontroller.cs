@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
-    private GameObject desk;
+    public GameObject desk;
     public GameObject[] boxCollider;
-    private Collider deskCollider;
-    private GameObject door;
-    private GameObject MCamera;   
+    public Collider deskCollider;
+    public GameObject door;
+    public GameObject MCamera;   
     public Collider[] slotColliders;
-    private GameObject rButton;
-    private GameObject lButton;
-    private GameObject bButton;
+    public GameObject rButton;
+    public GameObject lButton;
+    public GameObject bButton;
     public bool[] zoomState;
     private Vector3 startPos;
     private Vector3 startAng;
@@ -22,14 +22,6 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.MCamera = GameObject.Find("Main Camera");
-        this.desk = GameObject.Find("Desk");
-        this.door = GameObject.Find("Door");
-        this.rButton = GameObject.Find("RightButton");
-        this.lButton = GameObject.Find("LeftButton");
-        this.bButton = GameObject.Find("BackButton");
-        this.deskCollider = this.desk.GetComponent<Collider>();
-        this.bButton.SetActive(false);
         this.startPos = this.transform.position;
         this.startAng = this.transform.eulerAngles;
     }

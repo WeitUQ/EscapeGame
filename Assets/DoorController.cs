@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    private GameObject door;
     //doorを開けるアニメーション
-    private Animator doorOpen;
+    public Animator doorOpen;
     private bool isDoorOpen = false;
     public bool lockState = false;
     // Start is called before the first frame update
     void Start()
     {
-        this.door = GameObject.Find("Door");
-        this.doorOpen = GetComponent<Animator>();
+       
     }
 
     // Update is called once per frame
