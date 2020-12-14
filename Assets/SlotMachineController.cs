@@ -7,7 +7,9 @@ public class SlotMachineController : MonoBehaviour
     public GameObject missPaper;
     public GameObject drawerKey;
     public GameObject[] items;
+    public GameObject redFrame;
     public ItemController iScript;
+    public Animator[] leverAnimator;
     private int prob;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,16 @@ public class SlotMachineController : MonoBehaviour
     void Update()
     {
 
+    }
+    public void LeverONBlue()
+    {
+        this.leverAnimator[0].SetTrigger("ONBlue");
+        this.leverAnimator[0].SetBool("End", true);
+    }
+    public void LeverONRed()
+    {
+        this.leverAnimator[1].SetTrigger("ONRed");
+        this.leverAnimator[1].SetBool("End", true);
     }
     public void RedMachineController()
     {
