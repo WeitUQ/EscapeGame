@@ -255,7 +255,7 @@ public class ItemController : MonoBehaviour
     }
     public void RInCoin()
     {
-        if (this.chooseCoin)
+        if (this.chooseCoin & this.cameraScript.zoomState[5])
         {
             if (this.listCoins[0].activeSelf)
             {
@@ -276,7 +276,7 @@ public class ItemController : MonoBehaviour
     }
     public void BInCoin()
     {
-        if (this.chooseCoin)
+        if (this.chooseCoin & this.cameraScript.zoomState[6])
         {
             if (this.listCoins[0].activeSelf)
             {

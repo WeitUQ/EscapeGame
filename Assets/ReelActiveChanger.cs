@@ -15,4 +15,18 @@ public class ReelActiveChanger : MonoBehaviour
     {
         
     }
+    private void OnTriggerEnter(Collider other)
+    {
+      
+        {
+            other.gameObject.GetComponent<Renderer>().enabled = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "ReelList")
+        {
+            other.gameObject.GetComponent<Renderer>().enabled = false;
+        }
+    }
 }

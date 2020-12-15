@@ -28,7 +28,10 @@ public class SlotMachineController : MonoBehaviour
         this.leverAnimator[0].SetTrigger("ONBlue");
         if (this.iScript.bCoinCount == 3 )
         {
-            this.reelAnimator[0].SetBool("Rotation", true);        }
+            this.iScript.bCoinCount = 0;
+            this.reelAnimator[0].SetBool("RotationA", true);
+            this.reelAnimator[1].SetBool("RotationB", true);
+        }
     }
     public void LeverONRed()
     {
@@ -36,7 +39,7 @@ public class SlotMachineController : MonoBehaviour
     }
     public void RedMachineController()
     {
-        if (this.iScript.rCoinCount == 3 )
+        if (this.iScript.rCoinCount == 3)
         {
             this.iScript.rCoinCount = 0;
             this.prob = Random.Range(0, 100);
