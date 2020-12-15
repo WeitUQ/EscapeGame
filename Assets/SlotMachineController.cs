@@ -10,7 +10,7 @@ public class SlotMachineController : MonoBehaviour
     public GameObject[] frames;
     public ItemController iScript;
     public Animator[] leverAnimator;
-    public Animator[] reelAnimator;
+    public Animator[] reelAnimatorB;
     private int prob;
     // Start is called before the first frame update
     void Start()
@@ -29,8 +29,11 @@ public class SlotMachineController : MonoBehaviour
         if (this.iScript.bCoinCount == 3 )
         {
             this.iScript.bCoinCount = 0;
-            this.reelAnimator[0].SetBool("RotationA", true);
-            this.reelAnimator[1].SetBool("RotationB", true);
+            this.reelAnimatorB[0].SetBool("RotationA", true);
+            this.reelAnimatorB[1].SetBool("RotationB", true);
+            this.reelAnimatorB[2].SetBool("RotationC", true); 
+            this.reelAnimatorB[3].SetBool("RotationD", true);
+
         }
     }
     public void LeverONRed()
