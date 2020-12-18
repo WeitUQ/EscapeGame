@@ -7,21 +7,23 @@ public class SlotMachineController : MonoBehaviour
     public GameObject missPaper;
     public GameObject drawerKey;
     public GameObject[] items;
-    public GameObject[] blueReels;
+    public GameObject[] blueMainReels;
+    public GameObject[] blueSubReels;
     public ItemController iScript;
     public Animator[] leverAnimator;
     private Vector3 blueStartPos1;
     private Vector3 blueStartPos2;
     private Vector3 blueStartPos3;
-    private float blueRotSpeed = -0.005f;
+    private float[] blueRotSpeed = { -0.005f, -0.005f, -0.005f };
     private int prob;
     private bool blueRotState = false;
+    private bool[] blueRotStop = { false, false, false };
     // Start is called before the first frame update
     void Start()
     {
-        this.blueStartPos1 = this.blueReels[1].transform.position;
-        this.blueStartPos2 = this.blueReels[3].transform.position;
-        this.blueStartPos3 = this.blueReels[5].transform.position;
+        this.blueStartPos1 = this.blueSubReels[1].transform.position;
+        this.blueStartPos2 = this.blueSubReels[3].transform.position;
+        this.blueStartPos3 = this.blueSubReels[5].transform.position;
 
     }
 
@@ -30,36 +32,45 @@ public class SlotMachineController : MonoBehaviour
     {
         if (this.blueRotState)
         {
-            this.blueReels[0].transform.Translate(0, this.blueRotSpeed, 0);
-            this.blueReels[1].transform.Translate(0, this.blueRotSpeed, 0);
-            this.blueReels[2].transform.Translate(0, this.blueRotSpeed, 0);
-            this.blueReels[3].transform.Translate(0, this.blueRotSpeed, 0);
-            this.blueReels[4].transform.Translate(0, this.blueRotSpeed, 0);
-            this.blueReels[5].transform.Translate(0, this.blueRotSpeed, 0);
-            if (this.blueReels[0].transform.position.y <= 7.3f)
+            this.blueMainReels[0].transform.Translate(0, this.blueRotSpeed[0], 0);
+            this.blueMainReels[1].transform.Translate(0, this.blueRotSpeed[1], 0);
+            this.blueMainReels[2].transform.Translate(0, this.blueRotSpeed[2], 0);
+            if (this.blueSubReels[0].transform.position.y <= 7.3f)
             {
-                this.blueReels[0].transform.position = blueStartPos1;
+                this.blueSubReels[0].transform.position = blueStartPos1;
             }
-            if (this.blueReels[1].transform.position.y <= 7.3f)
+            if (this.blueSubReels[1].transform.position.y <= 7.3f)
             {
-                this.blueReels[1].transform.position = blueStartPos1;
+                this.blueSubReels[1].transform.position = blueStartPos1;
             }
-            if (this.blueReels[2].transform.position.y <= 7.3f)
+            if (this.blueSubReels[2].transform.position.y <= 7.3f)
             {
-                this.blueReels[2].transform.position = blueStartPos2;
+                this.blueSubReels[2].transform.position = blueStartPos2;
             }
-            if (this.blueReels[3].transform.position.y <= 7.3f)
+            if (this.blueSubReels[3].transform.position.y <= 7.3f)
             {
-                this.blueReels[3].transform.position = blueStartPos2;
+                this.blueSubReels[3].transform.position = blueStartPos2;
             }
-            if (this.blueReels[4].transform.position.y <= 7.3f)
+            if (this.blueSubReels[4].transform.position.y <= 7.3f)
             {
-                this.blueReels[4].transform.position = blueStartPos3;
+                this.blueSubReels[4].transform.position = blueStartPos3;
             }
-            if (this.blueReels[5].transform.position.y <= 7.3f)
+            if (this.blueSubReels[5].transform.position.y <= 7.3f)
             {
-                this.blueReels[5].transform.position = blueStartPos3;
+                this.blueSubReels[5].transform.position = blueStartPos3;
             }
+        }
+        if (this.blueRotStop[0] && Mathf.Abs(this.blueMainReels[0].transform.position.y % 1.7f) > 0.38f && Mathf.Abs(this.blueMainReels[0].transform.position.y % 1.7f) < 0.42f)
+        {
+            this.blueRotSpeed[0] = 0;
+        }
+        if (this.blueRotStop[1] && Mathf.Abs(this.blueMainReels[1].transform.position.y % 1.7f) > 0.38f && Mathf.Abs(this.blueMainReels[1].transform.position.y % 1.7f) < 0.42f)
+        {
+            this.blueRotSpeed[1] = 0;
+        }
+        if (this.blueRotStop[2] && Mathf.Abs(this.blueMainReels[2].transform.position.y % 1.7f) > 0.38f && Mathf.Abs(this.blueMainReels[2].transform.position.y % 1.7f) < 0.42f)
+        {
+            this.blueRotSpeed[2] = 0;
         }
     }
     public void LeverONBlue()
@@ -80,15 +91,31 @@ public class SlotMachineController : MonoBehaviour
         if (this.iScript.rCoinCount == 3)
         {
             this.iScript.rCoinCount = 0;
-            this.prob = Random.Range(0, 100);
-            if (this.prob >= 0 & this.prob <= 19)
-            {
-                this.drawerKey.SetActive(true);
-            }
-            else
-            {
-                this.missPaper.SetActive(true);
-            }
+           
+        }
+    }
+    public void StopReelBlue1()
+    {
+        if (this.blueRotSpeed[0] != 0)
+        {
+            this.blueRotSpeed[0] = -0.002f;
+            this.blueRotStop[0] = true;
+        }
+    }
+    public void StopReelBlue2()
+    {
+        if (this.blueRotSpeed[1] != 0)
+        {
+            this.blueRotSpeed[1] = -0.002f;
+            this.blueRotStop[1] = true;
+        }
+    }
+    public void StopReelBlue3()
+    {
+        if (this.blueRotSpeed[2] != 0)
+        {
+            this.blueRotSpeed[2] = -0.002f;
+            this.blueRotStop[2] = true;
         }
     }
 }

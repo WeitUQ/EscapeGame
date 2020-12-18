@@ -57,7 +57,7 @@ public class CameraController : MonoBehaviour
     }
     public void DeskZoomCamera()
     {
-        if (this.zoomState[1] == false & this.zoomState[2] == false & this.zoomState[3] == false)
+        if (this.zoomState[1] == false && this.zoomState[2] == false && this.zoomState[3] == false)
         {
             this.boxCollider[0].SetActive(true);
             this.boxCollider[1].SetActive(true);

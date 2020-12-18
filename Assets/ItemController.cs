@@ -226,7 +226,7 @@ public class ItemController : MonoBehaviour
     }
     public void ZoomCoin()
     {
-        if (this.chooseCoin & (this.listCoins[0].activeSelf || this.listCoins[1].activeSelf || this.listCoins[2].activeSelf))
+        if (this.chooseCoin && (this.listCoins[0].activeSelf || this.listCoins[1].activeSelf || this.listCoins[2].activeSelf))
         {
             this.zoomCamera.SetActive(true);
             this.zoomList[0].SetActive(false);
@@ -255,7 +255,7 @@ public class ItemController : MonoBehaviour
     }
     public void RInCoin()
     {
-        if (this.chooseCoin & this.cameraScript.zoomState[5])
+        if (this.chooseCoin && this.cameraScript.zoomState[5])
         {
             if (this.listCoins[0].activeSelf)
             {
@@ -276,7 +276,7 @@ public class ItemController : MonoBehaviour
     }
     public void BInCoin()
     {
-        if (this.chooseCoin & this.cameraScript.zoomState[6])
+        if (this.chooseCoin && this.cameraScript.zoomState[6])
         {
             if (this.listCoins[0].activeSelf)
             {
