@@ -115,6 +115,7 @@ public class CameraController : MonoBehaviour
         if (this.zoomState[4])
         {
             this.slotColliders[0].enabled = false;
+            this.boxCollider[4].SetActive(true);
             this.zoomState[4] = false;
             this.zoomState[5] = true;
             this.MCamera.transform.Rotate(0, 0, 0);
