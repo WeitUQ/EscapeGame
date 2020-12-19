@@ -16,6 +16,7 @@ public class SlotMachineController : MonoBehaviour
     public CameraController cScript;
     public ItemController iScript;
     public Animator[] leverAnimator;
+    public Animator[] buttonAnimator;
     public float[] blueRotSpeed;
     public float[] redRotSpeed;
     private bool blueRotState = false;
@@ -119,29 +120,42 @@ public class SlotMachineController : MonoBehaviour
     }
     public void StopReelBlue1()
     {
-        if (this.cScript.zoomState[6] && this.blueRotSpeed[0] == -1.0f && this.blueRotState)
+        if (this.cScript.zoomState[6])
         {
-           
-            this.blueRotStop[0] = true;
-            this.blueStopColliders[0].SetActive(true);
+            Debug.Log("OK");
+            this.buttonAnimator[0].SetTrigger("LON");
+            if (this.blueRotSpeed[0] == -1.0f && this.blueRotState)
+            {
+
+                this.blueRotStop[0] = true;
+                this.blueStopColliders[0].SetActive(true);
+            }
         }
     }
     public void StopReelBlue2()
     {
-        if (this.cScript.zoomState[6] && this.blueRotSpeed[1] == -1.0f && this.blueRotState)
+        if (this.cScript.zoomState[6])
         {
-          
-            this.blueRotStop[1] = true;
-            this.blueStopColliders[1].SetActive(true);
+            this.buttonAnimator[0].SetTrigger("CON");
+            if (this.blueRotSpeed[1] == -1.0f && this.blueRotState)
+            {
+
+                this.blueRotStop[1] = true;
+                this.blueStopColliders[1].SetActive(true);
+            }
         }
     }
     public void StopReelBlue3()
     {
-        if (this.cScript.zoomState[6] && this.blueRotSpeed[2] == -1.0f && this.blueRotState)
+        if (this.cScript.zoomState[6])
         {
-          
-            this.blueRotStop[2] = true;
-            this.blueStopColliders[2].SetActive(true);
+            this.buttonAnimator[0].SetTrigger("RON");
+            if (this.blueRotSpeed[2] == -1.0f && this.blueRotState)
+            {
+
+                this.blueRotStop[2] = true;
+                this.blueStopColliders[2].SetActive(true);
+            }
         }
     }
     public void StopReelRed1()
