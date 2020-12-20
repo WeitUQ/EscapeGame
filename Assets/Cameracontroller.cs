@@ -64,7 +64,7 @@ public class CameraController : MonoBehaviour
             this.deskCollider.enabled = false;
             this.zoomState[1] = true;
             this.MCamera.transform.Rotate(20, -45, 0);
-            this.MCamera.transform.position = new Vector3(-5, 15, this.desk.transform.position.z);
+            this.MCamera.transform.position = new Vector3(-5, 20, this.desk.transform.position.z);
             this.rButton.SetActive(false);
             this.lButton.SetActive(false);
             this.bButton.SetActive(true);

@@ -20,7 +20,9 @@ public class ItemController : MonoBehaviour
     public GameObject[] drawerKeys;
     public GameObject[] listDrawerKeys;
     public GameObject[] zoomDrawerKeys;
-    public GameObject[] zoomListCoins;   
+    public GameObject[] zoomListCoins;
+    public GameObject textCamera;
+    public Text itemText;
     public int rCoinCount = 0;
     public int bCoinCount = 0;
     public DoorController doorScript;
@@ -138,6 +140,11 @@ public class ItemController : MonoBehaviour
             {
                 Destroy(this.nob);
                 this.listNob.SetActive(true);
+                this.textCamera.SetActive(true);
+                this.zoomCamera.SetActive(true);
+                this.zoomList[4].SetActive(true);
+                this.closeButton.SetActive(false);
+                this.itemText.text = "ドアノブが取れてしまった。…わざとじゃない。";
             }
         }
     }
