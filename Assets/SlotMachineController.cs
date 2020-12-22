@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SlotMachineController : MonoBehaviour
 {
+    // 出てくるアイテム
     public GameObject missPaper;
     public GameObject drawerKey;
     public GameObject[] items;
+
+    //　スロットの回転関係
     public GameObject[] blueMainReels;
     public GameObject[] blueSubReels;
     public GameObject[] redMainReels;
     public GameObject[] redSubReels;
     public GameObject[] blueStopColliders;
-    public GameObject[] redStopColliders;
+    public GameObject[] redStopColliders;   
     public CameraController cScript;
     public ItemController iScript;
     public Animator[] leverAnimator;
@@ -23,6 +27,13 @@ public class SlotMachineController : MonoBehaviour
     private bool redRotState = false;
     public bool[] blueRotStop = { false, false, false };
     public bool[] redRotStop = { false, false, false };
+
+    // テキスト関係
+    public Text slotText;
+    public GameObject textCanvas;
+    public GameObject textCamera;
+    public GameObject bButton;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -104,6 +115,13 @@ public class SlotMachineController : MonoBehaviour
                 this.iScript.bCoinCount = 0;
                 this.blueRotState = true;
             }
+            else 
+            {
+                this.textCanvas.SetActive(true);
+                this.textCamera.SetActive(true);
+                this.bButton.SetActive(false);
+                this.slotText.text = "どうやらコインを入れないと動かないようだ…。";
+            }
         }
     }
     public void LeverONRed()
@@ -116,13 +134,19 @@ public class SlotMachineController : MonoBehaviour
                 this.iScript.rCoinCount = 0;
                 this.redRotState = true;
             }
+            else
+            {
+                this.textCanvas.SetActive(true);
+                this.textCamera.SetActive(true);
+                this.bButton.SetActive(false);
+                this.slotText.text = "どうやらコインを入れないと動かないようだ…。";
+            }
         }
     }
     public void StopReelBlue1()
     {
         if (this.cScript.zoomState[6])
         {
-            Debug.Log("OK");
             this.buttonAnimator[0].SetTrigger("LON");
             if (this.blueRotSpeed[0] == -1.0f && this.blueRotState)
             {

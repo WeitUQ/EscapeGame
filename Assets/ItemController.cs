@@ -22,6 +22,10 @@ public class ItemController : MonoBehaviour
     public GameObject[] zoomDrawerKeys;
     public GameObject[] zoomListCoins;
     public GameObject textCamera;
+    public GameObject rButton;
+    public GameObject lButton;
+    public GameObject bButton;
+    public GameObject textCanvas;
     public Text itemText;
     public int rCoinCount = 0;
     public int bCoinCount = 0;
@@ -32,6 +36,7 @@ public class ItemController : MonoBehaviour
     public bool chooseCoin = false;
     public bool chooseDrawerKey = false;
     private int clickCount = 0;
+    private int getCoinCount = 0;
    
     // Start is called before the first frame update
     void Start()
@@ -51,11 +56,41 @@ public class ItemController : MonoBehaviour
         {
             Destroy(this.drawerKeys[1]);
             this.listDrawerKeys[1].SetActive(true);
+            this.textCanvas.SetActive(true);
+            this.textCamera.SetActive(true);
+            this.zoomCamera.SetActive(true);
+            this.zoomList[1].SetActive(true);
+            this.zoomDrawerKeys[0].SetActive(false);
+            this.closeButton.SetActive(false);
+            this.bButton.SetActive(false);
+            if (this.listDrawerKeys[0].activeSelf)
+            {
+                this.itemText.text = "カギを手に入れた。…二個目だ。";
+            }
+            else
+            {
+                this.itemText.text = "カギを手に入れた。…どこのカギだろう？";
+            }
         }
         else
         {
             Destroy(this.drawerKeys[0]);
-            this.listDrawerKeys[0].SetActive(true); 
+            this.listDrawerKeys[0].SetActive(true);
+            this.textCanvas.SetActive(true);
+            this.textCamera.SetActive(true);
+            this.zoomCamera.SetActive(true);
+            this.zoomList[1].SetActive(true);
+            this.zoomDrawerKeys[1].SetActive(false);
+            this.closeButton.SetActive(false);
+            this.bButton.SetActive(false);
+            if (this.listDrawerKeys[1].activeSelf)
+            {
+                this.itemText.text = "カギを手に入れた。…二個目だ。";
+            }
+            else
+            {
+                this.itemText.text = "カギを手に入れた。…どこのカギだろう？";
+            }
         }
     }
     public void ChooseDrawerKey()
@@ -140,11 +175,13 @@ public class ItemController : MonoBehaviour
             {
                 Destroy(this.nob);
                 this.listNob.SetActive(true);
+                this.textCanvas.SetActive(true);
                 this.textCamera.SetActive(true);
                 this.zoomCamera.SetActive(true);
                 this.zoomList[4].SetActive(true);
                 this.closeButton.SetActive(false);
-                this.itemText.text = "ドアノブが取れてしまった。…わざとじゃない。";
+                this.bButton.SetActive(false);
+                this.itemText.text = "ドアノブが取れてしまった…。";
             }
         }
     }
@@ -188,8 +225,15 @@ public class ItemController : MonoBehaviour
     
     public void GetHammer()
     {       
-            Destroy(this.hammer);
-            this.listHammer.SetActive(true);
+        Destroy(this.hammer);
+        this.listHammer.SetActive(true);
+        this.textCanvas.SetActive(true);
+        this.textCamera.SetActive(true);
+        this.zoomCamera.SetActive(true);
+        this.zoomList[3].SetActive(true);
+        this.closeButton.SetActive(false);
+        this.bButton.SetActive(false);
+        this.itemText.text = "ハンマーだ。何かに使えるかもしれないし持っておこう。";
     }
     
     public void ChooseHammer()
@@ -218,18 +262,121 @@ public class ItemController : MonoBehaviour
     
     public void GetCoin1()
     {        
-            Destroy(this.coins[0]);
-            this.listCoins[0].SetActive(true);       
+        Destroy(this.coins[0]);
+        this.listCoins[0].SetActive(true);
+        this.textCamera.SetActive(true);
+        this.textCanvas.SetActive(true);
+        this.zoomCamera.SetActive(true);
+        this.zoomList[2].SetActive(true);
+        this.zoomListCoins[0].SetActive(false);
+        this.zoomListCoins[1].SetActive(false);
+        this.zoomListCoins[2].SetActive(false);
+        if (this.listCoins[0].activeSelf)
+        {
+            this.zoomListCoins[0].SetActive(true);
+        }
+        if (this.listCoins[1].activeSelf)
+        {
+            this.zoomListCoins[1].SetActive(true);
+        }
+        if (this.listCoins[2].activeSelf)
+        {
+            this.zoomListCoins[2].SetActive(true);
+        }
+        this.closeButton.SetActive(false);
+        this.bButton.SetActive(false);
+        this.getCoinCount++;
+        if (this.getCoinCount == 1)
+        {           
+            this.itemText.text = "コインだ。…何のコインだろう？";
+        }
+        else if (this.getCoinCount == 2)
+        {
+            this.itemText.text = "コインだ。…さっきも拾ったな。何枚あるんだ？";
+        }
+        else if (this.getCoinCount == 3)
+        {
+            this.itemText.text = "コインだ。…これで3枚目だ。";
+        }
+
     }
     public void GetCoin2()
     {
         Destroy(this.coins[1]);
         this.listCoins[1].SetActive(true);
+        this.textCanvas.SetActive(true);
+        this.textCamera.SetActive(true);
+        this.zoomCamera.SetActive(true);
+        this.zoomList[2].SetActive(true);
+        this.zoomListCoins[0].SetActive(false);
+        this.zoomListCoins[1].SetActive(false);
+        this.zoomListCoins[2].SetActive(false);
+        if (this.listCoins[0].activeSelf)
+        {
+            this.zoomListCoins[0].SetActive(true);
+        }
+        if (this.listCoins[1].activeSelf)
+        {
+            this.zoomListCoins[1].SetActive(true);
+        }
+        if (this.listCoins[2].activeSelf)
+        {
+            this.zoomListCoins[2].SetActive(true);
+        }
+        this.closeButton.SetActive(false);
+        this.bButton.SetActive(false);
+        this.getCoinCount++;
+        if (this.getCoinCount == 1)
+        {
+            this.itemText.text = "コインだ。…何のコインだろう？";
+        }
+        else if (this.getCoinCount == 2)
+        {
+            this.itemText.text = "コインだ。…さっきも拾ったな。何枚あるんだ？";
+        }
+        else if (this.getCoinCount == 3)
+        {
+            this.itemText.text = "コインだ。…これで3枚目だ。";
+        }
     }
     public void GetCoin3()
     {
         Destroy(this.coins[2]);
         this.listCoins[2].SetActive(true);
+        this.textCanvas.SetActive(true);
+        this.textCamera.SetActive(true);
+        this.zoomCamera.SetActive(true);
+        this.zoomList[2].SetActive(true);
+        this.zoomListCoins[0].SetActive(false);
+        this.zoomListCoins[1].SetActive(false);
+        this.zoomListCoins[2].SetActive(false);
+        if (this.listCoins[0].activeSelf)
+        {
+            this.zoomListCoins[0].SetActive(true);
+        }
+        if (this.listCoins[1].activeSelf)
+        {
+            this.zoomListCoins[1].SetActive(true);
+        }
+        if (this.listCoins[2].activeSelf)
+        {
+            this.zoomListCoins[2].SetActive(true);
+        }
+        this.closeButton.SetActive(false);
+        this.bButton.SetActive(false);
+        this.getCoinCount++;
+        if (this.getCoinCount == 1)
+        {
+            this.itemText.text = "コインだ。…何のコインだろう？";
+        }
+        else if (this.getCoinCount == 2)
+        {
+            this.itemText.text = "コインだ。…さっきも拾ったな。何枚あるんだ？";
+        }
+        else if (this.getCoinCount == 3)
+        {
+            this.itemText.text = "コインだ。…これで3枚目だ。";
+        }
     }
     public void ZoomCoin()
     {
