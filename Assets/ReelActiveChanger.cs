@@ -17,7 +17,7 @@ public class ReelActiveChanger : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "ReelList")
+        if (other.tag == "ReelList" || other.tag == "ReelPicture1" || other.tag == "ReelPicture2")
         {
             other.gameObject.GetComponent<Renderer>().enabled = true;
         }
