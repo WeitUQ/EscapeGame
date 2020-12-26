@@ -17,15 +17,13 @@ public class ReelActiveChanger : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "ReelList" || other.tag == "ReelPicture1" || other.tag == "ReelPicture2")
+        if (other.tag == "ReelPicture1" || other.tag == "ReelPicture2" || other.tag == "ReelPicture3" || other.tag == "ReelPicture4" || other.tag == "ReelPicture5" || other.tag == "ReelPicture6")
         {
             other.gameObject.GetComponent<Renderer>().enabled = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        {
             other.gameObject.GetComponent<Renderer>().enabled = false;
-        }
     }
 }

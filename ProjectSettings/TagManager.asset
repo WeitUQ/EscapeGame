@@ -6,9 +6,12 @@ TagManager:
   tags:
   - ItemList
   - ZoomList
-  - ReelList
   - ReelPicture1
   - ReelPicture2
+  - ReelPicture3
+  - ReelPicture4
+  - ReelPicture5
+  - ReelPicture6
   layers:
   - Default
   - TransparentFX
@@ -21,7 +24,7 @@ TagManager:
   - ItemList
   - Zoom
   - Text
-  - 
+  - ItemDrop
   - 
   - 
   - 
