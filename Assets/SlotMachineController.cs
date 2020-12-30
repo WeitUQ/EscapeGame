@@ -5,11 +5,6 @@ using UnityEngine.UI;
 
 public class SlotMachineController : MonoBehaviour
 {
-    // 出てくるアイテム
-    public GameObject missPaper;
-    public GameObject drawerKey;
-    public GameObject[] items;
-
     //　スロットの回転関係
     public GameObject[] blueMainReels;
     public GameObject[] blueSubReels;

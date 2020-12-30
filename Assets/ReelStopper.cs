@@ -8,7 +8,7 @@ public class ReelStopper : MonoBehaviour
     private int item2Count = 0;
     private int item3Count = 0;
     private int item4Count = 0;
-    public int item5Count = 0;
+    private int item5Count = 0;
     private int item6Count = 0;
     public GameObject[] blueItemShutters;
     public GameObject redItemShutter;

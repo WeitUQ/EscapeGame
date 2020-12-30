@@ -96,5 +96,20 @@ public class SpriteChanger : MonoBehaviour
             this.itemList[10].GetComponent<Image>().sprite = this.sprite[0];
             this.itemList[11].GetComponent<Image>().sprite = this.sprite[0];
         }
+        else if (this.iScript.chooseDriver)
+        {
+            this.itemList[0].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[1].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[2].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[3].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[4].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[5].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[6].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[7].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[8].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[9].GetComponent<Image>().sprite = this.sprite[1];
+            this.itemList[10].GetComponent<Image>().sprite = this.sprite[0];
+            this.itemList[11].GetComponent<Image>().sprite = this.sprite[0];
+        }
     }
 }

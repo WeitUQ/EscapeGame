@@ -21,6 +21,9 @@ public class ItemController : MonoBehaviour
     public GameObject[] listDrawerKeys;
     public GameObject[] zoomDrawerKeys;
     public GameObject[] zoomListCoins;
+    public GameObject screwDriver;
+    public GameObject listDriver;
+    public GameObject stickBond;
     public GameObject textCamera;
     public GameObject rButton;
     public GameObject lButton;
@@ -35,6 +38,7 @@ public class ItemController : MonoBehaviour
     public bool chooseHammer = false;
     public bool chooseCoin = false;
     public bool chooseDrawerKey = false;
+    public bool chooseDriver = false;
     private int clickCount = 0;
     private int getCoinCount = 0;
    
@@ -100,7 +104,8 @@ public class ItemController : MonoBehaviour
         this.chooseKey = false;
         this.chooseHammer = false;
         this.chooseCoin = false;
-    }
+        this.chooseDriver = false;
+}
     public void ZoomDrawerKey()
     {
         if (this.chooseDrawerKey & (this.listDrawerKeys[0].activeSelf || this.listDrawerKeys[1].activeSelf))
@@ -113,6 +118,11 @@ public class ItemController : MonoBehaviour
             this.zoomList[4].SetActive(false);
             this.zoomList[5].SetActive(false);
             this.zoomList[6].SetActive(false);
+            this.zoomList[7].SetActive(false);
+            this.zoomList[8].SetActive(false);
+            this.zoomList[9].SetActive(false);
+            this.zoomList[10].SetActive(false);
+            this.zoomList[11].SetActive(false);
             this.zoomDrawerKeys[0].SetActive(false);
             this.zoomDrawerKeys[1].SetActive(false);
             if (this.listDrawerKeys[0].activeSelf)
@@ -154,6 +164,11 @@ public class ItemController : MonoBehaviour
             this.zoomList[4].SetActive(false);
             this.zoomList[5].SetActive(true);
             this.zoomList[6].SetActive(false);
+            this.zoomList[7].SetActive(false);
+            this.zoomList[8].SetActive(false);
+            this.zoomList[9].SetActive(false);
+            this.zoomList[10].SetActive(false);
+            this.zoomList[11].SetActive(false);
         }
     }
     
@@ -163,7 +178,8 @@ public class ItemController : MonoBehaviour
         this.chooseNob = false;
         this.chooseKey = true;
         this.chooseHammer = false;    
-        this.chooseCoin = false;       
+        this.chooseCoin = false;
+        this.chooseDriver = false;
     }
    
     public void GetNob()
@@ -193,6 +209,7 @@ public class ItemController : MonoBehaviour
         this.chooseKey = false;
         this.chooseHammer = false;
         this.chooseCoin = false;
+        this.chooseDriver = false;
     }
     
     public void ZoomNob()
@@ -207,6 +224,11 @@ public class ItemController : MonoBehaviour
             this.zoomList[4].SetActive(true);
             this.zoomList[5].SetActive(false);
             this.zoomList[6].SetActive(false);
+            this.zoomList[7].SetActive(false);
+            this.zoomList[8].SetActive(false);
+            this.zoomList[9].SetActive(false);
+            this.zoomList[10].SetActive(false);
+            this.zoomList[11].SetActive(false);
         }
     }
     
@@ -242,7 +264,8 @@ public class ItemController : MonoBehaviour
         this.chooseNob = false;
         this.chooseKey = false;
         this.chooseHammer = true;
-        this.chooseCoin = false; 
+        this.chooseCoin = false;
+        this.chooseDriver = false;
     }
     
     public void ZoomHammer()
@@ -257,6 +280,11 @@ public class ItemController : MonoBehaviour
             this.zoomList[4].SetActive(false);
             this.zoomList[5].SetActive(false);
             this.zoomList[6].SetActive(false);
+            this.zoomList[7].SetActive(false);
+            this.zoomList[8].SetActive(false);
+            this.zoomList[9].SetActive(false);
+            this.zoomList[10].SetActive(false);
+            this.zoomList[11].SetActive(false);
         }
     }
     
@@ -390,6 +418,11 @@ public class ItemController : MonoBehaviour
             this.zoomList[4].SetActive(false);
             this.zoomList[5].SetActive(false);
             this.zoomList[6].SetActive(false);
+            this.zoomList[7].SetActive(false);
+            this.zoomList[8].SetActive(false);
+            this.zoomList[9].SetActive(false);
+            this.zoomList[10].SetActive(false);
+            this.zoomList[11].SetActive(false);
             this.zoomListCoins[0].SetActive(false);
             this.zoomListCoins[1].SetActive(false);
             this.zoomListCoins[2].SetActive(false);
@@ -456,8 +489,59 @@ public class ItemController : MonoBehaviour
         this.chooseKey = false;
         this.chooseHammer = false;
         this.chooseCoin = true;
+        this.chooseDriver = false;
     }
 
+    public void GetDriver()
+    {
+        if (this.cameraScript.zoomState[6])
+        {
+            Destroy(this.screwDriver);
+            this.listDriver.SetActive(true);
+            this.textCanvas.SetActive(true);
+            this.textCamera.SetActive(true);
+            this.zoomCamera.SetActive(true);
+            this.zoomList[7].SetActive(true);
+            this.closeButton.SetActive(false);
+            this.bButton.SetActive(false);
+            this.itemText.text = "プラスドライバーだ。…どこか使えそうなとこあっただろうか？";
+        }
+    }
+    public void ChooseDriver()
+    {
+        this.chooseDrawerKey = false;
+        this.chooseNob = false;
+        this.chooseKey = false;
+        this.chooseHammer = false;
+        this.chooseCoin = false;
+        this.chooseDriver = true;
+    }
+    public void ZoomDriver()
+    {
+        if (this.chooseDriver && this.listDriver.activeSelf)
+        {
+            this.zoomCamera.SetActive(true);
+            this.zoomList[0].SetActive(false);
+            this.zoomList[1].SetActive(false);
+            this.zoomList[2].SetActive(false);
+            this.zoomList[3].SetActive(false);
+            this.zoomList[4].SetActive(false);
+            this.zoomList[5].SetActive(false);
+            this.zoomList[6].SetActive(false);
+            this.zoomList[7].SetActive(true);
+            this.zoomList[8].SetActive(false);
+            this.zoomList[9].SetActive(false);
+            this.zoomList[10].SetActive(false);
+            this.zoomList[11].SetActive(false);
+        }
+    }
+    public void GetBond()
+    {
+        if (this.cameraScript.zoomState[6])
+        {
+            Destroy(this.stickBond);
+        }
+    }
     public void OnCloseButtun()
     {
         this.zoomCamera.SetActive(false);
@@ -468,5 +552,10 @@ public class ItemController : MonoBehaviour
         this.zoomList[4].SetActive(false);
         this.zoomList[5].SetActive(false);
         this.zoomList[6].SetActive(false);
+        this.zoomList[7].SetActive(false);
+        this.zoomList[8].SetActive(false);
+        this.zoomList[9].SetActive(false);
+        this.zoomList[10].SetActive(false);
+        this.zoomList[11].SetActive(false);
     }
 }

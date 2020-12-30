@@ -30,6 +30,11 @@ public class TextController : MonoBehaviour
         this.iScript.zoomList[4].SetActive(false);
         this.iScript.zoomList[5].SetActive(false);
         this.iScript.zoomList[6].SetActive(false);
+        this.iScript.zoomList[7].SetActive(false);
+        this.iScript.zoomList[8].SetActive(false);
+        this.iScript.zoomList[9].SetActive(false);
+        this.iScript.zoomList[10].SetActive(false);
+        this.iScript.zoomList[11].SetActive(false);
         this.iScript.closeButton.SetActive(true);
         this.bButton.SetActive(true);
         this.zoomCamera.SetActive(false);

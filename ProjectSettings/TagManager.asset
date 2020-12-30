@@ -12,6 +12,7 @@ TagManager:
   - ReelPicture4
   - ReelPicture5
   - ReelPicture6
+  - Collider
   layers:
   - Default
   - TransparentFX
