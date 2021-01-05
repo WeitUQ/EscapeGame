@@ -9,6 +9,8 @@ public class CameraController : MonoBehaviour
     public GameObject[] boxCollider;
     public Collider deskCollider;
     public GameObject door;
+    public GameObject pcCanvas;
+    public GameObject pcCamera;
     public GameObject MCamera;   
     public Collider[] slotColliders;
     public GameObject rButton;
@@ -134,6 +136,20 @@ public class CameraController : MonoBehaviour
             this.MCamera.transform.position = new Vector3(15, 17, 5);
         }
     }
+    public void PCZoomCamera()
+    {
+        if (this.zoomState[2])
+        {
+            this.zoomState[2] = false;
+            this.zoomState[7] = true;
+            this.MCamera.SetActive(false);
+            this.pcCanvas.SetActive(true);
+            this.pcCamera.SetActive(true);
+            this.rButton.SetActive(false);
+            this.lButton.SetActive(false);
+            this.bButton.SetActive(true); 
+        }
+    }
     public void BackCamera()
     {
         if (this.zoomState[0])
@@ -198,6 +214,14 @@ public class CameraController : MonoBehaviour
             this.zoomState[6] = false;
             this.MCamera.transform.eulerAngles = this.interAng;
             this.MCamera.transform.position = this.interPos;
+        }
+        else if (this.zoomState[7])
+        {
+            this.zoomState[2] = true;
+            this.zoomState[7] = false;
+            this.pcCamera.SetActive(false);
+            this.pcCanvas.SetActive(false);
+            this.MCamera.SetActive(true);
         }
     }
 }

@@ -19,11 +19,25 @@ public class ReelActiveChanger : MonoBehaviour
     {
         if (other.tag == "ReelPicture1" || other.tag == "ReelPicture2" || other.tag == "ReelPicture3" || other.tag == "ReelPicture4" || other.tag == "ReelPicture5" || other.tag == "ReelPicture6")
         {
-            other.gameObject.GetComponent<Renderer>().enabled = true;
+            if (other.gameObject.GetComponent<Renderer>() != null)
+            {
+                other.gameObject.GetComponent<Renderer>().enabled = true;
+            }
+            foreach(Transform child in other.gameObject.transform)
+            {
+                child.gameObject.GetComponent<Renderer>().enabled = true;
+            }
         }
     }
     private void OnTriggerExit(Collider other)
     {
+        if (other.gameObject.GetComponent<Renderer>() != null)
+        {
             other.gameObject.GetComponent<Renderer>().enabled = false;
+        }
+        foreach (Transform child in other.gameObject.transform)
+        {
+            child.gameObject.GetComponent<Renderer>().enabled = false;
+        }
     }
 }

@@ -24,6 +24,7 @@ public class ItemController : MonoBehaviour
     public GameObject screwDriver;
     public GameObject listDriver;
     public GameObject stickBond;
+    public GameObject gamTape;
     public GameObject textCamera;
     public GameObject rButton;
     public GameObject lButton;
@@ -540,6 +541,13 @@ public class ItemController : MonoBehaviour
         if (this.cameraScript.zoomState[6])
         {
             Destroy(this.stickBond);
+        }
+    }
+    public void GetTape()
+    {
+        if (this.cameraScript.zoomState[6])
+        {
+            Destroy(this.gamTape);
         }
     }
     public void OnCloseButtun()

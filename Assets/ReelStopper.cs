@@ -46,6 +46,26 @@ public class ReelStopper : MonoBehaviour
                 this.blueItemShutters[1].SetActive(false);
             }
         }
+        else if (this.sScript.blueRotStop[0] && other.tag == "ReelPicture3")
+        {
+            this.item3Count++;
+            this.sScript.blueRotSpeed[0] = 0;
+            this.gameObject.SetActive(false);
+            if (this.item3Count == 3)
+            {
+                this.blueItemShutters[2].SetActive(false);
+            }
+        }
+        else if (this.sScript.blueRotStop[0] && other.tag == "ReelPicture4")
+        {
+            this.item4Count++;
+            this.sScript.blueRotSpeed[0] = 0;
+            this.gameObject.SetActive(false);
+            if (this.item4Count == 3)
+            {
+                this.blueItemShutters[3].SetActive(false);
+            }
+        }
         if (this.sScript.blueRotStop[1] && other.tag == "ReelPicture1")
         {
             this.item1Count++;
@@ -66,6 +86,26 @@ public class ReelStopper : MonoBehaviour
                 this.blueItemShutters[1].SetActive(false);
             }
         }
+        else if (this.sScript.blueRotStop[1] && other.tag == "ReelPicture3")
+        {
+            this.item3Count++;
+            this.sScript.blueRotSpeed[1] = 0;
+            this.gameObject.SetActive(false);
+            if (this.item3Count == 3)
+            {
+                this.blueItemShutters[2].SetActive(false);
+            }
+        }
+        else if (this.sScript.blueRotStop[1] && other.tag == "ReelPicture4")
+        {
+            this.item4Count++;
+            this.sScript.blueRotSpeed[1] = 0;
+            this.gameObject.SetActive(false);
+            if (this.item4Count == 3)
+            {
+                this.blueItemShutters[3].SetActive(false);
+            }
+        }
         if (this.sScript.blueRotStop[2] && other.tag == "ReelPicture1")
         {
             this.item1Count++;
@@ -84,6 +124,26 @@ public class ReelStopper : MonoBehaviour
             if (this.item2Count == 3)
             {
                 this.blueItemShutters[1].SetActive(false);
+            }
+        }
+        else if (this.sScript.blueRotStop[2] && other.tag == "ReelPicture3")
+        {
+            this.item3Count++;
+            this.sScript.blueRotSpeed[2] = 0;
+            this.gameObject.SetActive(false);
+            if (this.item3Count == 3)
+            {
+                this.blueItemShutters[2].SetActive(false);
+            }
+        }
+        else if (this.sScript.blueRotStop[2] && other.tag == "ReelPicture4")
+        {
+            this.item4Count++;
+            this.sScript.blueRotSpeed[2] = 0;
+            this.gameObject.SetActive(false);
+            if (this.item4Count == 3)
+            {
+                this.blueItemShutters[3].SetActive(false);
             }
         }
         if (this.sScript.redRotStop[0] && other.tag == "ReelPicture5")
