@@ -7,9 +7,14 @@ public class PCController : MonoBehaviour
 {
     public InputField inputField;
     public Text underText;
+    public GameObject image;
+    public GameObject waitTextObject;
     public GameObject inputFieldObject;
     public GameObject okButton;
+    public GameObject[] folders;
     private int errorPoint = 0;
+    private bool singleClick = false;
+    public float[] clickTimes = { 0f, 0f };
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +28,12 @@ public class PCController : MonoBehaviour
     }
     public void EnterON()
     {
-        if (this.inputField.text == "OPEN")
+        if (this.inputField.text == "open")
         {
-         
+            Destroy(this.inputFieldObject);
+            Destroy(this.underText);
+            this.waitTextObject.SetActive(true);
+            Invoke("ScreenChange", 0.5f);
         }
         else
         {
@@ -44,5 +52,33 @@ public class PCController : MonoBehaviour
             {
                 this.underText.text = "パスワードのヒント: 閉じる = close, 開ける = ????";
             }
+    }
+    private void ScreenChange()
+    {
+        Destroy(this.waitTextObject);
+        this.image.SetActive(true);
+        this.folders[0].SetActive(true);
+    }
+    public void FolderOpen()
+    {
+        if (this.singleClick)
+        {
+            this.clickTimes[1] = Time.time;
+            if (this.clickTimes[1] - this.clickTimes[0] < 0.4f)
+            {
+                Debug.Log("OK");
+            }
+            else
+            {
+                this.clickTimes[0] = this.clickTimes[1];
+                this.clickTimes[1] = 0;
+            }
+        }         
+        else if (this.singleClick == false)
+        {
+            this.singleClick = true;
+            this.clickTimes[0] = Time.time;
+        }
+        
     }
 }
