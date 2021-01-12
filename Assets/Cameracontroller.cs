@@ -153,7 +153,7 @@ public class CameraController : MonoBehaviour
     }
     public void BedZoomCamera()
     {
-        if (this.zoomState[8] == false)
+        if (this.zoomState[8] == false && this.zoomState[9] == false && this.zoomState[10] == false)
         {
             this.bedCollider.enabled = false;
             this.zoomState[8] = true;
@@ -185,7 +185,7 @@ public class CameraController : MonoBehaviour
             this.zoomState[10] = true;
             this.boxCollider[6].SetActive(false);
             this.MCamera.transform.Rotate(-20, 0, 0);
-            this.MCamera.transform.position = new Vector3(25, 0.6f, -55);
+            this.MCamera.transform.position = new Vector3(25, 0.6f, -50);
         }
     }
     public void BackCamera()

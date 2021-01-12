@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ItemController : MonoBehaviour
 {
+    public GameObject flashLight;
+    public GameObject listLight;
     public GameObject listKey;
     public GameObject door;
     public GameObject nob;
@@ -549,6 +551,10 @@ public class ItemController : MonoBehaviour
         {
             Destroy(this.gamTape);
         }
+    }
+    public void GetFlashLight()
+    {
+        Destroy(this.flashLight);
     }
     public void OnCloseButtun()
     {
