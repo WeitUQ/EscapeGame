@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
     public GameObject desk;
     public GameObject[] boxCollider;
     public Collider deskCollider;
+    public Collider bedCollider;
     public GameObject door;
     public GameObject pcCanvas;
     public GameObject pcCamera;
@@ -150,6 +151,43 @@ public class CameraController : MonoBehaviour
             this.bButton.SetActive(true); 
         }
     }
+    public void BedZoomCamera()
+    {
+        if (this.zoomState[8] == false)
+        {
+            this.bedCollider.enabled = false;
+            this.zoomState[8] = true;
+            this.MCamera.transform.Rotate(20, -45, 0);
+            this.MCamera.transform.position = new Vector3(0, 20, -50);
+            this.rButton.SetActive(false);
+            this.lButton.SetActive(false);
+            this.bButton.SetActive(true);
+            this.interPos = this.transform.position;
+            this.interAng = this.transform.eulerAngles;
+        }
+    }
+    public void OverBedZoomCamera()
+    {
+        if (this.zoomState[8])
+        {
+            this.zoomState[8] = false;
+            this.zoomState[9] = true;
+            this.boxCollider[5].SetActive(false);
+            this.MCamera.transform.Rotate(20, 0, 0);
+            this.MCamera.transform.position = new Vector3(15, 20, -50);
+        }
+    }
+    public void UnderBedZoomCamera()
+    {
+        if (this.zoomState[8])
+        {
+            this.zoomState[8] = false;
+            this.zoomState[10] = true;
+            this.boxCollider[6].SetActive(false);
+            this.MCamera.transform.Rotate(-20, 0, 0);
+            this.MCamera.transform.position = new Vector3(25, 0.6f, -55);
+        }
+    }
     public void BackCamera()
     {
         if (this.zoomState[0])
@@ -222,6 +260,32 @@ public class CameraController : MonoBehaviour
             this.pcCamera.SetActive(false);
             this.pcCanvas.SetActive(false);
             this.MCamera.SetActive(true);
+        }
+        else if (this.zoomState[8])
+        {
+            this.zoomState[8] = false;
+            this.bedCollider.enabled = true;
+            this.MCamera.transform.eulerAngles = this.startAng;
+            this.MCamera.transform.position = this.startPos;
+            this.rButton.SetActive(true);
+            this.lButton.SetActive(true);
+            this.bButton.SetActive(false);
+        }
+        else if (this.zoomState[9])
+        {
+            this.zoomState[8] = true;
+            this.zoomState[9] = false;
+            this.boxCollider[5].SetActive(true);
+            this.MCamera.transform.eulerAngles = this.interAng;
+            this.MCamera.transform.position = this.interPos;
+        }
+        else if (this.zoomState[10])
+        {
+            this.zoomState[8] = true;
+            this.zoomState[10] = false;
+            this.boxCollider[6].SetActive(true);
+            this.MCamera.transform.eulerAngles = this.interAng;
+            this.MCamera.transform.position = this.interPos;
         }
     }
 }

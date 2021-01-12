@@ -5,7 +5,6 @@ using UnityEngine;
 public class DeskController : MonoBehaviour
 {
     public Animator deskAnimator;
-    public GameObject mCamera;
     public CameraController cScript;
 
     // Start is called before the first frame update
