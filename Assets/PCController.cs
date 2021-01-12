@@ -78,7 +78,6 @@ public class PCController : MonoBehaviour
         {
             this.singleClick = true;
             this.clickTimes[0] = Time.time;
-        }
-        
+        }       
     }
 }
