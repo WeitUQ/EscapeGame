@@ -15,10 +15,13 @@ public class StopperBreaker : MonoBehaviour
     {
         
     }
+
+    //スロットマシン内アイテムが受け皿に設置したコライダーと接触したとき
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Collider")
         {
+            //0.5秒後にコライダーを破壊
             Destroy(other.gameObject, 0.5f);
         }
     }

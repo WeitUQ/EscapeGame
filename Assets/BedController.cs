@@ -17,8 +17,11 @@ public class BedController : MonoBehaviour
     {
         
     }
+
+    //枕をクリック時の処理
     public void PillowStateChange()
     {
+        //枕を移動させるアニメーションを実行
         if (this.cScript.zoomState[9])
         {
             this.bedAnimator.SetBool("pillowMove", !this.bedAnimator.GetBool("pillowMove"));

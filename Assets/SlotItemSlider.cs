@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlotItemDropper : MonoBehaviour
+public class SlotItemSlider : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,9 +15,11 @@ public class SlotItemDropper : MonoBehaviour
     {
        
     }
+
+    //スロットマシン内アイテムがスロープに設置されたコライダーに接触したときの処理
     private void OnCollisionEnter(Collision other)
     {
+        //アイテムのリジッドボディ設定を変更
         other.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-
     }
 }

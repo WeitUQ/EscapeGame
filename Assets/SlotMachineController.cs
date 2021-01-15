@@ -38,8 +38,10 @@ public class SlotMachineController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //青スロットの回転フラグがオンになっているときの処理
         if (this.blueRotState)
         {
+            //リールを下に移動させ、規定位置を超えたら初期位置に戻す
             this.blueMainReels[0].transform.Translate(0, this.blueRotSpeed[0] * Time.deltaTime, 0);
             this.blueMainReels[1].transform.Translate(0, this.blueRotSpeed[1] * Time.deltaTime, 0);
             this.blueMainReels[2].transform.Translate(0, this.blueRotSpeed[2] * Time.deltaTime, 0);
@@ -68,9 +70,11 @@ public class SlotMachineController : MonoBehaviour
                 this.blueSubReels[5].transform.position = new Vector3(18.4f, this.blueSubReels[4].transform.position.y + 10.2f, this.blueSubReels[5].transform.position.z);
             }
         }
-        
+
+        //赤スロットの回転フラグがオンになっているときの処理
         if (this.redRotState)
         {
+            //リールを下に移動させ、規定位置を超えたら初期位置に戻す
             this.redMainReels[0].transform.Translate(0, this.redRotSpeed[0] * Time.deltaTime, 0);
             this.redMainReels[1].transform.Translate(0, this.redRotSpeed[1] * Time.deltaTime, 0);
             this.redMainReels[2].transform.Translate(0, this.redRotSpeed[2] * Time.deltaTime, 0);
@@ -100,11 +104,16 @@ public class SlotMachineController : MonoBehaviour
             }
         }
     }
+
+    //青スロットのレバーをクリックしたときの処理
     public void LeverONBlue()
     {
         if (this.cScript.zoomState[6])
         {
+            //青レバーのアニメーション実行
             this.leverAnimator[0].SetTrigger("ONBlue");
+
+            //コインが3枚入っていれば回転フラグON,足りなければ定型文表示
             if (this.iScript.bCoinCount == 3)
             {
                 this.iScript.bCoinCount = 0;
@@ -119,11 +128,16 @@ public class SlotMachineController : MonoBehaviour
             }
         }
     }
+
+    //赤スロットのレバーをクリックしたときの処理
     public void LeverONRed()
     {
         if (this.cScript.zoomState[5])
         {
+            //赤レバーのアニメーション実行
             this.leverAnimator[1].SetTrigger("ONRed");
+
+            //コインが3枚入っていれば回転フラグON,足りなければ定型文表示
             if (this.iScript.rCoinCount == 3)
             {
                 this.iScript.rCoinCount = 0;
@@ -138,37 +152,48 @@ public class SlotMachineController : MonoBehaviour
             }
         }
     }
+
+    //青スロットのリール回転時に左ボタンが押されたとき
     public void StopReelBlue1()
     {
         if (this.cScript.zoomState[6])
         {
+            //ボタンアニメーション実行
             this.buttonAnimator[0].SetTrigger("LON");
+
+            //リールストップフラグON
             if (this.blueRotSpeed[0] == -1.0f && this.blueRotState)
             {
-
                 this.blueRotStop[0] = true;
                 this.blueStopColliders[0].SetActive(true);
             }
         }
     }
+
+    //青スロットのリール回転時に中ボタンが押されたとき
     public void StopReelBlue2()
     {
         if (this.cScript.zoomState[6])
         {
+            //ボタンアニメーション実行
             this.buttonAnimator[0].SetTrigger("CON");
+            //リールストップフラグON
             if (this.blueRotSpeed[1] == -1.0f && this.blueRotState)
-            {
-
+            {                
                 this.blueRotStop[1] = true;
                 this.blueStopColliders[1].SetActive(true);
             }
         }
     }
+
+    //青スロットのリール回転時に右ボタンが押されたとき
     public void StopReelBlue3()
     {
         if (this.cScript.zoomState[6])
         {
+            //ボタンアニメーション実行
             this.buttonAnimator[0].SetTrigger("RON");
+            //リールストップフラグON
             if (this.blueRotSpeed[2] == -1.0f && this.blueRotState)
             {
 
@@ -177,26 +202,35 @@ public class SlotMachineController : MonoBehaviour
             }
         }
     }
+
+    //赤スロットのリール回転時に左ボタンが押されたとき
     public void StopReelRed1()
     {
         if (this.cScript.zoomState[5] && this.redRotSpeed[0] == -10.0f && this.redRotState)
         {
+            //リールストップフラグON
             this.redRotStop[0] = true;
             this.redStopColliders[0].SetActive(true);
         }
     }
+
+    //赤スロットのリール回転時に中ボタンが押されたとき
     public void StopReelRed2()
     {
         if (this.cScript.zoomState[5] && this.redRotSpeed[1] == -10.0f && this.redRotState)
         {
+            //リールストップフラグON
             this.redRotStop[1] = true;
             this.redStopColliders[1].SetActive(true);
         }
     }
+
+    //赤スロットのリール回転時に右ボタンが押されたとき
     public void StopReelRed3()
     {
         if (this.cScript.zoomState[5] && this.redRotSpeed[2] == -10.0f && this.redRotState)
         {
+            //リールストップフラグON
             this.redRotStop[2] = true;
             this.redStopColliders[2].SetActive(true);
         }

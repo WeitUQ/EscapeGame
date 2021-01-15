@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class ReelStopper : MonoBehaviour
 {
+    // リール中央にそろった絵柄のカウント
     private int item1Count = 0;
     private int item2Count = 0;
     private int item3Count = 0;
     private int item4Count = 0;
     private int item5Count = 0;
     private int item6Count = 0;
+
+    //アイテムの落下を止めているシャッター
     public GameObject[] blueItemShutters;
     public GameObject redItemShutter;
+
     public SlotMachineController sScript;
     // Start is called before the first frame update
     void Start()
@@ -24,8 +28,11 @@ public class ReelStopper : MonoBehaviour
     {
         
     }
+
+    //リール中央にあるコライダーにリール絵柄のコライダーが接触したとき
     private void OnTriggerEnter(Collider other)
     {
+        //回転が止まり、止まった絵柄ごとにカウントを加算していきカウントが3になったら対応するシャッターを破壊しアイテムが落ちてくる
         if (this.sScript.blueRotStop[0] && other.tag == "ReelPicture1")
         {
             this.item1Count++;

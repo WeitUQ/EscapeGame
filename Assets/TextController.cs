@@ -21,6 +21,7 @@ public class TextController : MonoBehaviour
         
     }
 
+    //テキストウィンドウクリック時の処理
     public void TextChanger()
     {
         this.iScript.zoomList[0].SetActive(false);

@@ -6,7 +6,8 @@ public class DoorController : MonoBehaviour
 {
     //doorを開けるアニメーション
     public Animator doorOpen;
-    private bool isDoorOpen = false;
+
+    //ドアを開けるフラグ
     public bool lockState = false;
     // Start is called before the first frame update
     void Start()
@@ -17,14 +18,14 @@ public class DoorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(this.isDoorOpen)
-        {
-            this.doorOpen.SetTrigger("Open");
-        }
+        
     }
+
+    //ドアにカギ使用後にドアをクリックしたときの処理
     public void OpenDoor()
     {
+        //ドアを開けるアニメーションを実行
         if(this.lockState)
-        this.isDoorOpen = true;
+        this.doorOpen.SetTrigger("Open");
     }
 }
