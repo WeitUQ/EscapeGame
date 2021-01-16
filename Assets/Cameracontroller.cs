@@ -29,6 +29,9 @@ public class CameraController : MonoBehaviour
     private Vector3 startAng; //ズーム前の角度
     private Vector3 interPos; //1回目のズーム時の位置
     private Vector3 interAng; //1回目のズーム時の角度
+
+    //その他
+    public ItemController iScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -234,14 +237,14 @@ public class CameraController : MonoBehaviour
             this.zoomState[10] = true;
             this.boxCollider[6].SetActive(false);
             this.MCamera.transform.Rotate(-20, 0, 0);
-            this.MCamera.transform.position = new Vector3(25, 0.6f, -50);
+            this.MCamera.transform.position = new Vector3(23.5f, 0.75f, -44);
         }
     }
 
     //backボタンを押したときの処理
     public void BackCamera()
     {
-        //1回目のズーム時なら初期位置、角度に、2回目のズーム時なら中間位置、角度にカメラが移動
+        //1回目のズーム時なら初期位置・角度に、2回目のズーム時なら中間位置・角度にカメラが移動
         if (this.zoomState[0])
         {
             this.zoomState[0] = false;
@@ -338,6 +341,10 @@ public class CameraController : MonoBehaviour
             this.boxCollider[6].SetActive(true);
             this.MCamera.transform.eulerAngles = this.interAng;
             this.MCamera.transform.position = this.interPos;
+            //ベッドしたライトをオフにする
+            this.iScript.lights[0].SetActive(false);
+            this.iScript.lights[1].SetActive(false);
+            this.iScript.lights[2].SetActive(false);
         }
     }
 }

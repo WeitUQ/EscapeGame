@@ -15,6 +15,7 @@ public class ItemController : MonoBehaviour
 　　public GameObject screwDriver;
     public GameObject stickBond;
     public GameObject gamTape;
+    public GameObject[] lights;
 
     //アイテムリスト内オブジェクト
     public GameObject listLight;
@@ -24,12 +25,14 @@ public class ItemController : MonoBehaviour
   　public GameObject[] listCoins;
     public GameObject[] listDrawerKeys;
     public GameObject listDriver;
+    public Light listFlashSpotLight;
 
     //ズームリスト内オブジェクト
     public GameObject[] zoomList;
     public GameObject zoomCamera;
     public GameObject[] zoomDrawerKeys;
     public GameObject[] zoomListCoins;
+    public Light zoomFlashSpotLight;
 
     //UI,Script
     public CameraController cameraScript;
@@ -56,7 +59,9 @@ public class ItemController : MonoBehaviour
     public bool chooseCoin = false;
     public bool chooseDrawerKey = false;
     public bool chooseDriver = false;
-     
+
+    //その他
+    public Animator lightAnimator;
     // Start is called before the first frame update
     void Start()
     {      
@@ -713,6 +718,30 @@ public class ItemController : MonoBehaviour
         }
     }
 
+    //懐中電灯ズーム画面で懐中電灯についているボタンを押した時
+    public void ChangeLight()
+    {
+        this.lightAnimator.SetTrigger("ButtonON");
+        this.zoomFlashSpotLight.enabled = !this.zoomFlashSpotLight.enabled;
+        this.listFlashSpotLight.enabled = !this.listFlashSpotLight.enabled;
+    }
+
+    //懐中電灯使用時の処理
+    public void UseLightL()
+    {
+       
+    }
+    public void UseLightC()
+    {
+        if (this.chooseLight && this.cameraScript.zoomState[10])
+        {
+            this.lights[1].SetActive(true);
+        }
+    }
+    public void UseLightR()
+    {
+
+    }
     //ズーム画面左上の×ボタンを押したときの処理
     public void OnCloseButtun()
     {
@@ -730,5 +759,10 @@ public class ItemController : MonoBehaviour
         this.zoomList[9].SetActive(false);
         this.zoomList[10].SetActive(false);
         this.zoomList[11].SetActive(false);
+
+        //ベッドしたライトをオフにする
+        this.lights[0].SetActive(false);
+        this.lights[1].SetActive(false);
+        this.lights[2].SetActive(false);
     }
 }
