@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
-    //ゲーム画面内オブジェクト、コライダー
+    //ゲーム画面内オブジェクト、コンポーネント
     public GameObject desk;
     public GameObject door;
     public GameObject[] boxCollider;
     public Collider deskCollider;
     public Collider bedCollider;
     public Collider[] slotColliders;
+    public Light underBedLight;
 
     //UIなど
     public GameObject pcCanvas;
@@ -341,10 +342,8 @@ public class CameraController : MonoBehaviour
             this.boxCollider[6].SetActive(true);
             this.MCamera.transform.eulerAngles = this.interAng;
             this.MCamera.transform.position = this.interPos;
-            //ベッドしたライトをオフにする
-            this.iScript.lights[0].SetActive(false);
-            this.iScript.lights[1].SetActive(false);
-            this.iScript.lights[2].SetActive(false);
+            //ベッド下ライトをオフにする
+            this.underBedLight.enabled = false;
         }
     }
 }
