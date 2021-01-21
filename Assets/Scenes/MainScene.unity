@@ -5176,7 +5176,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cbe5ac504479194478f9bd3d6948abd7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.2
+      value: 2.200001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cbe5ac504479194478f9bd3d6948abd7,
         type: 3}
@@ -7056,9 +7056,9 @@ Transform:
   - {fileID: 478063863}
   - {fileID: 1709665144}
   - {fileID: 1966709713}
-  - {fileID: 927144390}
-  - {fileID: 1399757949}
   - {fileID: 965839762}
+  - {fileID: 1399757949}
+  - {fileID: 927144390}
   m_Father: {fileID: 1708261256}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23459,7 +23459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4221664889422640, guid: 14d7a570754dc3240ba1b0a465ba37e4, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4221664889422640, guid: 14d7a570754dc3240ba1b0a465ba37e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -25908,6 +25908,7 @@ MonoBehaviour:
   chooseCoin: 0
   chooseDrawerKey: 0
   chooseDriver: 0
+  lightButtonON: 0
   lightAnimator: {fileID: 978979951}
 --- !u!114 &1598857773
 MonoBehaviour:
@@ -31079,7 +31080,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cbe5ac504479194478f9bd3d6948abd7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cbe5ac504479194478f9bd3d6948abd7,
         type: 3}
@@ -31796,7 +31797,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976988164}
   m_LocalRotation: {x: 0.7071068, y: 0, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0.822, y: -0.01, z: 0.06}
+  m_LocalPosition: {x: 0.813, y: -0.01, z: 0.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5570720594595954647}
@@ -31809,7 +31810,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976988164}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
