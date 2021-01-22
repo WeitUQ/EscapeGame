@@ -730,7 +730,7 @@ public class ItemController : MonoBehaviour
 
   
     //ズーム画面左上の×ボタンを押したときの処理
-    public void OnCloseButtun()
+    public void OnCloseButton()
     {
         //全ズーム画面を非表示にする
         this.zoomCamera.SetActive(false);
