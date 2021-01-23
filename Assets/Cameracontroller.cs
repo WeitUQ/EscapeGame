@@ -17,11 +17,11 @@ public class CameraController : MonoBehaviour
     //UIなど
     public GameObject pcCanvas;
     public GameObject pcCamera;
-    public GameObject MCamera;   
+    public GameObject MCamera;
     public GameObject rButton;
     public GameObject lButton;
     public GameObject bButton;
-    
+
     //メインカメラの状態のフラグ
     public bool[] zoomState;
 
@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+
     }
     //右ボタンクリック時の処理
     public void RAngleChange()
@@ -66,13 +66,13 @@ public class CameraController : MonoBehaviour
     {
         //ドアをズーム
         if (this.zoomState[0] == false)
-        {            
+        {
             this.zoomState[0] = true;
             this.MCamera.transform.Rotate(5, -45, 0);
             this.MCamera.transform.position = new Vector3(this.door.transform.position.x, 15, -38);
             this.rButton.SetActive(false);
             this.lButton.SetActive(false);
-            this.bButton.SetActive(true); 
+            this.bButton.SetActive(true);
         }
     }
 
@@ -96,7 +96,7 @@ public class CameraController : MonoBehaviour
             this.interPos = this.transform.position;
             this.interAng = this.transform.eulerAngles;
         }
-       
+
     }
 
     //机ズーム状態で机の上クリック時の処理
@@ -111,8 +111,8 @@ public class CameraController : MonoBehaviour
             this.MCamera.transform.Rotate(35, 0, 0);
             this.MCamera.transform.position = new Vector3(-23, 25, this.desk.transform.position.z);
         }
-    } 
-    
+    }
+
     //机の上ズーム状態でPCクリックしたときの処理
     public void PCZoomCamera()
     {
@@ -126,7 +126,7 @@ public class CameraController : MonoBehaviour
             this.pcCamera.SetActive(true);
             this.rButton.SetActive(false);
             this.lButton.SetActive(false);
-            this.bButton.SetActive(true); 
+            this.bButton.SetActive(true);
         }
     }
 
@@ -140,7 +140,7 @@ public class CameraController : MonoBehaviour
             this.zoomState[1] = false;
             this.zoomState[3] = true;
             this.MCamera.transform.Rotate(33, 0, 0);
-            this.MCamera.transform.position = new Vector3(-18, 16, this.desk.transform.position.z +7);
+            this.MCamera.transform.position = new Vector3(-18, 16, this.desk.transform.position.z + 7);
         }
     }
 
@@ -282,7 +282,7 @@ public class CameraController : MonoBehaviour
             this.zoomState[3] = false;
             this.MCamera.transform.eulerAngles = this.interAng;
             this.MCamera.transform.position = this.interPos;
-        }      
+        }
         else if (this.zoomState[4])
         {
             this.zoomState[4] = false;
@@ -343,7 +343,27 @@ public class CameraController : MonoBehaviour
             this.MCamera.transform.eulerAngles = this.interAng;
             this.MCamera.transform.position = this.interPos;
             //ベッド下ライトをオフにする
-            this.underBedLight.enabled =false;
+            this.underBedLight.enabled = false;
         }
+    }
+
+    //机をズームできるか
+ 
+    //机の上をズームできるか
+    public bool OnDeskZoomable
+    {
+        get => this.zoomState[1] = true;
+    }
+
+    //PCをズームできるか
+    public bool IsPCZoomable
+    {
+        get => this.zoomState[2] = true;
+    }
+
+    //引き出しをズームできるか
+    public bool IsDrawerZoomable
+    {
+        get => this.zoomState[3] = true;
     }
 }
