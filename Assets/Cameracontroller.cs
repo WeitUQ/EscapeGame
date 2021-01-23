@@ -237,8 +237,8 @@ public class CameraController : MonoBehaviour
             this.zoomState[8] = false;
             this.zoomState[10] = true;
             this.boxCollider[6].SetActive(false);
-            this.MCamera.transform.Rotate(-20, 0, 0);
-            this.MCamera.transform.position = new Vector3(23.5f, 0.75f, -44);
+            this.MCamera.transform.Rotate(-5, 0, 0);
+            this.MCamera.transform.position = new Vector3(24f, 1.8f, -44);
         }
     }
 
@@ -343,7 +343,7 @@ public class CameraController : MonoBehaviour
             this.MCamera.transform.eulerAngles = this.interAng;
             this.MCamera.transform.position = this.interPos;
             //ベッド下ライトをオフにする
-            this.underBedLight.enabled = false;
+            this.underBedLight.enabled =false;
         }
     }
 }
