@@ -94,9 +94,9 @@ public class PCController : MonoBehaviour
                 this.pdfs[0].SetActive(false);
                 this.pdfText.text =
                     "　　　　                  ヒント\n\n" +
-                    "1.出口は1つ。だが、部屋を出る方法は1つではない。何をどのように使うかが、あなたの命運を分けるだろう。\n\n" +
+                    "1.出口は1つ。だが、部屋を出る方法は1つではない。何をどのように使うかよく考えろ。\n\n" +
                     "2.なぜその部屋に閉じ込められているのかを思い出せ。3枚の紙が全てを語る。\n\n" +
-                    "3.部屋を出るためのカギはドアにある。あきらめずに探せ。";
+                    "3.部屋を出るためのカギは扉にある。";
                 this.titleText.text = "        ヒント.pdf - PDF Reader";
             }
             else
