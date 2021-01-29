@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class CameraController : MonoBehaviour
 {
@@ -13,11 +14,12 @@ public class CameraController : MonoBehaviour
     public Collider bedCollider;
     public Collider[] slotColliders;
     public Light underBedLight;
+    public PhysicsRaycaster mainRaycaster;
 
     //UIなど
     public GameObject pcCanvas;
     public GameObject pcCamera;
-    public GameObject MCamera;
+    public GameObject zoomCamera;
     public GameObject rButton;
     public GameObject lButton;
     public GameObject bButton;
@@ -43,22 +45,36 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (this.zoomCamera.activeSelf)
+        {
+            this.mainRaycaster.enabled = false;
+        }
+        else
+        {
+            this.mainRaycaster.enabled = true;
+        }
     }
     //右ボタンクリック時の処理
     public void RAngleChange()
     {
-        //右回りに回転させ位置と角度を更新
-        this.MCamera.transform.Rotate(0, 90, 0);
-        this.startPos = this.transform.position;
-        this.startAng = this.transform.eulerAngles;
+        if (!this.zoomCamera.activeSelf)
+        {
+            //右回りに回転させ位置と角度を更新
+            this.transform.Rotate(0, 90, 0);
+            this.startPos = this.transform.position;
+            this.startAng = this.transform.eulerAngles;
+        }
     }
+    //左ボタンクリック時の処理
     public void LAngleChange()
     {
-        //左回りに回転させ位置と角度を更新
-        this.MCamera.transform.Rotate(0, -90, 0);
-        this.startPos = this.transform.position;
-        this.startAng = this.transform.eulerAngles;
+        if (!this.zoomCamera.activeSelf)
+        {
+            //左回りに回転させ位置と角度を更新
+            this.transform.Rotate(0, -90, 0);
+            this.startPos = this.transform.position;
+            this.startAng = this.transform.eulerAngles;
+        }
     }
 
     //ドアクリック時の処理
@@ -68,8 +84,8 @@ public class CameraController : MonoBehaviour
         if (this.zoomState[0] == false)
         {
             this.zoomState[0] = true;
-            this.MCamera.transform.Rotate(5, -45, 0);
-            this.MCamera.transform.position = new Vector3(this.door.transform.position.x, 15, -38);
+            this.transform.Rotate(5, -45, 0);
+            this.transform.position = new Vector3(this.door.transform.position.x, 15, -38);
             this.rButton.SetActive(false);
             this.lButton.SetActive(false);
             this.bButton.SetActive(true);
@@ -80,14 +96,14 @@ public class CameraController : MonoBehaviour
     public void DeskZoomCamera()
     {
         //机をズーム
-        if (this.zoomState[1] == false && this.zoomState[2] == false && this.zoomState[3] == false)
+        if (this.IsDeskZoomable)
         {
             this.boxCollider[0].SetActive(true);
             this.boxCollider[1].SetActive(true);
             this.deskCollider.enabled = false;
             this.zoomState[1] = true;
-            this.MCamera.transform.Rotate(20, -45, 0);
-            this.MCamera.transform.position = new Vector3(-5, 20, this.desk.transform.position.z);
+            this.transform.Rotate(20, -45, 0);
+            this.transform.position = new Vector3(-5, 20, this.desk.transform.position.z);
             this.rButton.SetActive(false);
             this.lButton.SetActive(false);
             this.bButton.SetActive(true);
@@ -103,13 +119,13 @@ public class CameraController : MonoBehaviour
     public void OverDeskZoomCamera()
     {
         //机の上をズーム
-        if (this.zoomState[1])
+        if (this.OnDeskZoomable)
         {
             this.zoomState[1] = false;
             this.zoomState[2] = true;
             this.boxCollider[1].SetActive(false);
-            this.MCamera.transform.Rotate(35, 0, 0);
-            this.MCamera.transform.position = new Vector3(-23, 25, this.desk.transform.position.z);
+            this.transform.Rotate(35, 0, 0);
+            this.transform.position = new Vector3(-23, 25, this.desk.transform.position.z);
         }
     }
 
@@ -117,11 +133,11 @@ public class CameraController : MonoBehaviour
     public void PCZoomCamera()
     {
         //PCcanvasを表示
-        if (this.zoomState[2])
+        if (this.IsPCZoomable)
         {
             this.zoomState[2] = false;
             this.zoomState[7] = true;
-            this.MCamera.SetActive(false);
+            this.gameObject.SetActive(false);
             this.pcCanvas.SetActive(true);
             this.pcCamera.SetActive(true);
             this.rButton.SetActive(false);
@@ -134,13 +150,13 @@ public class CameraController : MonoBehaviour
     public void DrawerZoomCamera()
     {
         //引き出しをズーム
-        if (this.zoomState[1])
+        if (this.IsDrawerZoomable)
         {
             this.boxCollider[0].SetActive(false);
             this.zoomState[1] = false;
             this.zoomState[3] = true;
-            this.MCamera.transform.Rotate(33, 0, 0);
-            this.MCamera.transform.position = new Vector3(-18, 16, this.desk.transform.position.z + 7);
+            this.transform.Rotate(33, 0, 0);
+            this.transform.position = new Vector3(-18, 16, this.desk.transform.position.z + 7);
         }
     }
 
@@ -152,8 +168,8 @@ public class CameraController : MonoBehaviour
         {
             this.boxCollider[2].SetActive(false);
             this.zoomState[4] = true;
-            this.MCamera.transform.Rotate(20, -45, 0);
-            this.MCamera.transform.position = new Vector3(30, 20, -10);
+            this.transform.Rotate(20, -45, 0);
+            this.transform.position = new Vector3(30, 20, -10);
             this.rButton.SetActive(false);
             this.lButton.SetActive(false);
             this.bButton.SetActive(true);
@@ -174,8 +190,8 @@ public class CameraController : MonoBehaviour
             this.boxCollider[4].SetActive(true);
             this.zoomState[4] = false;
             this.zoomState[5] = true;
-            this.MCamera.transform.Rotate(0, 0, 0);
-            this.MCamera.transform.position = new Vector3(35, 17, 5);
+            this.transform.Rotate(0, 0, 0);
+            this.transform.position = new Vector3(35, 17, 5);
         }
     }
 
@@ -189,8 +205,8 @@ public class CameraController : MonoBehaviour
             this.boxCollider[3].SetActive(true);
             this.zoomState[4] = false;
             this.zoomState[6] = true;
-            this.MCamera.transform.Rotate(0, 0, 0);
-            this.MCamera.transform.position = new Vector3(15, 17, 5);
+            this.transform.Rotate(0, 0, 0);
+            this.transform.position = new Vector3(15, 17, 5);
         }
     }
 
@@ -202,8 +218,8 @@ public class CameraController : MonoBehaviour
         {
             this.bedCollider.enabled = false;
             this.zoomState[8] = true;
-            this.MCamera.transform.Rotate(20, -45, 0);
-            this.MCamera.transform.position = new Vector3(0, 20, -50);
+            this.transform.Rotate(20, -45, 0);
+            this.transform.position = new Vector3(0, 20, -50);
             this.rButton.SetActive(false);
             this.lButton.SetActive(false);
             this.bButton.SetActive(true);
@@ -223,8 +239,8 @@ public class CameraController : MonoBehaviour
             this.zoomState[8] = false;
             this.zoomState[9] = true;
             this.boxCollider[5].SetActive(false);
-            this.MCamera.transform.Rotate(20, 0, 0);
-            this.MCamera.transform.position = new Vector3(15, 20, -50);
+            this.transform.Rotate(20, 0, 0);
+            this.transform.position = new Vector3(15, 20, -50);
         }
     }
 
@@ -237,133 +253,159 @@ public class CameraController : MonoBehaviour
             this.zoomState[8] = false;
             this.zoomState[10] = true;
             this.boxCollider[6].SetActive(false);
-            this.MCamera.transform.Rotate(-5, 0, 0);
-            this.MCamera.transform.position = new Vector3(24f, 1.8f, -44);
+            this.transform.Rotate(-5, 0, 0);
+            this.transform.position = new Vector3(24f, 1.8f, -44);
         }
     }
 
     //backボタンを押したときの処理
     public void BackCamera()
     {
-        //1回目のズーム時なら初期位置・角度に、2回目のズーム時なら中間位置・角度にカメラが移動
-        if (this.zoomState[0])
+        if (!this.zoomCamera.activeSelf)
         {
-            this.zoomState[0] = false;
-            this.MCamera.transform.eulerAngles = this.startAng;
-            this.MCamera.transform.position = this.startPos;
-            this.rButton.SetActive(true);
-            this.lButton.SetActive(true);
-            this.bButton.SetActive(false);
-        }
-        else if (this.zoomState[1])
-        {
-            this.boxCollider[0].SetActive(false);
-            this.boxCollider[1].SetActive(false);
-            this.zoomState[1] = false;
-            this.MCamera.transform.eulerAngles = this.startAng;
-            this.MCamera.transform.position = this.startPos;
-            this.rButton.SetActive(true);
-            this.lButton.SetActive(true);
-            this.bButton.SetActive(false);
-            this.deskCollider.enabled = true;
-        }
-        else if (this.zoomState[2])
-        {
-            this.boxCollider[1].SetActive(true);
-            this.zoomState[1] = true;
-            this.zoomState[2] = false;
-            this.MCamera.transform.eulerAngles = this.interAng;
-            this.MCamera.transform.position = this.interPos;
-        }
-        else if (this.zoomState[3])
-        {
-            this.boxCollider[0].SetActive(true);
-            this.zoomState[1] = true;
-            this.zoomState[3] = false;
-            this.MCamera.transform.eulerAngles = this.interAng;
-            this.MCamera.transform.position = this.interPos;
-        }
-        else if (this.zoomState[4])
-        {
-            this.zoomState[4] = false;
-            this.MCamera.transform.eulerAngles = this.startAng;
-            this.MCamera.transform.position = this.startPos;
-            this.rButton.SetActive(true);
-            this.lButton.SetActive(true);
-            this.bButton.SetActive(false);
-            this.boxCollider[2].SetActive(true);
-        }
-        else if (this.zoomState[5])
-        {
-            this.slotColliders[0].enabled = true;
-            this.zoomState[4] = true;
-            this.zoomState[5] = false;
-            this.MCamera.transform.eulerAngles = this.interAng;
-            this.MCamera.transform.position = this.interPos;
-        }
-        else if (this.zoomState[6])
-        {
-            this.slotColliders[1].enabled = true;
-            this.zoomState[4] = true;
-            this.zoomState[6] = false;
-            this.MCamera.transform.eulerAngles = this.interAng;
-            this.MCamera.transform.position = this.interPos;
-        }
-        else if (this.zoomState[7])
-        {
-            this.zoomState[2] = true;
-            this.zoomState[7] = false;
-            this.pcCamera.SetActive(false);
-            this.pcCanvas.SetActive(false);
-            this.MCamera.SetActive(true);
-        }
-        else if (this.zoomState[8])
-        {
-            this.zoomState[8] = false;
-            this.bedCollider.enabled = true;
-            this.MCamera.transform.eulerAngles = this.startAng;
-            this.MCamera.transform.position = this.startPos;
-            this.rButton.SetActive(true);
-            this.lButton.SetActive(true);
-            this.bButton.SetActive(false);
-        }
-        else if (this.zoomState[9])
-        {
-            this.zoomState[8] = true;
-            this.zoomState[9] = false;
-            this.boxCollider[5].SetActive(true);
-            this.MCamera.transform.eulerAngles = this.interAng;
-            this.MCamera.transform.position = this.interPos;
-        }
-        else if (this.zoomState[10])
-        {
-            this.zoomState[8] = true;
-            this.zoomState[10] = false;
-            this.boxCollider[6].SetActive(true);
-            this.MCamera.transform.eulerAngles = this.interAng;
-            this.MCamera.transform.position = this.interPos;
-            //ベッド下ライトをオフにする
-            this.underBedLight.enabled = false;
+            //1回目のズーム時なら初期位置・角度に、2回目のズーム時なら中間位置・角度にカメラが移動
+            if (this.zoomState[0])
+            {
+                this.zoomState[0] = false;
+                this.transform.eulerAngles = this.startAng;
+                this.transform.position = this.startPos;
+                this.rButton.SetActive(true);
+                this.lButton.SetActive(true);
+                this.bButton.SetActive(false);
+            }
+            else if (this.zoomState[1])
+            {
+                this.boxCollider[0].SetActive(false);
+                this.boxCollider[1].SetActive(false);
+                this.zoomState[1] = false;
+                this.transform.eulerAngles = this.startAng;
+                this.transform.position = this.startPos;
+                this.rButton.SetActive(true);
+                this.lButton.SetActive(true);
+                this.bButton.SetActive(false);
+                this.deskCollider.enabled = true;
+            }
+            else if (this.zoomState[2])
+            {
+                this.boxCollider[1].SetActive(true);
+                this.zoomState[1] = true;
+                this.zoomState[2] = false;
+                this.transform.eulerAngles = this.interAng;
+                this.transform.position = this.interPos;
+            }
+            else if (this.zoomState[3])
+            {
+                this.boxCollider[0].SetActive(true);
+                this.zoomState[1] = true;
+                this.zoomState[3] = false;
+                this.transform.eulerAngles = this.interAng;
+                this.transform.position = this.interPos;
+            }
+            else if (this.zoomState[4])
+            {
+                this.zoomState[4] = false;
+                this.transform.eulerAngles = this.startAng;
+                this.transform.position = this.startPos;
+                this.rButton.SetActive(true);
+                this.lButton.SetActive(true);
+                this.bButton.SetActive(false);
+                this.boxCollider[2].SetActive(true);
+            }
+            else if (this.zoomState[5])
+            {
+                this.slotColliders[0].enabled = true;
+                this.zoomState[4] = true;
+                this.zoomState[5] = false;
+                this.transform.eulerAngles = this.interAng;
+                this.transform.position = this.interPos;
+            }
+            else if (this.zoomState[6])
+            {
+                this.slotColliders[1].enabled = true;
+                this.zoomState[4] = true;
+                this.zoomState[6] = false;
+                this.transform.eulerAngles = this.interAng;
+                this.transform.position = this.interPos;
+            }
+            else if (this.zoomState[7])
+            {
+                this.zoomState[2] = true;
+                this.zoomState[7] = false;
+                this.pcCamera.SetActive(false);
+                this.pcCanvas.SetActive(false);
+                this.gameObject.SetActive(true);
+            }
+            else if (this.zoomState[8])
+            {
+                this.zoomState[8] = false;
+                this.bedCollider.enabled = true;
+                this.transform.eulerAngles = this.startAng;
+                this.transform.position = this.startPos;
+                this.rButton.SetActive(true);
+                this.lButton.SetActive(true);
+                this.bButton.SetActive(false);
+            }
+            else if (this.zoomState[9])
+            {
+                this.zoomState[8] = true;
+                this.zoomState[9] = false;
+                this.boxCollider[5].SetActive(true);
+                this.transform.eulerAngles = this.interAng;
+                this.transform.position = this.interPos;
+            }
+            else if (this.zoomState[10])
+            {
+                this.zoomState[8] = true;
+                this.zoomState[10] = false;
+                this.boxCollider[6].SetActive(true);
+                this.transform.eulerAngles = this.interAng;
+                this.transform.position = this.interPos;
+                //ベッド下ライトをオフにする
+                this.underBedLight.enabled = false;
+            }
         }
     }
 
     //机をズームできるか
- 
+    public bool IsDeskZoomable
+    {
+        get
+        {
+            if (!this.OnDeskZoomable && !this.IsPCZoomable && !this.IsPCZoomable)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
     //机の上をズームできるか
     public bool OnDeskZoomable
     {
-        get => this.zoomState[1] = true;
+        get => this.zoomState[1];
     }
 
     //PCをズームできるか
     public bool IsPCZoomable
     {
-        get => this.zoomState[2] = true;
+        get => this.zoomState[2];
     }
 
     //引き出しをズームできるか
     public bool IsDrawerZoomable
     {
-        get => this.zoomState[3] = true;
+        get
+        {
+            if (!this.zoomState [3] && OnDeskZoomable)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } 
     }
 }

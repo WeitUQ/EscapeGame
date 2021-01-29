@@ -16456,8 +16456,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6043528, y: 1.1827575, z: 0.68923783}
-  m_Center: {x: -0.3093918, y: -0.00032954323, z: 0.35537905}
+  m_Size: {x: 0.67043895, y: 1.3487356, z: 0.97224313}
+  m_Center: {x: -0.3424348, y: -0.083318144, z: 0.49688148}
 --- !u!95 &939448421
 Animator:
   serializedVersion: 3
@@ -17033,9 +17033,10 @@ MonoBehaviour:
   - {fileID: 2108732481}
   - {fileID: 1987756337}
   underBedLight: {fileID: 1976988166}
+  mainRaycaster: {fileID: 963194230}
   pcCanvas: {fileID: 1461428059}
   pcCamera: {fileID: 346470825}
-  MCamera: {fileID: 963194225}
+  zoomCamera: {fileID: 1411273652}
   rButton: {fileID: 1940643429}
   lButton: {fileID: 223203460}
   bButton: {fileID: 1899598208}
@@ -24006,7 +24007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1824
   m_MaxRayIntersections: 0
 --- !u!1 &1412344635 stripped
 GameObject:
