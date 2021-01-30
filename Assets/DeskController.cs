@@ -6,6 +6,7 @@ public class DeskController : MonoBehaviour
 {
     public Animator deskAnimator;//引き出しを開閉させるためのアニメーター
     public CameraController cScript;
+    public ItemController iScript;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,7 @@ public class DeskController : MonoBehaviour
     public void DrawerStateChange1()
     {
         //1番上の引き出しの開閉アニメーション実行
-        if (this.cScript.zoomState[3])
+        if (this.cScript.zoomState[3] && this.iScript.DrawerOpen)
         {
             this.deskAnimator.SetBool("Open1", !this.deskAnimator.GetBool("Open1"));
         }

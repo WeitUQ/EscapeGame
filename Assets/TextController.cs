@@ -28,7 +28,14 @@ public class TextController : MonoBehaviour
     //テキストウィンドウクリック時の処理
     public void TextChanger()
     {
-        if (this.iScript.zoomList[9].activeSelf && i <= 4)
+        if(this.text.text == "こ…これは……!!")
+        {
+            Destroy(this.iScript.IOU);
+            this.iScript.zoomList[9].SetActive(true);
+            this.text.text = this.IOUScenerios[i];
+            i++;
+        }
+        else if (this.iScript.zoomList[9].activeSelf && i <= 4)
         {
             this.text.text = this.IOUScenerios[i];
             i++;
@@ -53,6 +60,7 @@ public class TextController : MonoBehaviour
             this.zoomCamera.SetActive(false);
             this.textCamera.SetActive(false);
             this.textCanvas.SetActive(false);
+            i = 0;
         }
     }
 }

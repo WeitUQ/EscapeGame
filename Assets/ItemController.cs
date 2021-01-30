@@ -65,6 +65,7 @@ public class ItemController : MonoBehaviour
 
     //その他
     public Animator lightAnimator;
+    private bool drawerOpen = false;
     // Start is called before the first frame update
     void Start()
     {      
@@ -162,6 +163,15 @@ public class ItemController : MonoBehaviour
                 this.zoomDrawerKeys[1].SetActive(true);
             }
         }
+    }
+    //引き出しのカギ使用時
+    public void UseDrawerKey()
+    {
+        if (this.cameraScript.IsDrawerZoomable && this.chooseKey && this.listDrawerKeys[0].activeSelf)
+            Destroy(this.listDrawerKeys[0]);
+        else if (this.cameraScript.IsDrawerZoomable && this.chooseKey && this.listDrawerKeys[1].activeSelf)
+            Destroy(this.listDrawerKeys[1]);
+        this.drawerOpen = true;
     }
     //ドアのカギクリック時の処理
     public void GetKey()
@@ -697,7 +707,6 @@ public class ItemController : MonoBehaviour
         {
             Destroy(this.IOU);
             UIStateONGetItems();
-            this.zoomList[9].SetActive(true);
             this.itemText.text = "こ…これは……!!";
         }
     }
@@ -722,12 +731,16 @@ public class ItemController : MonoBehaviour
         this.zoomList[11].SetActive(false);
     }
 
-    private void UIStateONGetItems()
+    public void UIStateONGetItems()
     {
         this.textCanvas.SetActive(true);
         this.textCamera.SetActive(true);
         this.zoomCamera.SetActive(true);
         this.closeButton.SetActive(false);
         this.bButton.SetActive(false);
+    }
+    public bool DrawerOpen
+    {
+        get => this.drawerOpen;
     }
 }
