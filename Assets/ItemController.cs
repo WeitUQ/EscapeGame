@@ -16,6 +16,7 @@ public class ItemController : MonoBehaviour
     public GameObject stickBond;
     public GameObject gamTape;
     public GameObject underBedLight;
+    public GameObject IOU;
 
     //アイテムリスト内オブジェクト
     public GameObject listLight;
@@ -85,13 +86,9 @@ public class ItemController : MonoBehaviour
             this.listDrawerKeys[1].SetActive(true);
 
             //ズーム画面と主人公のセリフを表示させる。
-            this.textCanvas.SetActive(true);
-            this.textCamera.SetActive(true);
-            this.zoomCamera.SetActive(true);
+            UIStateONGetItems();
             this.zoomList[1].SetActive(true);
             this.zoomDrawerKeys[0].SetActive(false);
-            this.closeButton.SetActive(false);
-            this.bButton.SetActive(false);
             if (this.listDrawerKeys[0].activeSelf)
             {
                 this.itemText.text = "カギを手に入れた。…二個目だ。";
@@ -109,13 +106,9 @@ public class ItemController : MonoBehaviour
             this.listDrawerKeys[0].SetActive(true);
 
             //ズーム画面と主人公のセリフを表示させる。
-            this.textCanvas.SetActive(true);
-            this.textCamera.SetActive(true);
-            this.zoomCamera.SetActive(true);
+            UIStateONGetItems();
             this.zoomList[1].SetActive(true);
             this.zoomDrawerKeys[1].SetActive(false);
-            this.closeButton.SetActive(false);
-            this.bButton.SetActive(false);
             if (this.listDrawerKeys[1].activeSelf)
             {
                 this.itemText.text = "カギを手に入れた。…二個目だ。";
@@ -239,12 +232,8 @@ public class ItemController : MonoBehaviour
                 this.listNob.SetActive(true);
 
                 //ズーム画面と主人公のセリフを表示させる
-                this.textCanvas.SetActive(true);
-                this.textCamera.SetActive(true);
-                this.zoomCamera.SetActive(true);
+                UIStateONGetItems();
                 this.zoomList[4].SetActive(true);
-                this.closeButton.SetActive(false);
-                this.bButton.SetActive(false);
                 this.itemText.text = "ドアノブが取れてしまった…。";
             }
         }
@@ -310,12 +299,8 @@ public class ItemController : MonoBehaviour
         this.listHammer.SetActive(true);
 
         //ズーム画面と主人公のセリフを表示させる
-        this.textCanvas.SetActive(true);
-        this.textCamera.SetActive(true);
-        this.zoomCamera.SetActive(true);
+        UIStateONGetItems();
         this.zoomList[3].SetActive(true);
-        this.closeButton.SetActive(false);
-        this.bButton.SetActive(false);
         this.itemText.text = "ハンマーだ。何かに使えるかもしれないし持っておこう。";
     }
     
@@ -362,9 +347,7 @@ public class ItemController : MonoBehaviour
         this.listCoins[0].SetActive(true);
 
         //入手しているコインの枚数に応じたズーム画面と主人公のセリフを表示
-        this.textCamera.SetActive(true);
-        this.textCanvas.SetActive(true);
-        this.zoomCamera.SetActive(true);
+        UIStateONGetItems();
         this.zoomList[2].SetActive(true);
         this.zoomListCoins[0].SetActive(false);
         this.zoomListCoins[1].SetActive(false);
@@ -381,8 +364,6 @@ public class ItemController : MonoBehaviour
         {
             this.zoomListCoins[2].SetActive(true);
         }
-        this.closeButton.SetActive(false);
-        this.bButton.SetActive(false);
         this.getCoinCount++;
         if (this.getCoinCount == 1)
         {           
@@ -407,9 +388,7 @@ public class ItemController : MonoBehaviour
         this.listCoins[1].SetActive(true);
 
         //入手しているコインの枚数に応じたズーム画面と主人公のセリフを表示
-        this.textCanvas.SetActive(true);
-        this.textCamera.SetActive(true);
-        this.zoomCamera.SetActive(true);
+        UIStateONGetItems();
         this.zoomList[2].SetActive(true);
         this.zoomListCoins[0].SetActive(false);
         this.zoomListCoins[1].SetActive(false);
@@ -426,8 +405,6 @@ public class ItemController : MonoBehaviour
         {
             this.zoomListCoins[2].SetActive(true);
         }
-        this.closeButton.SetActive(false);
-        this.bButton.SetActive(false);
         this.getCoinCount++;
         if (this.getCoinCount == 1)
         {
@@ -451,9 +428,7 @@ public class ItemController : MonoBehaviour
         this.listCoins[2].SetActive(true);
 
         //入手しているコインの枚数に応じたズーム画面と主人公のセリフを表示
-        this.textCanvas.SetActive(true);
-        this.textCamera.SetActive(true);
-        this.zoomCamera.SetActive(true);
+        UIStateONGetItems();
         this.zoomList[2].SetActive(true);
         this.zoomListCoins[0].SetActive(false);
         this.zoomListCoins[1].SetActive(false);
@@ -470,8 +445,6 @@ public class ItemController : MonoBehaviour
         {
             this.zoomListCoins[2].SetActive(true);
         }
-        this.closeButton.SetActive(false);
-        this.bButton.SetActive(false);
         this.getCoinCount++;
         if (this.getCoinCount == 1)
         {
@@ -594,12 +567,8 @@ public class ItemController : MonoBehaviour
             this.listDriver.SetActive(true);
 
             //ドライバーのズーム画面と主人公のセリフを表示
-            this.textCanvas.SetActive(true);
-            this.textCamera.SetActive(true);
-            this.zoomCamera.SetActive(true);
+            UIStateONGetItems();
             this.zoomList[7].SetActive(true);
-            this.closeButton.SetActive(false);
-            this.bButton.SetActive(false);
             this.itemText.text = "プラスドライバーだ。…どこか使えそうなとこあっただろうか？";
         }
     }
@@ -648,12 +617,8 @@ public class ItemController : MonoBehaviour
             Destroy(this.stickBond);
 
             //のりのズーム画面と主人公のセリフを表示
-            this.textCanvas.SetActive(true);
-            this.textCamera.SetActive(true);
-            this.zoomCamera.SetActive(true);
+            UIStateONGetItems();
             this.zoomList[7].SetActive(true);
-            this.closeButton.SetActive(false);
-            this.bButton.SetActive(false);
             this.itemText.text = "のりだ…。これ、使い道なさそうな気が…";
         }
     }
@@ -675,12 +640,8 @@ public class ItemController : MonoBehaviour
         this.listLight.SetActive(true);
 
         //懐中電灯のズーム画面と主人公のセリフを表示
-        this.textCanvas.SetActive(true);
-        this.textCamera.SetActive(true);
-        this.zoomCamera.SetActive(true);
+        UIStateONGetItems();
         this.zoomList[8].SetActive(true);
-        this.closeButton.SetActive(false);
-        this.bButton.SetActive(false);
         this.itemText.text = "懐中電灯だ！これがあれば暗いところを照らせるのでは!?";
     }
 
@@ -728,6 +689,15 @@ public class ItemController : MonoBehaviour
         this.lightButtonON = !this.lightButtonON;
     }
 
+    //借用書をクリックしたときの処理
+    public void GetIOU()
+    {
+        Destroy(this.IOU);
+        UIStateONGetItems();
+        this.zoomList[9].SetActive(true);
+        this.itemText.text = "こ…これは……!!";
+    }
+
   
     //ズーム画面左上の×ボタンを押したときの処理
     public void OnCloseButton()
@@ -746,5 +716,14 @@ public class ItemController : MonoBehaviour
         this.zoomList[9].SetActive(false);
         this.zoomList[10].SetActive(false);
         this.zoomList[11].SetActive(false);
+    }
+
+    private void UIStateONGetItems()
+    {
+        this.textCanvas.SetActive(true);
+        this.textCamera.SetActive(true);
+        this.zoomCamera.SetActive(true);
+        this.closeButton.SetActive(false);
+        this.bButton.SetActive(false);
     }
 }
