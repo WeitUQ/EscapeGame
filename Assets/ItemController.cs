@@ -38,6 +38,7 @@ public class ItemController : MonoBehaviour
     //UI,Script
     public CameraController cameraScript;
     public DoorController doorScript;
+    public FlashLightController flashLightScript;
     public GameObject closeButton;
     public GameObject textCamera;
     public GameObject rButton;
@@ -692,10 +693,13 @@ public class ItemController : MonoBehaviour
     //借用書をクリックしたときの処理
     public void GetIOU()
     {
-        Destroy(this.IOU);
-        UIStateONGetItems();
-        this.zoomList[9].SetActive(true);
-        this.itemText.text = "こ…これは……!!";
+        if (this.flashLightScript.IsIOUGettable)
+        {
+            Destroy(this.IOU);
+            UIStateONGetItems();
+            this.zoomList[9].SetActive(true);
+            this.itemText.text = "こ…これは……!!";
+        }
     }
 
   
