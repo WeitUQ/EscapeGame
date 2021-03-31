@@ -12,6 +12,9 @@ public class TextController : MonoBehaviour
     public GameObject bButton;
     public Text text;
     public string[] IOUScenerios;
+    public string[] contractScenerios;
+    public string[] agreementScenerios;
+    public string[] scenerios;
     private int i = 0;
     // Start is called before the first frame update
     void Start()
@@ -25,21 +28,21 @@ public class TextController : MonoBehaviour
         
     }
 
+
     //テキストウィンドウクリック時の処理
     public void TextChanger()
     {
-        if(this.text.text == "こ…これは……!!")
+        if (this.scenerios == this.IOUScenerios && i == 1)
         {
-            Destroy(this.iScript.IOU);
+            this.iScript.UIStateONGetItems();
             this.iScript.zoomList[9].SetActive(true);
-            this.text.text = this.IOUScenerios[i];
-            i++;
         }
-        else if (this.iScript.zoomList[9].activeSelf && i <= 4)
+
+       if (this.scenerios != null && i < this.scenerios.Length)
         {
-            this.text.text = this.IOUScenerios[i];
+            this.text.text = this.scenerios[i];
             i++;
-        }
+        }       
         else
         {
             this.iScript.zoomList[0].SetActive(false);
@@ -56,6 +59,7 @@ public class TextController : MonoBehaviour
             this.iScript.zoomList[11].SetActive(false);
             this.iScript.closeButton.SetActive(true);
             this.text.text = null;
+            this.scenerios = null;
             this.bButton.SetActive(true);
             this.zoomCamera.SetActive(false);
             this.textCamera.SetActive(false);

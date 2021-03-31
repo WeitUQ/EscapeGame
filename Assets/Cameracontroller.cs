@@ -10,6 +10,8 @@ public class CameraController : MonoBehaviour
     public GameObject desk;
     public GameObject door;
     public GameObject[] boxCollider;
+    public Collider[] drawerCollider;
+    public Collider drawKeyHoleCollider;
     public Collider deskCollider;
     public Collider bedCollider;
     public Collider[] slotColliders;
@@ -157,6 +159,11 @@ public class CameraController : MonoBehaviour
             this.zoomState[3] = true;
             this.transform.Rotate(33, 0, 0);
             this.transform.position = new Vector3(-18, 16, this.desk.transform.position.z + 7);
+            ChangeStateDrawerColiider();
+            if ((this.iScript.listDrawerKeys[0] && this.iScript.listDrawerKeys[0].activeSelf) || (this.iScript.listDrawerKeys[1] && this.iScript.listDrawerKeys[1].activeSelf))
+            {
+                this.drawKeyHoleCollider.enabled = true;
+            }
         }
     }
 
@@ -296,10 +303,12 @@ public class CameraController : MonoBehaviour
             else if (this.zoomState[3])
             {
                 this.boxCollider[0].SetActive(true);
+                this.drawKeyHoleCollider.enabled = false;
                 this.zoomState[1] = true;
                 this.zoomState[3] = false;
                 this.transform.eulerAngles = this.interAng;
                 this.transform.position = this.interPos;
+                ChangeStateDrawerColiider();
             }
             else if (this.zoomState[4])
             {
@@ -407,5 +416,13 @@ public class CameraController : MonoBehaviour
                 return false;
             }
         } 
+    }
+
+    //引き出しのコライダーの有効・無効を切り替える関数
+    private void ChangeStateDrawerColiider()
+    {
+        this.drawerCollider[0].enabled = !this.drawerCollider[0].enabled;
+        this.drawerCollider[1].enabled = !this.drawerCollider[1].enabled;
+        this.drawerCollider[2].enabled = !this.drawerCollider[2].enabled;
     }
 }

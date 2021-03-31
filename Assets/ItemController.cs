@@ -17,6 +17,8 @@ public class ItemController : MonoBehaviour
     public GameObject gamTape;
     public GameObject underBedLight;
     public GameObject IOU;
+    public GameObject contract;
+    public GameObject agreement;
 
     //アイテムリスト内オブジェクト
     public GameObject listLight;
@@ -26,7 +28,11 @@ public class ItemController : MonoBehaviour
   　public GameObject[] listCoins;
     public GameObject[] listDrawerKeys;
     public GameObject listDriver;
+    public GameObject listIOU;
+    public GameObject listContract;
+    public GameObject listAgreement;
     public Light listFlashSpotLight;
+
 
     //ズームリスト内オブジェクト
     public GameObject[] zoomList;
@@ -39,6 +45,7 @@ public class ItemController : MonoBehaviour
     public CameraController cameraScript;
     public DoorController doorScript;
     public FlashLightController flashLightScript;
+    public TextController textScript;
     public GameObject closeButton;
     public GameObject textCamera;
     public GameObject rButton;
@@ -62,6 +69,9 @@ public class ItemController : MonoBehaviour
     public bool chooseDrawerKey = false;
     public bool chooseDriver = false;
     public bool lightButtonON = false;
+    public bool chooseIOU = false;
+    public bool chooseContract = false;
+    public bool chooseAgreement = false;
 
     //その他
     public Animator lightAnimator;
@@ -132,6 +142,9 @@ public class ItemController : MonoBehaviour
         this.chooseCoin = false;
         this.chooseDriver = false;
         this.chooseLight = false;
+        this.chooseIOU = false;
+        this.chooseContract = false;
+        this.chooseAgreement = false;
     }
     //引き出しのカギを1つ以上入手している状態でアイテムリスト1を連続で2度クリックした場合の処理
     public void ZoomDrawerKey()
@@ -167,11 +180,21 @@ public class ItemController : MonoBehaviour
     //引き出しのカギ使用時
     public void UseDrawerKey()
     {
-        if (this.cameraScript.IsDrawerZoomable && this.chooseKey && this.listDrawerKeys[0].activeSelf)
+        if (!this.cameraScript.IsDrawerZoomable && this.chooseDrawerKey && this.listDrawerKeys[0] && this.listDrawerKeys[0].activeSelf)
+        {
+            this.listDrawerKeys[0].SetActive(false);
             Destroy(this.listDrawerKeys[0]);
-        else if (this.cameraScript.IsDrawerZoomable && this.chooseKey && this.listDrawerKeys[1].activeSelf)
+        }
+        else if (!this.cameraScript.IsDrawerZoomable && this.chooseDrawerKey && this.listDrawerKeys[1] && this.listDrawerKeys[1].activeSelf)
+        {
+            this.listDrawerKeys[1].SetActive(false);
             Destroy(this.listDrawerKeys[1]);
+        }
         this.drawerOpen = true;
+        if (this.listDrawerKeys[0] && !this.listDrawerKeys[0].activeSelf || !this.listDrawerKeys[1].activeSelf)
+        {
+            this.cameraScript.drawKeyHoleCollider.enabled = false;
+        }
     }
     //ドアのカギクリック時の処理
     public void GetKey()
@@ -228,6 +251,8 @@ public class ItemController : MonoBehaviour
         this.chooseCoin = false;
         this.chooseDriver = false;
         this.chooseLight = false;
+        this.chooseContract = false;
+        this.chooseAgreement = false;
     }
    
     //ドアノブクリック時の処理
@@ -261,6 +286,9 @@ public class ItemController : MonoBehaviour
         this.chooseCoin = false;
         this.chooseDriver = false;
         this.chooseLight = false;
+        this.chooseIOU = false;
+        this.chooseContract = false;
+        this.chooseAgreement = false;
     }
 
     //ドアノブを入手している状態でアイテムリスト10を連続で2度クリックした時の処理
@@ -326,6 +354,9 @@ public class ItemController : MonoBehaviour
         this.chooseCoin = false;
         this.chooseDriver = false;
         this.chooseLight = false;
+        this.chooseIOU = false;
+        this.chooseContract = false;
+        this.chooseAgreement = false;
     }
 
     //ハンマーを入手した状態でアイテムリスト3を連続で2度クリックした時の処理
@@ -482,6 +513,9 @@ public class ItemController : MonoBehaviour
         this.chooseCoin = true;
         this.chooseDriver = false;
         this.chooseLight = false;
+        this.chooseIOU = false;
+        this.chooseContract = false;
+        this.chooseAgreement = false;
     }
     //コインを1枚以上入手している状態でアイテムリスト2を連続で2度クリックしたとき
     public void ZoomCoin()
@@ -595,6 +629,9 @@ public class ItemController : MonoBehaviour
         this.chooseCoin = false;
         this.chooseDriver = true;
         this.chooseLight = false;
+        this.chooseIOU = false;
+        this.chooseContract = false;
+        this.chooseAgreement = false;
     }
 
     //ドライバーを入手している状態でアイテムリスト9を連続で2度クリックしたとき
@@ -667,12 +704,15 @@ public class ItemController : MonoBehaviour
         this.chooseCoin = false;
         this.chooseDriver = false;
         this.chooseLight = true;
+        this.chooseIOU = false;
+        this.chooseContract = false;
+        this.chooseAgreement = false;
     }
 
     //懐中電灯を入手している状態でアイテムリスト4を2度連続でクリックした時の処理
     public void ZoomLight()
     {
-        if (this.chooseLight)
+        if (this.chooseLight && this.listLight.activeSelf)
         {
             //懐中電灯のズーム画面を表示
             this.zoomCamera.SetActive(true);
@@ -706,14 +746,147 @@ public class ItemController : MonoBehaviour
         if (this.flashLightScript.IsIOUGettable)
         {
             Destroy(this.IOU);
-            UIStateONGetItems();
-            this.itemText.text = "こ…これは……!!";
+            this.listIOU.SetActive(true);
+            this.textCanvas.SetActive(true);
+            this.textCamera.SetActive(true);
+            this.textScript.scenerios = this.textScript.IOUScenerios;
+            this.textScript.TextChanger();
         }
     }
 
-  
-    //ズーム画面左上の×ボタンを押したときの処理
-    public void OnCloseButton()
+    //アイテムリスト6をクリックした時の処理
+    public void ChooseIOU()
+    {
+        this.chooseDrawerKey = false;
+        this.chooseNob = false;
+        this.chooseKey = false;
+        this.chooseHammer = false;
+        this.chooseCoin = false;
+        this.chooseDriver = false;
+        this.chooseLight = false;
+        this.chooseIOU = true;
+        this.chooseContract = false;
+        this.chooseAgreement = false;
+    }
+    //借用書を入手している状態でアイテムリスト6を2度連続でクリックした時の処理
+    public void ZoomIOU()
+    {
+        if (this.chooseIOU && this.listIOU.activeSelf)
+        {
+            //IOUのズーム画面を表示
+            this.zoomCamera.SetActive(true);
+            this.zoomList[0].SetActive(false);
+            this.zoomList[1].SetActive(false);
+            this.zoomList[2].SetActive(false);
+            this.zoomList[3].SetActive(false);
+            this.zoomList[4].SetActive(false);
+            this.zoomList[5].SetActive(false);
+            this.zoomList[6].SetActive(false);
+            this.zoomList[7].SetActive(false);
+            this.zoomList[8].SetActive(false);
+            this.zoomList[9].SetActive(true);
+            this.zoomList[10].SetActive(false);
+            this.zoomList[11].SetActive(false);
+        }
+        
+    }
+
+    //契約書をクリックしたときの処理
+    public void GetContract()
+    {
+        Destroy(this.contract);
+        this.listContract.SetActive(true);
+        UIStateONGetItems();
+        this.zoomList[11].SetActive(true);
+        this.textScript.scenerios = this.textScript.contractScenerios;
+        this.textScript.TextChanger();
+    }
+
+    //アイテムリスト8をクリックしたときの処理
+    public void ChooseContract()
+    {
+        this.chooseDrawerKey = false;
+        this.chooseNob = false;
+        this.chooseKey = false;
+        this.chooseHammer = false;
+        this.chooseCoin = false;
+        this.chooseDriver = false;
+        this.chooseLight = false;
+        this.chooseIOU = false;
+        this.chooseContract = true;
+        this.chooseAgreement = false;
+}
+
+//契約書を入手している状態でアイテムリスト8を2度連続でクリックした時の処理
+public void ZoomContract()
+    {
+        if (this.chooseContract && this.listContract.activeSelf)
+        {
+            this.zoomCamera.SetActive(true);
+            this.zoomList[0].SetActive(false);
+            this.zoomList[1].SetActive(false);
+            this.zoomList[2].SetActive(false);
+            this.zoomList[3].SetActive(false);
+            this.zoomList[4].SetActive(false);
+            this.zoomList[5].SetActive(false);
+            this.zoomList[6].SetActive(false);
+            this.zoomList[7].SetActive(false);
+            this.zoomList[8].SetActive(false);
+            this.zoomList[9].SetActive(false);
+            this.zoomList[10].SetActive(false);
+            this.zoomList[11].SetActive(true);
+        }
+    }
+
+    //同意書を入手したときの処理
+    public void GetAgreement()
+    {
+        Destroy(this.agreement);
+        this.listAgreement.SetActive(true);
+        UIStateONGetItems();
+        this.zoomList[10].SetActive(true);
+        this.textScript.scenerios = this.textScript.agreementScenerios;
+        this.textScript.TextChanger();
+    }
+
+    //アイテムリスト7をクリックしたときの処理
+    public void ChooseAgreement()
+    {
+        this.chooseDrawerKey = false;
+        this.chooseNob = false;
+        this.chooseKey = false;
+        this.chooseHammer = false;
+        this.chooseCoin = false;
+        this.chooseDriver = false;
+        this.chooseLight = false;
+        this.chooseIOU = false;
+        this.chooseContract = false;
+        this.chooseAgreement = true;
+    }
+
+    //同意書を入手している状態でアイテムリスト7を2度連続でクリックした時の処理
+    public void ZoomAgreement()
+    {
+        if (this.chooseAgreement && this.listAgreement.activeSelf)
+        {
+            this.zoomCamera.SetActive(true);
+            this.zoomList[0].SetActive(false);
+            this.zoomList[1].SetActive(false);
+            this.zoomList[2].SetActive(false);
+            this.zoomList[3].SetActive(false);
+            this.zoomList[4].SetActive(false);
+            this.zoomList[5].SetActive(false);
+            this.zoomList[6].SetActive(false);
+            this.zoomList[7].SetActive(false);
+            this.zoomList[8].SetActive(false);
+            this.zoomList[9].SetActive(false);
+            this.zoomList[10].SetActive(true);
+            this.zoomList[11].SetActive(false);
+        }
+    }
+
+        //ズーム画面左上の×ボタンを押したときの処理
+        public void OnCloseButton()
     {
         //全ズーム画面を非表示にする
         this.zoomCamera.SetActive(false);
@@ -739,8 +912,11 @@ public class ItemController : MonoBehaviour
         this.closeButton.SetActive(false);
         this.bButton.SetActive(false);
     }
+
+    //引き出し開閉フラグのプロパティ
     public bool DrawerOpen
     {
         get => this.drawerOpen;
     }
+
 }

@@ -27,6 +27,8 @@ public class DeskController : MonoBehaviour
         if (this.cScript.zoomState[3] && this.iScript.DrawerOpen)
         {
             this.deskAnimator.SetBool("Open1", !this.deskAnimator.GetBool("Open1"));
+            this.cScript.drawerCollider[1].enabled = !this.cScript.drawerCollider[1].enabled;
+            this.cScript.drawerCollider[2].enabled = !this.cScript.drawerCollider[2].enabled;
         }
     }
 
@@ -35,9 +37,11 @@ public class DeskController : MonoBehaviour
     {
         //真ん中の引き出しの開閉アニメーション実行
         if (this.cScript.zoomState[3])
-        { 
+        {
             this.deskAnimator.SetBool("Open2", !this.deskAnimator.GetBool("Open2"));
-        }           
+            this.cScript.drawerCollider[0].enabled = !this.cScript.drawerCollider[0].enabled;
+            this.cScript.drawerCollider[2].enabled = !this.cScript.drawerCollider[2].enabled;
+        }
     }
 
     //引き出しズーム状態で一番下の引き出しをクリックしたとき
@@ -47,6 +51,8 @@ public class DeskController : MonoBehaviour
         if (this.cScript.zoomState[3])
         {
             this.deskAnimator.SetBool("Open3", !this.deskAnimator.GetBool("Open3"));
+            this.cScript.drawerCollider[0].enabled = !this.cScript.drawerCollider[0].enabled;
+            this.cScript.drawerCollider[1].enabled = !this.cScript.drawerCollider[1].enabled;
         }
     }
 }
