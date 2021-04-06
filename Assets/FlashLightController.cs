@@ -7,6 +7,7 @@ public class FlashLightController : MonoBehaviour
     public ItemController iScript;
     public CameraController cScript;
     public Light underBedLight;
+    public GameObject zoomCamera;
     private Ray ray;
     private RaycastHit hit;
     public LayerMask mask;
@@ -31,7 +32,7 @@ public class FlashLightController : MonoBehaviour
             this.moveAng = new Vector3(10, 90, 0);
         }
         //ドラッグ中
-        else if (Input.GetMouseButton(0) && this.underBedLight.enabled)
+        else if (Input.GetMouseButton(0) && this.underBedLight.enabled && !this.zoomCamera.activeSelf)
         {
             this.ray = new Ray(this.underBedLight.transform.position, this.underBedLight.transform.rotation * new Vector3(0, 0.1f, 1.0f));
             if (Physics.Raycast(this.ray, out this.hit, 20.0f, this.mask))
