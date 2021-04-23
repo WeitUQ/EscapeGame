@@ -5,10 +5,12 @@ using UnityEngine;
 public class ZoomCameraRotater : MonoBehaviour
 {
     public ItemController iScript;
+    public DoorNobController dnScript;
     public GameObject[] zoomDrawerkeys;
     public GameObject[] zoomCoin;
     public GameObject zoomHammer;
     public GameObject zoomNob;
+    public GameObject zoomNobSphere;
     public GameObject zoomKey;
     public GameObject zoomDriver;
     public GameObject zoomLight;
@@ -20,7 +22,7 @@ public class ZoomCameraRotater : MonoBehaviour
     private Vector3 rotateAngle;
     private Vector2 lastMousePosition;
     private Vector3 initialRot;
-    public bool memorizeFrag = true;
+    public bool memorizeFlag = true;
     private GameObject zoomObject;
     // Start is called before the first frame update
     void Start()
@@ -44,7 +46,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomDrawerkeys[0].activeInHierarchy && !this.zoomDrawerkeys[1].activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomDrawerkeys[0];
                     ChangeFlagRot();
@@ -53,7 +55,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomDrawerkeys[1].activeInHierarchy && !this.zoomDrawerkeys[0].activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomDrawerkeys[1];
                     ChangeFlagRot();
@@ -62,7 +64,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomDrawerkeys[1].activeInHierarchy && this.zoomDrawerkeys[0].activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomDrawerkeys[2];
                     ChangeFlagRot();
@@ -71,7 +73,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomCoin[0].activeInHierarchy && !this.zoomCoin[1].activeInHierarchy && !this.zoomCoin[2].activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomCoin[0];
                     ChangeFlagRot();
@@ -80,7 +82,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomCoin[1].activeInHierarchy && !this.zoomCoin[0].activeInHierarchy && !this.zoomCoin[2].activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomCoin[1];
                     ChangeFlagRot();
@@ -89,7 +91,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomCoin[2].activeInHierarchy && !this.zoomCoin[0].activeInHierarchy && !this.zoomCoin[1].activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomCoin[2];
                     ChangeFlagRot();
@@ -98,7 +100,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomCoin[0].activeInHierarchy && this.zoomCoin[1].activeInHierarchy && !this.zoomCoin[2].activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomCoin[3];
                     ChangeFlagRot();
@@ -107,7 +109,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomCoin[0].activeInHierarchy && !this.zoomCoin[1].activeInHierarchy && this.zoomCoin[2].activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomCoin[4];
                     ChangeFlagRot();
@@ -116,7 +118,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (!this.zoomCoin[0].activeInHierarchy && this.zoomCoin[1].activeInHierarchy && this.zoomCoin[2].activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomCoin[5];
                     ChangeFlagRot();
@@ -125,7 +127,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomCoin[0].activeInHierarchy && this.zoomCoin[1].activeInHierarchy && this.zoomCoin[2].activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomCoin[6];
                     ChangeFlagRot();
@@ -134,7 +136,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomHammer.activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomHammer;
                     ChangeFlagRot();
@@ -143,16 +145,20 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomNob.activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomNob;
+                    if (this.dnScript.NobPivotChangeFlag == true)
+                    {
+                        this.zoomObject = this.zoomNobSphere;
+                    }
                     ChangeFlagRot();
                 }
                 RotateObject();
             }
             else if (this.zoomKey.activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomKey;
                     ChangeFlagRot();
@@ -161,7 +167,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomDriver.activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomDriver;
                     ChangeFlagRot();
@@ -170,7 +176,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomLight.activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = zoomLight;
                     ChangeFlagRot();
@@ -179,7 +185,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomIOU.activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomIOU;
                     ChangeFlagRot();
@@ -188,7 +194,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomAgreement.activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomAgreement;
                     ChangeFlagRot();
@@ -197,7 +203,7 @@ public class ZoomCameraRotater : MonoBehaviour
             }
             else if (this.zoomContract.activeInHierarchy && Input.GetMouseButton(0))
             {
-                if (this.memorizeFrag == true)
+                if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomContract;
                     ChangeFlagRot();
@@ -215,6 +221,7 @@ public class ZoomCameraRotater : MonoBehaviour
     public GameObject ZoomObject
     {
         get => this.zoomObject;
+        set => zoomObject = value;
     }
 
     private void RotateObject()
@@ -227,7 +234,7 @@ public class ZoomCameraRotater : MonoBehaviour
 
     private void ChangeFlagRot()
     {
-        this.memorizeFrag = false;
+        this.memorizeFlag = false;
         this.initialRot = this.zoomObject.transform.eulerAngles;
     }
 }

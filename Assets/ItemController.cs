@@ -46,7 +46,7 @@ public class ItemController : MonoBehaviour
     public DoorController doorScript;
     public FlashLightController flashLightScript;
     public TextController textScript;
-    public ZoomCameraRotater zoomRotateText;
+    public ZoomCameraRotater zoomRotateScript;
     public GameObject closeButton;
     public GameObject textCamera;
     public GameObject rButton;
@@ -157,10 +157,10 @@ public class ItemController : MonoBehaviour
         {
             //回転可能にし、前回開いていたズームアイテムの位置を初期化
             this.rotFlag = true;            
-            if (this.zoomRotateText.ZoomObject != null)
+            if (this.zoomRotateScript.ZoomObject != null)
             {
-                this.zoomRotateText.memorizeFrag = true;
-                this.zoomRotateText.ZoomObject.transform.eulerAngles = this.zoomRotateText.ZoomInitialRot;
+                this.zoomRotateScript.memorizeFlag = true;
+                this.zoomRotateScript.ZoomObject.transform.eulerAngles = this.zoomRotateScript.ZoomInitialRot;
             }            
             //入手している引き出しのカギのズーム画面のみを表示する
             this.zoomCamera.SetActive(true);
@@ -235,10 +235,10 @@ public class ItemController : MonoBehaviour
        {
             //回転可能にし、前回開いていたズームアイテムの位置を初期化
             this.rotFlag = true;
-            if (this.zoomRotateText.ZoomObject != null)
+            if (this.zoomRotateScript.ZoomObject != null)
             {
-                this.zoomRotateText.memorizeFrag = true;
-                this.zoomRotateText.ZoomObject.transform.eulerAngles = this.zoomRotateText.ZoomInitialRot;
+                this.zoomRotateScript.memorizeFlag = true;
+                this.zoomRotateScript.ZoomObject.transform.eulerAngles = this.zoomRotateScript.ZoomInitialRot;
             }
             //ドアのカギのズーム画面のみを表示する
             this.zoomCamera.SetActive(true);
@@ -314,10 +314,10 @@ public class ItemController : MonoBehaviour
         {
             //回転可能にし、前回開いていたズームアイテムの位置を初期化
             this.rotFlag = true;
-            if (this.zoomRotateText.ZoomObject != null)
+            if (this.zoomRotateScript.ZoomObject != null)
             {
-                this.zoomRotateText.memorizeFrag = true;
-                this.zoomRotateText.ZoomObject.transform.eulerAngles = this.zoomRotateText.ZoomInitialRot;
+                this.zoomRotateScript.memorizeFlag = true;
+                this.zoomRotateScript.ZoomObject.transform.eulerAngles = this.zoomRotateScript.ZoomInitialRot;
             }
             //ドアノブのズーム画面のみを表示する
             this.zoomCamera.SetActive(true);
@@ -389,10 +389,10 @@ public class ItemController : MonoBehaviour
         {
             //回転可能にし、前回開いていたズームアイテムの位置を初期化
             this.rotFlag = true;
-            if (this.zoomRotateText.ZoomObject != null)
+            if (this.zoomRotateScript.ZoomObject != null)
             {
-                this.zoomRotateText.memorizeFrag = true;
-                this.zoomRotateText.ZoomObject.transform.eulerAngles = this.zoomRotateText.ZoomInitialRot;
+                this.zoomRotateScript.memorizeFlag = true;
+                this.zoomRotateScript.ZoomObject.transform.eulerAngles = this.zoomRotateScript.ZoomInitialRot;
             }
             //ハンマーのズーム画面を表示
             this.zoomCamera.SetActive(true);
@@ -554,10 +554,10 @@ public class ItemController : MonoBehaviour
         {
             //回転可能にし、前回開いていたズームアイテムの位置を初期化
             this.rotFlag = true;
-            if (this.zoomRotateText.ZoomObject != null)
+            if (this.zoomRotateScript.ZoomObject != null)
             {
-                this.zoomRotateText.memorizeFrag = true;
-                this.zoomRotateText.ZoomObject.transform.eulerAngles = this.zoomRotateText.ZoomInitialRot;
+                this.zoomRotateScript.memorizeFlag = true;
+                this.zoomRotateScript.ZoomObject.transform.eulerAngles = this.zoomRotateScript.ZoomInitialRot;
             }
             //入手しているコインの枚数に応じた入手画面を表示
             this.zoomCamera.SetActive(true);
@@ -679,10 +679,10 @@ public class ItemController : MonoBehaviour
         {
             //回転可能にし、前回開いていたズームアイテムの位置を初期化
             this.rotFlag = true;
-            if (this.zoomRotateText.ZoomObject != null)
+            if (this.zoomRotateScript.ZoomObject != null)
             {
-                this.zoomRotateText.memorizeFrag = true;
-                this.zoomRotateText.ZoomObject.transform.eulerAngles = this.zoomRotateText.ZoomInitialRot;
+                this.zoomRotateScript.memorizeFlag = true;
+                this.zoomRotateScript.ZoomObject.transform.eulerAngles = this.zoomRotateScript.ZoomInitialRot;
             }
             //ドライバーのズーム画面を表示
             this.zoomCamera.SetActive(true);
@@ -761,10 +761,10 @@ public class ItemController : MonoBehaviour
         {
             //回転可能にし、前回開いていたズームアイテムの位置を初期化
             this.rotFlag = true;
-            if (this.zoomRotateText.ZoomObject != null)
+            if (this.zoomRotateScript.ZoomObject != null)
             {
-                this.zoomRotateText.memorizeFrag = true;
-                this.zoomRotateText.ZoomObject.transform.eulerAngles = this.zoomRotateText.ZoomInitialRot;
+                this.zoomRotateScript.memorizeFlag = true;
+                this.zoomRotateScript.ZoomObject.transform.eulerAngles = this.zoomRotateScript.ZoomInitialRot;
             }
             //懐中電灯のズーム画面を表示
             this.zoomCamera.SetActive(true);
@@ -827,10 +827,10 @@ public class ItemController : MonoBehaviour
         {
             //回転可能にし、前回開いていたズームアイテムの位置を初期化
             this.rotFlag = true;
-            if (this.zoomRotateText.ZoomObject != null)
+            if (this.zoomRotateScript.ZoomObject != null)
             {
-                this.zoomRotateText.memorizeFrag = true;
-                this.zoomRotateText.ZoomObject.transform.eulerAngles = this.zoomRotateText.ZoomInitialRot;
+                this.zoomRotateScript.memorizeFlag = true;
+                this.zoomRotateScript.ZoomObject.transform.eulerAngles = this.zoomRotateScript.ZoomInitialRot;
             }
             //IOUのズーム画面を表示
             this.zoomCamera.SetActive(true);
@@ -883,10 +883,10 @@ public void ZoomContract()
         {
             //回転可能にし、前回開いていたズームアイテムの位置を初期化
             this.rotFlag = true;
-            if (this.zoomRotateText.ZoomObject != null)
+            if (this.zoomRotateScript.ZoomObject != null)
             {
-                this.zoomRotateText.memorizeFrag = true;
-                this.zoomRotateText.ZoomObject.transform.eulerAngles = this.zoomRotateText.ZoomInitialRot;
+                this.zoomRotateScript.memorizeFlag = true;
+                this.zoomRotateScript.ZoomObject.transform.eulerAngles = this.zoomRotateScript.ZoomInitialRot;
             }
             // 契約書のズーム画面のみを表示
             this.zoomCamera.SetActive(true);
@@ -938,10 +938,10 @@ public void ZoomContract()
         {
             //回転可能にし、前回開いていたズームアイテムの位置を初期化
             this.rotFlag = true;
-            if (this.zoomRotateText.ZoomObject != null)
+            if (this.zoomRotateScript.ZoomObject != null)
             {
-                this.zoomRotateText.memorizeFrag = true;
-                this.zoomRotateText.ZoomObject.transform.eulerAngles = this.zoomRotateText.ZoomInitialRot;
+                this.zoomRotateScript.memorizeFlag = true;
+                this.zoomRotateScript.ZoomObject.transform.eulerAngles = this.zoomRotateScript.ZoomInitialRot;
             }
             //同意書のズーム画面のみを表示
             this.zoomCamera.SetActive(true);
@@ -979,8 +979,8 @@ public void ZoomContract()
         this.zoomList[10].SetActive(false);
         this.zoomList[11].SetActive(false);
         //ズームしていたアイテムの位置を初期化
-        this.zoomRotateText.memorizeFrag = true;
-        this.zoomRotateText.ZoomObject.transform.eulerAngles = this.zoomRotateText.ZoomInitialRot;
+        this.zoomRotateScript.memorizeFlag = true;
+        this.zoomRotateScript.ZoomObject.transform.eulerAngles = this.zoomRotateScript.ZoomInitialRot;
     }
 
     public void UIStateONGetItems()

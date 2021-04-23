@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class DoorNobController : MonoBehaviour
 {
+    public ZoomCameraRotater zcRotater;
     public Animator doorNobAnimator;
+    public GameObject zoomNobSphere;
     private int count = 0;
     private float i = 0.2f;
+    private bool nobPivotChangeFlag = false;
 
 
     // Start is called before the first frame update
@@ -64,6 +67,7 @@ public class DoorNobController : MonoBehaviour
                 i = 0.2f;
             }
     }
+
     private void RotateNob2()
     {
             float angle1 = Mathf.LerpAngle(this.gameObject.transform.eulerAngles.x, -45, i);
@@ -76,6 +80,7 @@ public class DoorNobController : MonoBehaviour
                 i = 0.2f;
             }
     }
+
     private void RotateNob3()
     {
             float angle1 = Mathf.LerpAngle(this.gameObject.transform.eulerAngles.x, 0, i);
@@ -88,11 +93,12 @@ public class DoorNobController : MonoBehaviour
                 i = 0.2f;
             }
     }
+
     private void RotateNob4()
     {
-            float angle1 = Mathf.LerpAngle(this.gameObject.transform.eulerAngles.x, 135, i);
-            float angle2 = Mathf.LerpAngle(this.gameObject.transform.eulerAngles.y, 0, i);
-            float angle3 = Mathf.LerpAngle(this.gameObject.transform.eulerAngles.z, 90, i);
+            float angle1 = Mathf.LerpAngle(this.gameObject.transform.eulerAngles.x, 45, i);
+            float angle2 = Mathf.LerpAngle(this.gameObject.transform.eulerAngles.y, 180, i);
+            float angle3 = Mathf.LerpAngle(this.gameObject.transform.eulerAngles.z, -90, i);
         this.gameObject.transform.eulerAngles = new Vector3(angle1, angle2, angle3);
             i += 0.2f;
             if (i > 1.0f)
@@ -100,4 +106,28 @@ public class DoorNobController : MonoBehaviour
                 i = 0.2f;
             }
     }
+
+    private void RotateNob5()
+    {
+        float angle1 = Mathf.LerpAngle(this.gameObject.transform.eulerAngles.x, 0, i);
+        this.gameObject.transform.eulerAngles = new Vector3(angle1, this.gameObject.transform.eulerAngles.y, this.gameObject.transform.eulerAngles.z);
+        i += 0.2f;
+        if (i > 1.0f)
+        {
+            i = 0.2f;
+        }
+    }
+
+
+    private void ChangeNobPivot()
+    {
+        this.nobPivotChangeFlag = !this.nobPivotChangeFlag;
+        this.zcRotater.ZoomObject = this.zoomNobSphere;
+    }
+
+    public bool NobPivotChangeFlag
+    {
+        get => this.nobPivotChangeFlag;
+    }
+
 }
