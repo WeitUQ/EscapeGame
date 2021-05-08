@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class DoorNobController : MonoBehaviour
 {
-    public ZoomCameraRotater zcRotater;
+    public ZoomItemRotater zcRotater;
+    public ItemController iScript;
     public Animator doorNobAnimator;
-    public GameObject zoomNobSphere;
+    public GameObject[] zoomNobSphere;
+    public GameObject zoomCamera;
     private int count = 0;
     private float i = 0.2f;
-    private bool nobPivotChangeFlag = false;
+    private bool nobPivotChangeFlag1 = false;
+    private bool nobPivotChangeFlag2 = false;
 
 
     // Start is called before the first frame update
@@ -27,6 +30,7 @@ public class DoorNobController : MonoBehaviour
     {
         if (this.count == 0)
         {
+            ChangeRotFlag();
             this.doorNobAnimator.SetTrigger("Removable1");
             count++;
         }
@@ -35,6 +39,7 @@ public class DoorNobController : MonoBehaviour
     {
         if (this.count == 0)
         {
+            ChangeRotFlag();
             this.doorNobAnimator.SetTrigger("Removable2");
             count++;
         }
@@ -43,6 +48,7 @@ public class DoorNobController : MonoBehaviour
     {
         if (this.count == 0)
         {
+            ChangeRotFlag();
             this.doorNobAnimator.SetTrigger("Removable3");
             count++;
         }
@@ -51,6 +57,7 @@ public class DoorNobController : MonoBehaviour
     {
         if (this.count == 0)
         {
+            ChangeRotFlag();
             this.doorNobAnimator.SetTrigger("Removable4");
             count++;
         }
@@ -109,25 +116,37 @@ public class DoorNobController : MonoBehaviour
 
     private void RotateNob5()
     {
-        float angle1 = Mathf.LerpAngle(this.gameObject.transform.eulerAngles.x, 0, i);
-        this.gameObject.transform.eulerAngles = new Vector3(angle1, this.gameObject.transform.eulerAngles.y, this.gameObject.transform.eulerAngles.z);
-        i += 0.2f;
-        if (i > 1.0f)
-        {
-            i = 0.2f;
-        }
+
+        this.gameObject.transform.Rotate(this.gameObject.transform.InverseTransformDirection(zoomCamera.transform.right), 8);
     }
 
-
-    private void ChangeNobPivot()
+    private void ChangeNobPivot1()
     {
-        this.nobPivotChangeFlag = !this.nobPivotChangeFlag;
-        this.zcRotater.ZoomObject = this.zoomNobSphere;
+        this.nobPivotChangeFlag1 = !this.nobPivotChangeFlag1;
+        this.zcRotater.ZoomObject = this.zoomNobSphere[0];
+        this.zcRotater.ZoomInitialRot = this.zcRotater.ZoomObject.transform.eulerAngles;
     }
 
-    public bool NobPivotChangeFlag
+    
+     private void ChangeRotFlag()
     {
-        get => this.nobPivotChangeFlag;
+        this.iScript.RotFlag = !this.iScript.RotFlag;
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        this.nobPivotChangeFlag2 = !this.nobPivotChangeFlag2;
+        this.zcRotater.ZoomObject = this.zoomNobSphere[1];
+        this.zcRotater.ZoomInitialRot = this.zcRotater.ZoomObject.transform.eulerAngles;
+    }
+
+    public bool NobPivotChangeFlag1
+    {
+        get => this.nobPivotChangeFlag1;
+    }
+
+    public bool NobPivotChangeFlag2
+    {
+        get => this.nobPivotChangeFlag2;
+    }
 }

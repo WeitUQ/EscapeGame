@@ -46,7 +46,7 @@ public class ItemController : MonoBehaviour
     public DoorController doorScript;
     public FlashLightController flashLightScript;
     public TextController textScript;
-    public ZoomCameraRotater zoomRotateScript;
+    public ZoomItemRotater zoomRotateScript;
     public GameObject closeButton;
     public GameObject textCamera;
     public GameObject rButton;
@@ -206,7 +206,7 @@ public class ItemController : MonoBehaviour
         this.drawerOpen = true;
     }
     //ドアのカギクリック時の処理
-    public void GetKey()
+    public void GetKey1()
     {
         //ドアのカギを破壊し、アイテムリストに表示させる
         this.zoomList[6].SetActive(false);
@@ -214,7 +214,16 @@ public class ItemController : MonoBehaviour
         this.closeButton.SetActive(true);
         this.listKey.SetActive(true);
     }
-    
+
+    public void GetKey2()
+    {
+        //ドアのカギを破壊し、アイテムリストに表示させる
+        this.zoomList[4].SetActive(false);
+        this.zoomList[5].SetActive(true);
+        this.closeButton.SetActive(true);
+        this.listKey.SetActive(true);
+    }
+
     //ドアのカギ使用時の処理
     public void UseKey()
     {
@@ -1002,6 +1011,7 @@ public void ZoomContract()
     public bool RotFlag
     {
         get => this.rotFlag;
+        set => this.rotFlag = value;
     }
 
 }

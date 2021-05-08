@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZoomCameraRotater : MonoBehaviour
+public class ZoomItemRotater : MonoBehaviour
 {
     public ItemController iScript;
     public DoorNobController dnScript;
@@ -10,7 +10,7 @@ public class ZoomCameraRotater : MonoBehaviour
     public GameObject[] zoomCoin;
     public GameObject zoomHammer;
     public GameObject zoomNob;
-    public GameObject zoomNobSphere;
+    public GameObject[] zoomNobSphere;
     public GameObject zoomKey;
     public GameObject zoomDriver;
     public GameObject zoomLight;
@@ -23,7 +23,7 @@ public class ZoomCameraRotater : MonoBehaviour
     private Vector2 lastMousePosition;
     private Vector3 initialRot;
     public bool memorizeFlag = true;
-    private GameObject zoomObject;
+    public GameObject zoomObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -148,9 +148,13 @@ public class ZoomCameraRotater : MonoBehaviour
                 if (this.memorizeFlag == true)
                 {
                     this.zoomObject = this.zoomNob;
-                    if (this.dnScript.NobPivotChangeFlag == true)
+                    if (this.dnScript.NobPivotChangeFlag1 == true)
                     {
-                        this.zoomObject = this.zoomNobSphere;
+                        this.zoomObject = this.zoomNobSphere[0];
+                    }
+                    else if (this.dnScript.NobPivotChangeFlag2 == true)
+                    {
+                        
                     }
                     ChangeFlagRot();
                 }
@@ -216,6 +220,7 @@ public class ZoomCameraRotater : MonoBehaviour
     public Vector3 ZoomInitialRot
     {
         get => this.initialRot;
+        set => this.initialRot = value;
     }
 
     public GameObject ZoomObject
