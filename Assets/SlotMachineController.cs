@@ -16,6 +16,8 @@ public class SlotMachineController : MonoBehaviour
     public ItemController iScript;
     public Animator[] leverAnimator;
     public Animator[] buttonAnimator;
+    public Renderer[] buttonRenderers;
+    public Material[] buttonMaterials;
     public float[] blueRotSpeed;
     public float[] redRotSpeed;
     private bool blueRotState = false;
@@ -28,7 +30,15 @@ public class SlotMachineController : MonoBehaviour
     public GameObject textCanvas;
     public GameObject textCamera;
     public GameObject bButton;
-    
+
+    // リール中央にそろった絵柄のカウント
+    public int item1Count = 0;
+    public int item2Count = 0;
+    public int item3Count = 0;
+    public int item4Count = 0;
+    public int item5Count = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -164,6 +174,7 @@ public class SlotMachineController : MonoBehaviour
             //リールストップフラグON
             if (this.blueRotSpeed[0] == -1.0f && this.blueRotState)
             {
+                this.buttonRenderers[0].material = this.buttonMaterials[1];
                 this.blueRotStop[0] = true;
                 this.blueStopColliders[0].SetActive(true);
             }
@@ -179,7 +190,8 @@ public class SlotMachineController : MonoBehaviour
             this.buttonAnimator[0].SetTrigger("CON");
             //リールストップフラグON
             if (this.blueRotSpeed[1] == -1.0f && this.blueRotState)
-            {                
+            {
+                this.buttonRenderers[1].material = this.buttonMaterials[1];
                 this.blueRotStop[1] = true;
                 this.blueStopColliders[1].SetActive(true);
             }
@@ -196,7 +208,7 @@ public class SlotMachineController : MonoBehaviour
             //リールストップフラグON
             if (this.blueRotSpeed[2] == -1.0f && this.blueRotState)
             {
-
+                this.buttonRenderers[2].material = this.buttonMaterials[1];
                 this.blueRotStop[2] = true;
                 this.blueStopColliders[2].SetActive(true);
             }
@@ -209,6 +221,7 @@ public class SlotMachineController : MonoBehaviour
         if (this.cScript.zoomState[5] && this.redRotSpeed[0] == -10.0f && this.redRotState)
         {
             //リールストップフラグON
+            this.buttonRenderers[3].material = this.buttonMaterials[1];
             this.redRotStop[0] = true;
             this.redStopColliders[0].SetActive(true);
         }
@@ -220,6 +233,7 @@ public class SlotMachineController : MonoBehaviour
         if (this.cScript.zoomState[5] && this.redRotSpeed[1] == -10.0f && this.redRotState)
         {
             //リールストップフラグON
+            this.buttonRenderers[4].material = this.buttonMaterials[1];
             this.redRotStop[1] = true;
             this.redStopColliders[1].SetActive(true);
         }
@@ -231,6 +245,7 @@ public class SlotMachineController : MonoBehaviour
         if (this.cScript.zoomState[5] && this.redRotSpeed[2] == -10.0f && this.redRotState)
         {
             //リールストップフラグON
+            this.buttonRenderers[5].material = this.buttonMaterials[1];
             this.redRotStop[2] = true;
             this.redStopColliders[2].SetActive(true);
         }
