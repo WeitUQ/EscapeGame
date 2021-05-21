@@ -64,6 +64,10 @@ public class SpriteChanger : MonoBehaviour
         {
             this.itemList[7].GetComponent<Image>().sprite = this.sprite[1];
         }
+        else if (this.iScript.chooseCrushedNob)
+        {
+            this.itemList[8].GetComponent<Image>().sprite = this.sprite[1];
+        }
         else if (this.iScript.chooseDriver)
         {
             this.itemList[9].GetComponent<Image>().sprite = this.sprite[1];
@@ -76,5 +80,6 @@ public class SpriteChanger : MonoBehaviour
         {
             this.itemList[11].GetComponent<Image>().sprite = this.sprite[1];
         }
+
     }
 }

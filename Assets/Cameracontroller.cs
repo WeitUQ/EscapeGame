@@ -187,6 +187,18 @@ public class CameraController : MonoBehaviour
         }
     }
 
+
+    public void SlotManualZoomCamera()
+    {
+        //スロットマシンの説明文をズーム
+        if (this.zoomState[4])
+        {
+            this.zoomState[4] = false;
+            this.zoomState[11] = true;
+            this.transform.Rotate(0, 90, -20);
+            this.transform.position = new Vector3(32, 15, 4);
+        }
+    }
     //スロットマシンズーム状態で赤スロットマシンをクリックしたときの処理
     public void RedZoomCamera()
     {
@@ -371,6 +383,13 @@ public class CameraController : MonoBehaviour
                 this.transform.position = this.interPos;
                 //ベッド下ライトをオフにする
                 this.underBedLight.enabled = false;
+            }
+            else if (this.zoomState[11])
+            {
+                this.zoomState[4] = true;
+                this.zoomState[11] = false;
+                this.transform.eulerAngles = this.interAng;
+                this.transform.position = this.interPos;
             }
         }
     }

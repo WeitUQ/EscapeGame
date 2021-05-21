@@ -9,6 +9,7 @@ public class DoorNobController : MonoBehaviour
     public Animator doorNobAnimator;
     public GameObject[] zoomNobSphere;
     public GameObject zoomCamera;
+    public GameObject closeButton;
     private int count = 0;
     private float i = 0.2f;
     private bool nobPivotChangeFlag1 = false;
@@ -136,8 +137,18 @@ public class DoorNobController : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         this.nobPivotChangeFlag2 = !this.nobPivotChangeFlag2;
+        this.nobPivotChangeFlag1 = !this.nobPivotChangeFlag1;
         this.zcRotater.ZoomObject = this.zoomNobSphere[1];
-        this.zcRotater.ZoomInitialRot = this.zcRotater.ZoomObject.transform.eulerAngles;
+    }
+
+    private void OffCloseButton()
+    {
+        this.closeButton.SetActive(false);
+    }
+
+    private void OnCloseButton()
+    {
+        this.closeButton.SetActive(true);
     }
 
     public bool NobPivotChangeFlag1

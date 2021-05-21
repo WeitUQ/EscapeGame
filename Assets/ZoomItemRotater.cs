@@ -11,6 +11,7 @@ public class ZoomItemRotater : MonoBehaviour
     public GameObject zoomHammer;
     public GameObject zoomNob;
     public GameObject[] zoomNobSphere;
+    public GameObject zoomCrushedNobSphere;
     public GameObject zoomKey;
     public GameObject zoomDriver;
     public GameObject zoomLight;
@@ -23,7 +24,7 @@ public class ZoomItemRotater : MonoBehaviour
     private Vector2 lastMousePosition;
     private Vector3 initialRot;
     public bool memorizeFlag = true;
-    public GameObject zoomObject;
+    private GameObject zoomObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -154,8 +155,17 @@ public class ZoomItemRotater : MonoBehaviour
                     }
                     else if (this.dnScript.NobPivotChangeFlag2 == true)
                     {
-                        
+                        this.zoomObject = this.zoomNobSphere[1];
                     }
+                    ChangeFlagRot();
+                }
+                RotateObject();
+            }
+            else if (this.zoomCrushedNobSphere.activeInHierarchy && Input.GetMouseButton(0))
+            {
+                if (this.memorizeFlag == true)
+                {
+                    this.zoomObject = this.zoomCrushedNobSphere;
                     ChangeFlagRot();
                 }
                 RotateObject();

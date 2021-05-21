@@ -11,8 +11,8 @@ TagManager:
   - ReelPicture3
   - ReelPicture4
   - ReelPicture5
-  - ReelPicture6
   - Collider
+  - ReelPicture6
   layers:
   - Default
   - TransparentFX
@@ -28,7 +28,7 @@ TagManager:
   - ItemDrop
   - PC
   - FlashLight
-  - 
+  - SlotPicture
   - 
   - 
   - 

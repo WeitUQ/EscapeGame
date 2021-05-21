@@ -8,6 +8,7 @@ public class ItemController : MonoBehaviour
     //ゲーム画面内オブジェクト
     public GameObject flashLight;    
     public GameObject door;
+    public GameObject[] Key;
     public GameObject nob;
     public GameObject hammer;
     public GameObject[] coins;
@@ -24,6 +25,7 @@ public class ItemController : MonoBehaviour
     public GameObject listLight;
     public GameObject listKey;
     public GameObject listNob;
+    public GameObject listCrushedNob;
     public GameObject listHammer;
   　public GameObject[] listCoins;
     public GameObject[] listDrawerKeys;
@@ -65,6 +67,7 @@ public class ItemController : MonoBehaviour
     public bool chooseLight = false;
     public bool chooseKey = false;
     public bool chooseNob = false;
+    public bool chooseCrushedNob = false;
     public bool chooseHammer = false;
     public bool chooseCoin = false;
     public bool chooseDrawerKey = false;
@@ -148,6 +151,7 @@ public class ItemController : MonoBehaviour
         this.chooseIOU = false;
         this.chooseContract = false;
         this.chooseAgreement = false;
+        this.chooseCrushedNob = false;
     }
     //引き出しのカギを1つ以上入手している状態でアイテムリスト1を連続で2度クリックした場合の処理
     public void ZoomDrawerKey()
@@ -209,15 +213,18 @@ public class ItemController : MonoBehaviour
     public void GetKey1()
     {
         //ドアのカギを破壊し、アイテムリストに表示させる
+        Destroy(this.Key[0]);
         this.zoomList[6].SetActive(false);
         this.zoomList[5].SetActive(true);
         this.closeButton.SetActive(true);
         this.listKey.SetActive(true);
+        this.listCrushedNob.SetActive(true);
     }
 
     public void GetKey2()
     {
         //ドアのカギを破壊し、アイテムリストに表示させる
+        Destroy(this.Key[1]);
         this.zoomList[4].SetActive(false);
         this.zoomList[5].SetActive(true);
         this.closeButton.SetActive(true);
@@ -278,6 +285,7 @@ public class ItemController : MonoBehaviour
         this.chooseLight = false;
         this.chooseContract = false;
         this.chooseAgreement = false;
+        this.chooseCrushedNob = false;
     }
    
     //ドアノブクリック時の処理
@@ -314,6 +322,7 @@ public class ItemController : MonoBehaviour
         this.chooseIOU = false;
         this.chooseContract = false;
         this.chooseAgreement = false;
+        this.chooseCrushedNob = false;
     }
 
     //ドアノブを入手している状態でアイテムリスト10を連続で2度クリックした時の処理
@@ -361,7 +370,51 @@ public class ItemController : MonoBehaviour
             this.chooseHammer = false;
         }
     }
-    
+
+
+    public void ChooseCrushedNob()
+    {
+        //クラッシュドアノブフラグのみON
+        this.chooseDrawerKey = false;
+        this.chooseNob = true;
+        this.chooseKey = false;
+        this.chooseHammer = false;
+        this.chooseCoin = false;
+        this.chooseDriver = false;
+        this.chooseLight = false;
+        this.chooseIOU = false;
+        this.chooseContract = false;
+        this.chooseAgreement = false;
+        this.chooseCrushedNob = true;
+    }
+
+    public void ZoomCrushedNob()
+    {
+        if (this.chooseCrushedNob && this.listCrushedNob.activeSelf)
+        {
+            //回転可能にし、前回開いていたズームアイテムの位置を初期化
+            this.rotFlag = true;
+            if (this.zoomRotateScript.ZoomObject != null)
+            {
+                this.zoomRotateScript.memorizeFlag = true;
+                this.zoomRotateScript.ZoomObject.transform.eulerAngles = this.zoomRotateScript.ZoomInitialRot;
+            }
+            //クラッシュドアノブのズーム画面のみを表示する
+            this.zoomCamera.SetActive(true);
+            this.zoomList[0].SetActive(false);
+            this.zoomList[1].SetActive(false);
+            this.zoomList[2].SetActive(false);
+            this.zoomList[3].SetActive(false);
+            this.zoomList[4].SetActive(false);
+            this.zoomList[5].SetActive(false);
+            this.zoomList[6].SetActive(true);
+            this.zoomList[7].SetActive(false);
+            this.zoomList[8].SetActive(false);
+            this.zoomList[9].SetActive(false);
+            this.zoomList[10].SetActive(false);
+            this.zoomList[11].SetActive(false);
+        }
+    }
     //ハンマーをクリック時の処理
     public void GetHammer()
     {       
@@ -389,6 +442,7 @@ public class ItemController : MonoBehaviour
         this.chooseIOU = false;
         this.chooseContract = false;
         this.chooseAgreement = false;
+        this.chooseCrushedNob = false;
     }
 
     //ハンマーを入手した状態でアイテムリスト3を連続で2度クリックした時の処理
@@ -555,6 +609,7 @@ public class ItemController : MonoBehaviour
         this.chooseIOU = false;
         this.chooseContract = false;
         this.chooseAgreement = false;
+        this.chooseCrushedNob = false;
     }
     //コインを1枚以上入手している状態でアイテムリスト2を連続で2度クリックしたとき
     public void ZoomCoin()
@@ -678,6 +733,7 @@ public class ItemController : MonoBehaviour
         this.chooseIOU = false;
         this.chooseContract = false;
         this.chooseAgreement = false;
+        this.chooseCrushedNob = false;
     }
 
     //ドライバーを入手している状態でアイテムリスト9を連続で2度クリックしたとき
@@ -761,6 +817,7 @@ public class ItemController : MonoBehaviour
         this.chooseIOU = false;
         this.chooseContract = false;
         this.chooseAgreement = false;
+        this.chooseCrushedNob = false;
     }
 
     //懐中電灯を入手している状態でアイテムリスト4を2度連続でクリックした時の処理
@@ -828,6 +885,7 @@ public class ItemController : MonoBehaviour
         this.chooseIOU = true;
         this.chooseContract = false;
         this.chooseAgreement = false;
+        this.chooseCrushedNob = false;
     }
     //借用書を入手している状態でアイテムリスト6を2度連続でクリックした時の処理
     public void ZoomIOU()
@@ -883,7 +941,8 @@ public class ItemController : MonoBehaviour
         this.chooseIOU = false;
         this.chooseContract = true;
         this.chooseAgreement = false;
-}
+        this.chooseCrushedNob = false;
+    }
 
 //契約書を入手している状態でアイテムリスト8を2度連続でクリックした時の処理
 public void ZoomContract()
@@ -938,6 +997,7 @@ public void ZoomContract()
         this.chooseIOU = false;
         this.chooseContract = false;
         this.chooseAgreement = true;
+        this.chooseCrushedNob = false;
     }
 
     //同意書を入手している状態でアイテムリスト7を2度連続でクリックした時の処理
