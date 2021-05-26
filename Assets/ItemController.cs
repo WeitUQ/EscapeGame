@@ -6,16 +6,17 @@ using UnityEngine.UI;
 public class ItemController : MonoBehaviour
 {
     //ゲーム画面内オブジェクト
-    public GameObject flashLight;    
+    public GameObject flashLight;
     public GameObject door;
     public GameObject[] Key;
     public GameObject nob;
     public GameObject hammer;
     public GameObject[] coins;
     public GameObject[] drawerKeys;
-　　public GameObject screwDriver;
+    public GameObject screwDriver;
     public GameObject stickBond;
     public GameObject gamTape;
+    public GameObject[] capsules;
     public GameObject underBedLight;
     public GameObject IOU;
     public GameObject contract;
@@ -27,7 +28,7 @@ public class ItemController : MonoBehaviour
     public GameObject listNob;
     public GameObject listCrushedNob;
     public GameObject listHammer;
-  　public GameObject[] listCoins;
+    public GameObject[] listCoins;
     public GameObject[] listDrawerKeys;
     public GameObject listDriver;
     public GameObject listIOU;
@@ -61,9 +62,9 @@ public class ItemController : MonoBehaviour
     public int rCoinCount = 0; //赤スロットマシンにコインを入れた回数
     public int bCoinCount = 0; //青スロットマシンにコインを入れた回数
     private int clickCount = 0; //ドアノブをクリックした回数
-    private int getCoinCount = 0;　//コインを入手した回数
-    
-   //フラグ系 
+    private int getCoinCount = 0; //コインを入手した回数
+
+    //フラグ系 
     public bool chooseLight = false;
     public bool chooseKey = false;
     public bool chooseNob = false;
@@ -81,17 +82,17 @@ public class ItemController : MonoBehaviour
 
     //その他
     public Animator lightAnimator;
-    
+
     // Start is called before the first frame update
     void Start()
-    {      
-       
+    {
+
     }
 
     // Update is called once per frame
     void Update()
     {
-      
+
     }
     // 引き出しのカギクリック(タップ)の処理
     public void GetDrawerKey()
@@ -156,16 +157,16 @@ public class ItemController : MonoBehaviour
     //引き出しのカギを1つ以上入手している状態でアイテムリスト1を連続で2度クリックした場合の処理
     public void ZoomDrawerKey()
     {
-        
+
         if (this.chooseDrawerKey && (this.listDrawerKeys[0].activeSelf || this.listDrawerKeys[1].activeSelf))
         {
             //回転可能にし、前回開いていたズームアイテムの位置を初期化
-            this.rotFlag = true;            
+            this.rotFlag = true;
             if (this.zoomRotateScript.ZoomObject != null)
             {
                 this.zoomRotateScript.memorizeFlag = true;
                 this.zoomRotateScript.ZoomObject.transform.eulerAngles = this.zoomRotateScript.ZoomInitialRot;
-            }            
+            }
             //入手している引き出しのカギのズーム画面のみを表示する
             this.zoomCamera.SetActive(true);
             this.zoomList[0].SetActive(false);
@@ -235,10 +236,10 @@ public class ItemController : MonoBehaviour
     public void UseKey()
     {
         if (this.cameraScript.zoomState[0] && this.chooseKey & this.listKey.activeSelf)
-        {       
+        {
             //アイテムリスト内のカギを破壊する
             Destroy(this.listKey);
-            
+
             //ドアを開けるフラグON
             this.doorScript.lockState = true;
         }
@@ -247,8 +248,8 @@ public class ItemController : MonoBehaviour
     //ドアのカギを入手している状態でアイテムリスト5を連続で2度クリックした場合の処理
     public void ZoomKey()
     {
-       if (this.chooseKey && this.listKey.activeSelf)
-       {
+        if (this.chooseKey && this.listKey.activeSelf)
+        {
             //回転可能にし、前回開いていたズームアイテムの位置を初期化
             this.rotFlag = true;
             if (this.zoomRotateScript.ZoomObject != null)
@@ -279,7 +280,7 @@ public class ItemController : MonoBehaviour
         this.chooseDrawerKey = false;
         this.chooseNob = false;
         this.chooseKey = true;
-        this.chooseHammer = false;    
+        this.chooseHammer = false;
         this.chooseCoin = false;
         this.chooseDriver = false;
         this.chooseLight = false;
@@ -287,12 +288,12 @@ public class ItemController : MonoBehaviour
         this.chooseAgreement = false;
         this.chooseCrushedNob = false;
     }
-   
+
     //ドアノブクリック時の処理
     public void GetNob()
     {
         if (this.cameraScript.zoomState[0])
-        {          
+        {
             this.clickCount++; //クリック回数
             if (this.clickCount == 3)
             {
@@ -307,7 +308,7 @@ public class ItemController : MonoBehaviour
             }
         }
     }
-    
+
     //アイテムリスト10をクリックした時の処理
     public void ChooseNob()
     {
@@ -328,7 +329,7 @@ public class ItemController : MonoBehaviour
     //ドアノブを入手している状態でアイテムリスト10を連続で2度クリックした時の処理
     public void ZoomNob()
     {
-        if(this.chooseNob && this.listNob.activeSelf)
+        if (this.chooseNob && this.listNob.activeSelf)
         {
             //回転可能にし、前回開いていたズームアイテムの位置を初期化
             this.rotFlag = true;
@@ -353,7 +354,7 @@ public class ItemController : MonoBehaviour
             this.zoomList[11].SetActive(false);
         }
     }
-    
+
     //ドアノブにハンマーを使った時の処理
     public void CrushNob()
     {
@@ -417,7 +418,7 @@ public class ItemController : MonoBehaviour
     }
     //ハンマーをクリック時の処理
     public void GetHammer()
-    {       
+    {
         //ハンマーを破壊し、アイテムリストに表示させる
         Destroy(this.hammer);
         this.listHammer.SetActive(true);
@@ -427,7 +428,7 @@ public class ItemController : MonoBehaviour
         this.zoomList[3].SetActive(true);
         this.itemText.text = "ハンマーだ。何かに使えるかもしれないし持っておこう。";
     }
-    
+
     //アイテムリスト3をクリックした時の処理
     public void ChooseHammer()
     {
@@ -473,10 +474,10 @@ public class ItemController : MonoBehaviour
             this.zoomList[11].SetActive(false);
         }
     }
-    
+
     //コイン1をクリック時の処理
     public void GetCoin1()
-    {      
+    {
         //コイン1を破壊しアイテムリストに表示
         Destroy(this.coins[0]);
         this.listCoins[0].SetActive(true);
@@ -501,7 +502,7 @@ public class ItemController : MonoBehaviour
         }
         this.getCoinCount++;
         if (this.getCoinCount == 1)
-        {           
+        {
             this.itemText.text = "コインだ。…何のコインだろう？";
         }
         else if (this.getCoinCount == 2)
@@ -594,7 +595,7 @@ public class ItemController : MonoBehaviour
             this.itemText.text = "コインだ。…これで3枚目だ。";
         }
     }
- 
+
     //アイテムリスト2をクリックしたとき
     public void ChooseCoin()
     {
@@ -702,7 +703,7 @@ public class ItemController : MonoBehaviour
             }
         }
     }
-   
+
     //ドライバークリック時の処理
     public void GetDriver()
     {
@@ -739,7 +740,7 @@ public class ItemController : MonoBehaviour
     //ドライバーを入手している状態でアイテムリスト9を連続で2度クリックしたとき
     public void ZoomDriver()
     {
-        
+
         if (this.chooseDriver && this.listDriver.activeSelf)
         {
             //回転可能にし、前回開いていたズームアイテムの位置を初期化
@@ -789,6 +790,20 @@ public class ItemController : MonoBehaviour
             Destroy(this.gamTape);
         }
     }
+
+    public void GetCapsule1()
+    {
+        if (this.cameraScript.zoomState[6])
+        {
+            Destroy(this.capsules[0]);
+        }
+    }
+
+    public void GetCapsule2()
+    { 
+            Destroy(this.capsules[1]);
+    }
+
 
     //懐中電灯をクリックした時の処理
     public void GetFlashLight()

@@ -22,8 +22,6 @@ public class SlotMachineController : MonoBehaviour
     public float[] redRotSpeed;
     private bool blueRotState = false;
     private bool redRotState = false;
-    public bool[] blueRotStop = { false, false, false };
-    public bool[] redRotStop = { false, false, false };
 
     // テキスト関係
     public Text slotText;
@@ -37,6 +35,9 @@ public class SlotMachineController : MonoBehaviour
     public int item3Count = 0;
     public int item4Count = 0;
     public int item5Count = 0;
+
+    // リールが止まった回数のカウント
+    public int reelStopCount = 0;
 
 
     // Start is called before the first frame update
@@ -175,7 +176,6 @@ public class SlotMachineController : MonoBehaviour
             if (this.blueRotSpeed[0] == -1.0f && this.blueRotState)
             {
                 this.buttonRenderers[0].material = this.buttonMaterials[1];
-                this.blueRotStop[0] = true;
                 this.blueStopColliders[0].SetActive(true);
             }
         }
@@ -192,7 +192,6 @@ public class SlotMachineController : MonoBehaviour
             if (this.blueRotSpeed[1] == -1.0f && this.blueRotState)
             {
                 this.buttonRenderers[1].material = this.buttonMaterials[1];
-                this.blueRotStop[1] = true;
                 this.blueStopColliders[1].SetActive(true);
             }
         }
@@ -209,7 +208,6 @@ public class SlotMachineController : MonoBehaviour
             if (this.blueRotSpeed[2] == -1.0f && this.blueRotState)
             {
                 this.buttonRenderers[2].material = this.buttonMaterials[1];
-                this.blueRotStop[2] = true;
                 this.blueStopColliders[2].SetActive(true);
             }
         }
@@ -222,7 +220,6 @@ public class SlotMachineController : MonoBehaviour
         {
             //リールストップフラグON
             this.buttonRenderers[3].material = this.buttonMaterials[1];
-            this.redRotStop[0] = true;
             this.redStopColliders[0].SetActive(true);
         }
     }
@@ -234,7 +231,6 @@ public class SlotMachineController : MonoBehaviour
         {
             //リールストップフラグON
             this.buttonRenderers[4].material = this.buttonMaterials[1];
-            this.redRotStop[1] = true;
             this.redStopColliders[1].SetActive(true);
         }
     }
@@ -246,7 +242,6 @@ public class SlotMachineController : MonoBehaviour
         {
             //リールストップフラグON
             this.buttonRenderers[5].material = this.buttonMaterials[1];
-            this.redRotStop[2] = true;
             this.redStopColliders[2].SetActive(true);
         }
     }
